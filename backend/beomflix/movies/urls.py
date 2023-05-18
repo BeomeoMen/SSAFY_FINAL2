@@ -7,6 +7,10 @@ urlpatterns = [
     path('tmdb/', views_tmdb.tmdb_data),
     # 전체 영화 조회(GET)
     path('', views.movie_list),
-        # movie_Detail 조회(GET)
+    # movie_Detail 조회(GET)
     path('<int:movie_pk>/', views.movie_detail),
+    # 장르로 영화 목록 조회
+    path('genre/', views.movie_list_by_genre),
+    # 현재 상영중인 영화 조회(GET)
+    path('now/', views.now_movie_list),
 ]

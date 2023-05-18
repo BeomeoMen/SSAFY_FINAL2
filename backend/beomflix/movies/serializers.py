@@ -26,6 +26,11 @@ class MovieSerializer(serializers.ModelSerializer):
         fields = '__all__'
         # read_only_fields = ('FK',)
 
+class NowMovieListSerializer(serializers.ModelSerializer):
 
+    class Meta:
+        model = Nowplaying
+        fields = ('__all__')
+        # exceptions = ('actors, like_users, genres')
 
 
