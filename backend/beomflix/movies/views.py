@@ -6,8 +6,8 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly
 import json
 
 from django.shortcuts import get_list_or_404, get_object_or_404
-from movies.serializers import MovieListSerializer, MovieSerializer
-from movies.models import Movie, Genre
+from movies.serializers import MovieListSerializer, MovieSerializer, NowMovieListSerializer
+from movies.models import Movie, Genre, Nowplaying
 
 
 @api_view(['GET',])
@@ -58,3 +58,10 @@ def movie_list_by_genre(request):
         movie_list.append(movie_dict)
 
     return Response({'movies': movie_list})
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticatedOrReadOnly])
+def now_movie_list(request):
+    nowmovies = get_list_or_404(Nowplaying.objects.order_by('-popularity'))
+    serializer = NowMovieListSerializer(nowmovies, many=True)
+    return Response(serializer.data)
