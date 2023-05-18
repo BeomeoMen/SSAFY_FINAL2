@@ -13,4 +13,6 @@ urlpatterns = [
     path('genre/', views.movie_list_by_genre),
     # 현재 상영중인 영화 조회(GET)
     path('now/', views.now_movie_list),
+    # 특정 movie 에 있는 전체 리뷰 조회(GET), 생성(POST)
+    path('<int:movie_pk>/review/', views.review_list_create, name='review_list_create'),
 ]
