@@ -13,6 +13,8 @@ export default new Vuex.Store({
    ],
   state: {
     movieList: [],
+    token: null, 
+    movieDetail: Object
   },
   getters: {
     isLogin(state){
@@ -26,6 +28,10 @@ export default new Vuex.Store({
     SAVE_TOKEN(state, token){
       state.token = token
     },
+    GET_MOVIEDETAIL(state, movie){
+      // state.movieDetail.push(movie)
+      state.movieDetail = movie
+    }
   },
   actions: {
     getMovieList(context) {
@@ -38,9 +44,26 @@ export default new Vuex.Store({
       })
         .then((res) => {
           res.data.forEach((movie) => {
-            console.log(movie)
+            // console.log(movie)
             context.commit('GET_MOVIELIST', movie)
           })
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+    getMovieDetail(context, movie_pk) {
+      axios({
+        method: 'get',
+        url: `${API_URL}/movies/${movie_pk}/`,
+        headers: {
+          Authorization: `Token ${context.state.token.key}`
+        }
+      })
+        .then((res) => {
+          context.commit('GET_MOVIEDETAIL', res.data)
+          console.log(res.data)
+          router.push(`/movieDetail/`) // 해당 영화의 상세 페이지로 이동합니다.
         })
         .catch((err) => {
           console.log(err)

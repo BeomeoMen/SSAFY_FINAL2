@@ -18,7 +18,7 @@
             <label for="password2"><b>Password Confirmation</b></label><br>
             <input v-model="password2" style="width: 100%; padding: 5px;  border-radius: 5px; margin-bottom: 10px;" type="password" name="password2" id="password2" placeholder="비밀번호 확인">
             <div class="modal-footer">
-              <input type="submit" class="btn btn-primary" value="회원가입">
+              <input type="submit" class="btn btn-primary" value="회원가입" data-bs-dismiss="modal">
             </div>
           </form>
         </div>
