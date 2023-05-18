@@ -127,3 +127,22 @@ def review_detail(request, review_pk):
         # 현재 리뷰 작성자와 현재 유저가 다르면
         else:
             return Response(status=status.HTTP_403_FORBIDDEN)
+        
+# 리뷰 좋아요
+@api_view(['POST'])
+def like(request, review_pk):
+    review = get_object_or_404(Review, pk=review_pk)
+    user = request.user
+    if review.good_user.filter(pk=user.pk).exists():
+        review.good_user.remove(user)
+        is_liked = False
+    else:
+        review.good_user.add(user)
+        is_liked = True
+
+    context = {
+        'is_liked': is_liked, 
+        'count': review.good_user.count()
+    }
+
+    return Response(context, status=status.HTTP_200_OK)
