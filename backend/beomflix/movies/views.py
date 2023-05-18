@@ -17,7 +17,6 @@ def movie_list(request):
         movies = get_list_or_404(Movie.objects.order_by())
         serializer = MovieListSerializer(movies, many=True)
         return Response(serializer.data)
-    
 # 영화 디테일 조회(GET)
 @api_view(['GET',])
 @permission_classes([IsAuthenticatedOrReadOnly])

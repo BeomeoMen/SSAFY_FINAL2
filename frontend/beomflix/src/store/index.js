@@ -1,4 +1,5 @@
 import createPersistedState from 'vuex-persistedstate'
+import router from '@/router'; // Vue Router의 인스턴스를 가져옵니다.
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
@@ -12,7 +13,6 @@ export default new Vuex.Store({
    ],
   state: {
     movieList: [],
-    token : null,
   },
   getters: {
     isLogin(state){
@@ -22,7 +22,6 @@ export default new Vuex.Store({
   mutations: {
     GET_MOVIELIST(state, movie){
       state.movieList.push(movie)
-
     },
     SAVE_TOKEN(state, token){
       state.token = token
@@ -34,11 +33,10 @@ export default new Vuex.Store({
         method: 'get',
         url : `${API_URL}/movies/`,
         headers: {
-          Authorization: `Token ${ context.state.token }`
-        }
+          Authorization: `Token ${context.state.token.key}`
+        },
       })
         .then((res) => {
-          // console.log(res, context)
           res.data.forEach((movie) => {
             console.log(movie)
             context.commit('GET_MOVIELIST', movie)
@@ -50,7 +48,6 @@ export default new Vuex.Store({
     },
     signUp(context, payload){
       const username = payload.username
-      const email = payload.email
       const password1 = payload.password1
       const password2 = payload.password2
 
@@ -58,12 +55,11 @@ export default new Vuex.Store({
         method:'post',
         url: `${API_URL}/accounts/signup/`,
         data: {
-          username, email, password1, password2
+          username, password1, password2
         }
       })
       .then((res) => {
         console.log(res.data)
-        // console.log(res.data.key)
         context.commit('SAVE_TOKEN', res.data)
       })
       .catch((err) => console.log(err))
@@ -77,18 +73,18 @@ export default new Vuex.Store({
         url: `${API_URL}/accounts/login/`,
         data:{
           username, password
-        }
+        },
       })
       .then(res =>{
         console.log(res.data)
-        // console.log(res.data.key)
         context.commit('SAVE_TOKEN', res.data)
       })
       .catch(err => console.log(err))
     },
-    
+  
     logout(context){
       context.commit('SAVE_TOKEN', null)
+      router.push('/'); 
     }
   },
   modules: {
