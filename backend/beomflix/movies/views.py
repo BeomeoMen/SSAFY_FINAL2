@@ -14,7 +14,7 @@ from movies.models import Movie, Genre, Nowplaying
 @permission_classes([IsAuthenticatedOrReadOnly])
 def movie_list(request):
     if request.method == 'GET':
-        movies = get_list_or_404(Movie.objects.order_by())
+        movies = get_list_or_404(Movie.objects.order_by())[:50]
         serializer = MovieListSerializer(movies, many=True)
         return Response(serializer.data)
 # 영화 디테일 조회(GET)

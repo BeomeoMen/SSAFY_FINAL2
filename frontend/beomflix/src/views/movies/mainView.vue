@@ -3,7 +3,6 @@
     <navBar/>
     <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
       <div class="col-lg-8 align-self-end mb-5">
-        <h1>mainView입니다</h1>
         <p class="text-white">
           무료로 원하는 영화, 만화 등을 찾아보세요.<br>
           신뢰도 높은 알고리즘으로 이용자 맞춤 영화를 추천해 드립니다.
