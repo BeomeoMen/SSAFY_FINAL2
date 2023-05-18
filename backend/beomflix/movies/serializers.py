@@ -49,3 +49,12 @@ class ReviewCreateSerializer(serializers.ModelSerializer):
         fields = ('id', 'created_at', 'content', 'user', 'rank', 'good_user', 'bad_user',)
         read_only_fields = ('id', 'created_at', 'good_user', 'bad_user')
         # 작성 불요 (read_only_fields)
+
+# 상세 리뷰 조회(GET)
+class ReviewSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Review
+        fields = ('__all__')
+        read_only_fields = ('user', 'movie', 'good_user', 'bad_user')
+        # 작성 불요 (read_only_fields)

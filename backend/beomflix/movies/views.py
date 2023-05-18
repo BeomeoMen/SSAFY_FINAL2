@@ -6,7 +6,7 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly
 import json
 
 from django.shortcuts import get_list_or_404, get_object_or_404
-from movies.serializers import MovieListSerializer, MovieSerializer, NowMovieListSerializer, ReviewListSerializer, ReviewCreateSerializer
+from movies.serializers import MovieListSerializer, MovieSerializer, NowMovieListSerializer, ReviewListSerializer, ReviewCreateSerializer, ReviewSerializer
 from movies.models import Movie, Genre, Nowplaying, Review
 from rest_framework import status
 
@@ -96,3 +96,34 @@ def review_list_create(request, movie_pk):
         return Response(context, status=status.HTTP_201_CREATED)
     
     return Response(status=status.HTTP_400_BAD_REQUEST)
+  
+
+# 특정 movie 에 있는 전체 리뷰 조회(GET), 수정(PUT), 삭제(DELETE)   
+@api_view(['GET', 'DELETE', 'PUT'])
+@permission_classes([IsAuthenticatedOrReadOnly])
+def review_detail(request, review_pk):
+    review = get_object_or_404(Review, pk=review_pk)
+
+    if request.method == 'GET':
+        serializer = ReviewSerializer(review)
+
+        return Response(serializer.data)
+    else:
+        # 현재 리뷰 작성자와 현재 유저가 같으면 삭제, 수정 가능
+        if request.user == review.user:
+            # 삭제
+            if request.method == 'DELETE':
+                review.delete()
+                data = {
+                    f'{review_pk}번 리뷰가 삭제되었습니다.'
+                }
+                return Response(data, status=status.HTTP_204_NO_CONTENT)
+            # 수정
+            if request.method == 'PUT':
+                serializer = ReviewSerializer(review, data=request.data)
+                if serializer.is_valid(raise_exception=True):
+                    serializer.save()
+                    return Response(serializer.data)
+        # 현재 리뷰 작성자와 현재 유저가 다르면
+        else:
+            return Response(status=status.HTTP_403_FORBIDDEN)
