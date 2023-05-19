@@ -42,12 +42,15 @@ export default new Vuex.Store({
     SAVE_SEARCH_RESULTS(state, movies) {
       state.searchResults = movies;
     },
-    GET_REVIEWS(state, movie){
-      state.reviews = movie
+    GET_REVIEWS(state, review){
+      state.reviews = review
     },
     GET_USERID(state, userId){
       state.userId = userId
     },
+    // CREATE_REVIEW(state, review) {
+    //   state.reviews.push(review);
+    // },
   },
   actions: {
     getMovieList(context) {
@@ -110,13 +113,8 @@ export default new Vuex.Store({
         console.log(err)
       })
     },
-    createReview(context, {movieId, content, rank }){
-      const userId = context.state.userId;
-      console.log(userId)
-      if(!content || !rank){
-        alert('리뷰와 점수를 모두 입력해주세요')
-        return
-      }
+    createReview(context, {user, content, rank }){
+      const movieId = context.state.movieDetail.id
       axios({
         method:'post',
         url: `${API_URL}/movies/${movieId}/review/`,
@@ -124,18 +122,17 @@ export default new Vuex.Store({
           Authorization: `Token ${context.state.token.key}`
         },
         data: {
-          userId,
+          user,
           content,
-          rank
+          rank,
         },
       })
-      .then((res)=>{
-        console.log(res)
-        context.dispatch('getReviews', movieId)
+      .then(res => {
+        console.log('리뷰 작성 완료')
+        context.dispatch('getReviews', movieId); // 리뷰 작성 후, 새로운 리뷰 정보를 가져옵니다.
       })
       .catch(err =>{
         console.log(err)
-        throw err
       })
     },
     searchMovie(context, payload){
@@ -172,12 +169,12 @@ export default new Vuex.Store({
           username, password1, password2
         }
       })
-      .then((res) => {
-        console.log(res.data)
-        context.commit('SAVE_TOKEN', res.data)
-      })
+      .then(
+        console.log('회원가입 완료')
+      )
       .catch((err) => console.log(err))
     },
+
     login(context, payload){
       const username = payload.username
       const password = payload.password
@@ -199,10 +196,12 @@ export default new Vuex.Store({
         console.log(err)
       })
     },
+
     logout(context){
       context.commit('SAVE_TOKEN', null)
       router.push('/'); 
     },
+
     getUserId(context){
       axios({
         method:'get',

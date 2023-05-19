@@ -46,7 +46,6 @@ export default {
       }
 
       this.$store.dispatch('signUp', payload)
-      console.log('회원가입 완료')
       this.username = null
       this.password1 = null 
       this.password2 = null

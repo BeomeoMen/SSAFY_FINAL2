@@ -49,6 +49,7 @@ export default {
   },
   mounted(){
     this.getReview()
+    // console.log(this.$store.state.userId)
   },
   data(){
     return{
@@ -59,7 +60,7 @@ export default {
   methods:{
     getReview(){
       const movieId = this.$store.state.movieDetail.id
-      console.log(movieId)
+      // console.log(movieId)
       this.$store.dispatch('getReviews', movieId)
     }
   }

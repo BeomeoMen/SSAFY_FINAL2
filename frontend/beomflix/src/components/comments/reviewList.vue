@@ -39,12 +39,12 @@ export default {
   },
   computed:{
     reviewList() {
-      return this.$store.state.reviewList
+      return this.$store.state.reviews
     }
   },
   methods:{
     createReview() {
-      const movieId = this.$store.state.movieDetail.id
+      const user = this.$store.state.userId
       const content = this.content
       const rank = this.rank
       if(!content){
@@ -52,10 +52,10 @@ export default {
         return
       }
       if(!rank){
-        alert('점수를 입력해주세요')
+        alert('별점을 선택해주세요')
         return
       }
-      this.$store.dispatch('createReview', {movieId, content, rank})
+      this.$store.dispatch('createReview', {user, content, rank})
       this.content = null
       this.rank = null
     }
