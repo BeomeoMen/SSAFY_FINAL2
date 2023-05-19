@@ -36,3 +36,28 @@ def comment_create(request, profile_pk):
         serializer.save(user=request.user, profile = profile)
 
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+    
+# 유저 프로필에 있는 전체 댓글 조회(GET)
+@api_view(['GET'])
+def comment_list(request, profile_pk):
+    profile = get_object_or_404(Profile, pk=profile_pk)
+    comments = profile.comment_set.all()
+    # 역참조 profile : comment 1:N
+    serializers = CommentSerializer(comments, many=True)
+    return Response(serializers.data)
+
+# 댓글 삭제
+@api_view(['DELETE'])
+@permission_classes([IsAuthenticatedOrReadOnly])
+def comment_delete(request, profile_pk, comment_pk):
+
+    comment = get_object_or_404(Comment, pk=comment_pk)
+    # 상세 댓글 .filter(pk=comment_pk)
+    if request.user == comment.user:
+    # 댓글 작성자와 같은 경우 
+        comment.delete()
+        data = {
+            'delete': f'댓글 {comment_pk}번이 삭제되었습니다.'
+        }
+        return Response(data, status=status.HTTP_204_NO_CONTENT)
+    return Response(status=status.HTTP_403_FORBIDDEN)
