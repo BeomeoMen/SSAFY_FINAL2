@@ -92,6 +92,7 @@ export default new Vuex.Store({
     },
     createReview(context, {content, rank, movieId}){
       if(!content || !rank){
+        alert('리뷰와 점수를 모두 입력해주세요')
         return
       }
       axios({
