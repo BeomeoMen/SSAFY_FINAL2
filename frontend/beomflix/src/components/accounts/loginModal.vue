@@ -36,12 +36,12 @@ export default {
     login(){
       const username = this.username
       const password = this.password
-
       const payload = {
         username, password
       }
       this.$store.dispatch('login', payload)
-      this.$router.push({name:"mainView"})
+      this.username = "";
+      this.password = "";
     }
   }
 

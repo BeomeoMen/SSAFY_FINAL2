@@ -59,21 +59,25 @@ export default new Vuex.Store({
         })
     },
     getMovieDetail(context, movieId) {
-      axios({
-        method: 'get',
-        url: `${API_URL}/movies/${movieId}/`,
-        headers: {
-          Authorization: `Token ${context.state.token.key}`
-        }
-      })
-        .then((res) => {
-          context.commit('GET_MOVIEDETAIL', res.data)
-          console.log(res.data)
-          router.push(`/movieDetail/`) 
+      if (context.state.token && context.state.token.key) {
+        axios({
+          method: 'get',
+          url: `${API_URL}/movies/${movieId}/`,
+          headers: {
+            Authorization: `Token ${context.state.token.key}`
+          }
         })
-        .catch((err) => {
-          console.log(err)
-        })
+          .then((res) => {
+            context.commit('GET_MOVIEDETAIL', res.data)
+            console.log(res.data)
+            router.push(`/movieDetail/`) // 해당 영화의 상세 페이지로 이동합니다.
+          })
+          .catch((err) => {
+            console.log(err)
+          })
+      } else {
+        console.log('Token is missing')
+      }
     },
     searchMovie(context, payload){
       const title = payload.title;
@@ -113,7 +117,6 @@ export default new Vuex.Store({
       })
       .catch((err) => console.log(err))
     },
-
     login(context, payload){
       const username = payload.username
       const password = payload.password
@@ -124,18 +127,17 @@ export default new Vuex.Store({
           username, password
         },
       })
-      .then(res =>{
-        console.log(res.data)
-        context.commit('SAVE_TOKEN', res.data)
+      .then(res => {
+          console.log(res.data)
+          context.commit('SAVE_TOKEN', res.data)
+          this.$router.push({name: "mainView"}) 
       })
-      .catch(err => console.log(err))
-    },
-  
-    logout(context){
-      context.commit('SAVE_TOKEN', null)
-      router.push('/'); 
+      .catch(err => {
+        alert('로그인 정보가 유효하지 않습니다.')
+        console.log(err)
+      })
     }
-  },
+  },    
   modules: {
   }
 })
