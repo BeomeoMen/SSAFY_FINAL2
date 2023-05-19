@@ -39,6 +39,9 @@ export default {
 </script>
 
 <style scoped>
+  .card{
+    margin-bottom: 20px;
+  }
   .card-body{
     background-color: black;
     color: white;

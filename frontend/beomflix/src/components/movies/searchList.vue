@@ -15,7 +15,6 @@ export default {
   },
   computed:{
     searchList(){
-      console.log(this.$store.state.searchResults)
       return this.$store.state.searchResults;
     }
   }

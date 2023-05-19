@@ -11,7 +11,6 @@
     </div>
     <div>
       <movieList />
-      <searchList />
     </div>
     <div>
       <h1 class="text-white text-center">최근 상영작</h1>\
@@ -25,14 +24,12 @@
 <script>
 import navBar from '@/components/common/navbar.vue'
 import movieList from '@/components/movies/movieList.vue'
-import searchList from '@/components/movies/searchList.vue'
 
 export default {
   name : "mainView",
   components:{
     navBar,
     movieList,
-    searchList,
   },
   mounted(){
     this.getMovieList()
@@ -46,9 +43,6 @@ export default {
     getMovieList(){
       this.$store.dispatch('getMovieList')
     },
-    // searchResults() {
-    //   this.$store.dispatch('searchMovie')
-    // }
   }
 }
 </script>
