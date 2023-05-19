@@ -11,7 +11,7 @@ from django.contrib.auth import get_user_model
 
 
 # 회원가입 한 유저id 조회(GET), 생성(POST)
-@api_view(['GET', 'POST'])
+@api_view(['GET',])
 @permission_classes([IsAuthenticatedOrReadOnly])
 def profileuser_list(request):
     print(request)
@@ -20,11 +20,11 @@ def profileuser_list(request):
         serializer = ProfileListSerializer(profiles, many=True)
         return Response(serializer.data)
 
-    elif request.method == 'POST':
-        serializer = ProfileSerializer(data=request.data)
-        if serializer.is_valid(raise_exception=True):
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+    # elif request.method == 'POST':
+    #     serializer = ProfileSerializer(data=request.data)
+    #     if serializer.is_valid(raise_exception=True):
+    #         serializer.save()
+    #         return Response(serializer.data, status=status.HTTP_201_CREATED)
         
 @api_view(['POST'])
 @permission_classes([IsAuthenticatedOrReadOnly])
