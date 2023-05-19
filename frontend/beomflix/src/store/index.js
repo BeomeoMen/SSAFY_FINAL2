@@ -13,6 +13,10 @@ export default new Vuex.Store({
    ],
   state: {
     movieList: [],
+    token: null, 
+    movieDetail: Object,
+    searchResults: [],
+    trailerPath: 'https://www.youtube.com/embed/F-eMt3SrfFU',
   },
   getters: {
     isLogin(state){
@@ -26,6 +30,14 @@ export default new Vuex.Store({
     SAVE_TOKEN(state, token){
       state.token = token
     },
+    GET_MOVIEDETAIL(state, movie){
+      // state.movieDetail.push(movie)
+      state.movieDetail = movie
+    },
+    SAVE_SEARCH_RESULTS(state, movies) {
+      state.searchResults = movies;
+      // console.log(state.searchResults)
+    },
   },
   actions: {
     getMovieList(context) {
@@ -38,9 +50,46 @@ export default new Vuex.Store({
       })
         .then((res) => {
           res.data.forEach((movie) => {
-            console.log(movie)
+            // console.log(movie)
             context.commit('GET_MOVIELIST', movie)
           })
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+    getMovieDetail(context, movieId) {
+      axios({
+        method: 'get',
+        url: `${API_URL}/movies/${movieId}/`,
+        headers: {
+          Authorization: `Token ${context.state.token.key}`
+        }
+      })
+        .then((res) => {
+          context.commit('GET_MOVIEDETAIL', res.data)
+          console.log(res.data)
+          router.push(`/movieDetail/`) 
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+    searchMovie(context, payload){
+      const title = payload.title;
+      axios({
+        method: 'get',
+        url: `${API_URL}/movies/`,
+        headers: {
+          Authorization: `Token ${context.state.token.key}`
+        },
+      })
+        .then((res) => {
+          console.log(res.data)
+          console.log(title)
+          const filteredMovies = res.data.filter(movie => movie.title.includes(title));
+          console.log(filteredMovies)
+          context.commit('SAVE_SEARCH_RESULTS', filteredMovies);  
         })
         .catch((err) => {
           console.log(err)
@@ -90,3 +139,6 @@ export default new Vuex.Store({
   modules: {
   }
 })
+
+
+
