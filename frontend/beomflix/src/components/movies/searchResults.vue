@@ -1,10 +1,10 @@
 <template>
   <div class="col">
     <div class="card" style="width: 18rem;">
-      <img :src="poster+movie.poster_path" class="card-img-top" @click="movieDetail(movie.id)">  
+      <img :src="poster+movie.poster_path" class="card-img-top" @click="movieDetail(searchResult.id)">  
       <div class="card-body">
-        <h4 class="card-title" @click="movieDetail(movie.id)">{{movie.title}}</h4>
-        <p class="card-text" @click="movieDetail(movie.id)">{{ truncateOverview(movie.overview, 100) }}</p>
+        <h4 class="card-title" @click="movieDetail(searchResult.id)">{{searchResult.title}}</h4>
+        <p class="card-text" @click="movieDetail(searchResult.id)">{{ truncateOverview(searchResult.overview, 100) }}</p>
       </div>
     </div>
   </div>
@@ -12,9 +12,9 @@
 
 <script>
 export default {
-  name:"movieListItem",
-  props:{
-    movie:Object,
+  name:"searchResults",
+  props: {
+    searchResult:Object,
   },
   data(){
     return{
@@ -31,19 +31,6 @@ export default {
         return overview
       }
     }, 
-    movieDetail(movieId) {
-      this.$store.dispatch('getMovieDetail', movieId);
-    }
   }
 }
 </script>
-
-<style scoped>
-  .card-body{
-    background-color: black;
-    color: white;
-  }
-  .card-body > .card-title{
-    text-align: center;
-  }
-</style>
