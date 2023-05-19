@@ -13,7 +13,7 @@ export default new Vuex.Store({
    ],
   state: {
     movieList: [],
-    token: null, 
+    token: Object, 
     movieDetail: Object,
     searchResults: [],
     reviews: [],
@@ -90,7 +90,8 @@ export default new Vuex.Store({
         console.log(err)
       })
     },
-    createReview(context, {content, rank, movieId}){
+    createReview(context, {movieId, content, rank }){
+      const userId = context.state.token.user_id; 
       if(!content || !rank){
         alert('리뷰와 점수를 모두 입력해주세요')
         return
@@ -102,6 +103,7 @@ export default new Vuex.Store({
           Authorization: `Token ${context.state.token.key}`
         },
         data: {
+          user_id: userId,
           content,
           rank
         },

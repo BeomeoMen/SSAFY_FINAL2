@@ -44,9 +44,9 @@ export default {
   },
   methods:{
     createReview() {
+      const movieId = this.$store.state.movieDetail.id
       const content = this.content
       const rank = this.rank
-      const movieId = this.$store.state.movieDetail.id
       if(!content){
         alert('리뷰를 입력해주세요')
         return
@@ -55,7 +55,7 @@ export default {
         alert('점수를 입력해주세요')
         return
       }
-      this.$store.dispatch('createReview', {content, rank, movieId})
+      this.$store.dispatch('createReview', {movieId, content, rank})
       this.content = null
       this.rank = null
     }
