@@ -43,7 +43,6 @@ class Review(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='reviews')
     rank = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(5)])
     good_user = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='good_reviews')
-    bad_user = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='bad_reviews')
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
