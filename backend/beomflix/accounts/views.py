@@ -5,6 +5,7 @@ from rest_framework.decorators import api_view
 from rest_framework.decorators import permission_classes
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
+from .models import User
 
 
 # 유저 아이디로 접근
@@ -44,3 +45,7 @@ def profile_username(request, username):
             serializer.save()
 
             return Response(serializer.data)
+        
+@api_view(['POST',])
+def follow(request, user_pk):
+    pass
