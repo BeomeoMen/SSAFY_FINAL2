@@ -16,6 +16,7 @@ export default new Vuex.Store({
     token: null, 
     movieDetail: Object,
     searchResults: [],
+    reviews: [],
     trailerPath: 'https://www.youtube.com/embed/F-eMt3SrfFU',
   },
   getters: {
@@ -36,6 +37,9 @@ export default new Vuex.Store({
     SAVE_SEARCH_RESULTS(state, movies) {
       state.searchResults = movies;
     },
+    GET_REVIEWS(state, movie){
+      state.reviews = movie
+    }
   },
   actions: {
     getMovieList(context) {
@@ -56,7 +60,6 @@ export default new Vuex.Store({
         })
     },
     getMovieDetail(context, movieId) {
-      if (context.state.token && context.state.token.key) {
         axios({
           method: 'get',
           url: `${API_URL}/movies/${movieId}/`,
@@ -66,15 +69,50 @@ export default new Vuex.Store({
         })
           .then((res) => {
             context.commit('GET_MOVIEDETAIL', res.data)
-            console.log(res.data)
             router.push(`/movieDetail/`) 
           })
           .catch((err) => {
             console.log(err)
           })
-      } else {
-        console.log('Token is missing')
+    },
+    getReviews(context, movieId){
+      axios({
+        method:'get',
+        url: `${API_URL}/movies/${movieId}/review/`,
+        headers: {
+          Authorization: `Token ${context.state.token.key}`
+        },
+      })
+      .then(res =>{
+        context.commit('GET_REVIEWS', res.data)
+      })
+      .catch(err=>{
+        console.log(err)
+      })
+    },
+    createReview(context, {content, rank, movieId}){
+      if(!content || !rank){
+        return
       }
+      axios({
+        method:'post',
+        url: `${API_URL}/movies/${movieId}/review/`,
+        headers: {
+          Authorization: `Token ${context.state.token.key}`
+        },
+        data: {
+          content,
+          rank
+        },
+      })
+      .then((res)=>{
+        console.log(res)
+        context.dispatch('getReviews', movieId)
+      })
+      .catch(err =>{
+        console.log(err)
+        throw err
+      })
     },
     searchMovie(context, payload){
       const title = payload.title;
