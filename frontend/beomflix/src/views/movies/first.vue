@@ -46,7 +46,7 @@ export default {
   components:{
     loginModal,
     signUpModal
-  }
+  },
 }
 </script>
 

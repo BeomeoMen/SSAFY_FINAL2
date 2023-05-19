@@ -42,7 +42,8 @@ export default {
       this.$store.dispatch('login', payload)
       this.username = "";
       this.password = "";
-    }
+    },
+    
   }
 
 }

@@ -7,6 +7,7 @@
           무료로 원하는 영화, 만화 등을 찾아보세요.<br>
           신뢰도 높은 알고리즘으로 이용자 맞춤 영화를 추천해 드립니다.
         </p>
+        <button @click="getUserId"></button>
       </div>
     </div>
     <div>
@@ -47,6 +48,9 @@ export default {
     },
     getNowMovie(){
       this.$store.dispatch('getNowMovieList')
+    },
+    getUserId(){
+      this.$store.dispatch('getUserId')
     }
   }
 }

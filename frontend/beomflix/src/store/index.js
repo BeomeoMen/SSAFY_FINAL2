@@ -12,7 +12,7 @@ export default new Vuex.Store({
     createPersistedState(),
    ],
   state: {
-    user: Object,
+    userId: null,
     movieList: [],
     nowMovieList: [],
     token: Object, 
@@ -28,10 +28,10 @@ export default new Vuex.Store({
   },
   mutations: {
     GET_MOVIELIST(state, movie){
-      state.movieList.push(movie)
+      state.movieList = movie
     },
     GET_NOWMOVIELIST(state, movie){
-      state.nowMovieList.push(movie)
+      state.nowMovieList = movie
     },
     SAVE_TOKEN(state, token){
       state.token = token
@@ -44,7 +44,10 @@ export default new Vuex.Store({
     },
     GET_REVIEWS(state, movie){
       state.reviews = movie
-    }
+    },
+    GET_USERID(state, userId){
+      state.userId = userId
+    },
   },
   actions: {
     getMovieList(context) {
@@ -56,9 +59,7 @@ export default new Vuex.Store({
         },
       })
         .then((res) => {
-          res.data.forEach((movie) => {
-            context.commit('GET_MOVIELIST', movie)
-          })
+            context.commit('GET_MOVIELIST', res.data)
         })
         .catch((err) => {
           console.log(err)
@@ -66,15 +67,13 @@ export default new Vuex.Store({
     },
     getNowMovieList(context){
       axios({
-        url : `${API_URL}/movies/`,
+        url : `${API_URL}/movies/now/`,
         headers: {
           Authorization: `Token ${context.state.token.key}`
         },
       })
         .then((res) => {
-          res.data.forEach((movie) => {
-            context.commit('GET_NOWMOVIELIST', movie)
-          })
+          context.commit('GET_NOWMOVIELIST', res.data)
         })
         .catch((err) => {
           console.log(err)
@@ -112,6 +111,8 @@ export default new Vuex.Store({
       })
     },
     createReview(context, {movieId, content, rank }){
+      const userId = context.state.userId;
+      console.log(userId)
       if(!content || !rank){
         alert('리뷰와 점수를 모두 입력해주세요')
         return
@@ -123,6 +124,7 @@ export default new Vuex.Store({
           Authorization: `Token ${context.state.token.key}`
         },
         data: {
+          userId,
           content,
           rank
         },
@@ -200,6 +202,23 @@ export default new Vuex.Store({
     logout(context){
       context.commit('SAVE_TOKEN', null)
       router.push('/'); 
+    },
+    getUserId(context){
+      axios({
+        method:'get',
+        url: `${API_URL}/accounts/user/`,
+        headers: {
+          Authorization: `Token ${context.state.token.key}`
+        },
+      })
+      .then(res =>{
+        console.log(res)
+        console.log(res.data.pk)
+        context.commit('GET_USERID', res.data.pk)
+      })
+      .catch(err =>{
+        console.log(err)
+      })
     }
   },    
   modules: {
