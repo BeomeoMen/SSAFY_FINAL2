@@ -4,6 +4,7 @@ import mainView from '@/views/movies/mainView.vue'
 import proFile from '@/views/accounts/profileView.vue'
 import first from '@/views/movies/first.vue'
 import movieDetail from '@/views/movies/movieDetail.vue'
+import searchMovie from '@/views/movies/searchMovie.vue'
 
 Vue.use(VueRouter)
 
@@ -27,6 +28,11 @@ const routes = [
     path: '/movieDetail',
     name: 'movieDetail',
     component: movieDetail
+  },
+  {
+    path: '/searchMovie',
+    name: 'searchMovie',
+    component: searchMovie
   }
 
 ]
