@@ -15,7 +15,7 @@
       <div class="details-row">
         <p>
           장르 : 
-          <span v-for="genre in movieDetail.genres" :key="genre.id">{{ genre }}</span>
+          <span v-for="genre in movieDetail.genres" :key="genre.id">{{ genre.name }} | </span>
         </p>
         <p>평점 : {{ movieDetail.vote_average }}</p>
         <p>개봉일 : {{ movieDetail.release_date }}</p>
