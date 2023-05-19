@@ -10,7 +10,7 @@ from movies.serializers import MovieListSerializer, MovieSerializer, NowMovieLis
 from movies.models import Movie, Genre, Nowplaying, Review
 from rest_framework import status
 
-
+# 영화 전체 조회
 @api_view(['GET',])
 @permission_classes([IsAuthenticatedOrReadOnly])
 def movie_list(request):
@@ -29,6 +29,7 @@ def movie_detail(request, movie_pk):
         serializer = MovieSerializer(movie)
         return Response(serializer.data)
 
+# 장르로 영화 조회
 @api_view(['GET',])
 @permission_classes([IsAuthenticatedOrReadOnly])
 def movie_list_by_genre(request):
@@ -67,7 +68,7 @@ def now_movie_list(request):
     serializer = NowMovieListSerializer(nowmovies, many=True)
     return Response(serializer.data)
 
-
+# 특정 영화에 있는 리뷰들 조회, 생성
 @api_view(['GET', 'POST'])
 @permission_classes([IsAuthenticatedOrReadOnly])
 def review_list_create(request, movie_pk):
@@ -97,7 +98,7 @@ def review_list_create(request, movie_pk):
     return Response(status=status.HTTP_400_BAD_REQUEST)
   
 
-# 특정 movie 에 있는 전체 리뷰 조회(GET), 수정(PUT), 삭제(DELETE)   
+# 특정 movie 에 있는 특정 리뷰 조회(GET), 수정(PUT), 삭제(DELETE)   
 @api_view(['GET', 'DELETE', 'PUT'])
 @permission_classes([IsAuthenticatedOrReadOnly])
 def review_detail(request, review_pk):
