@@ -13,7 +13,7 @@
       <movieList />
     </div>
     <div>
-      <h1 class="text-white text-center">최근 상영작</h1>\
+      <nowMovieList/>
     </div>
     <div>
       <h1 class="text-white text-center">찜한 콘텐츠 중 가장 많은 장르</h1>
@@ -24,15 +24,17 @@
 <script>
 import navBar from '@/components/common/navbar.vue'
 import movieList from '@/components/movies/movieList.vue'
-
+import nowMovieList from '@/components/movies/nowMovieList.vue'
 export default {
   name : "mainView",
   components:{
     navBar,
     movieList,
+    nowMovieList,
   },
   mounted(){
     this.getMovieList()
+    this.getNowMovie()
   },
   computed: {
     searchResults() {
@@ -43,6 +45,9 @@ export default {
     getMovieList(){
       this.$store.dispatch('getMovieList')
     },
+    getNowMovie(){
+      this.$store.dispatch('getNowMovieList')
+    }
   }
 }
 </script>
