@@ -1,5 +1,5 @@
 import createPersistedState from 'vuex-persistedstate'
-import router from '@/router'; // Vue Router의 인스턴스를 가져옵니다.
+import router from '@/router'
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
@@ -31,12 +31,10 @@ export default new Vuex.Store({
       state.token = token
     },
     GET_MOVIEDETAIL(state, movie){
-      // state.movieDetail.push(movie)
       state.movieDetail = movie
     },
     SAVE_SEARCH_RESULTS(state, movies) {
       state.searchResults = movies;
-      // console.log(state.searchResults)
     },
   },
   actions: {
@@ -50,7 +48,6 @@ export default new Vuex.Store({
       })
         .then((res) => {
           res.data.forEach((movie) => {
-            // console.log(movie)
             context.commit('GET_MOVIELIST', movie)
           })
         })
@@ -70,7 +67,7 @@ export default new Vuex.Store({
           .then((res) => {
             context.commit('GET_MOVIEDETAIL', res.data)
             console.log(res.data)
-            router.push(`/movieDetail/`) // 해당 영화의 상세 페이지로 이동합니다.
+            router.push(`/movieDetail/`) 
           })
           .catch((err) => {
             console.log(err)
@@ -89,11 +86,13 @@ export default new Vuex.Store({
         },
       })
         .then((res) => {
-          console.log(res.data)
-          console.log(title)
           const filteredMovies = res.data.filter(movie => movie.title.includes(title));
-          console.log(filteredMovies)
-          context.commit('SAVE_SEARCH_RESULTS', filteredMovies);  
+          if(filteredMovies.length === 0){
+            alert('일치하는 영화가 없습니다.')
+          }else{
+            context.commit('SAVE_SEARCH_RESULTS', filteredMovies);
+            router.push({name: "searchMovie"}).catch(err => console.log(err))
+          }
         })
         .catch((err) => {
           console.log(err)
@@ -130,7 +129,7 @@ export default new Vuex.Store({
       .then(res => {
           console.log(res.data)
           context.commit('SAVE_TOKEN', res.data)
-          this.$router.push({name: "mainView"}) 
+          router.push({name: "mainView"}) 
       })
       .catch(err => {
         alert('로그인 정보가 유효하지 않습니다.')
@@ -141,6 +140,4 @@ export default new Vuex.Store({
   modules: {
   }
 })
-
-
 
