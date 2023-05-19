@@ -21,6 +21,16 @@ def movie_list(request):
         serializer = MovieListSerializer(movies, many=True)
         return Response(serializer.data)
     
+# 최근 영화 전체 조회
+# 영화 전체 조회
+@api_view(['GET',])
+@permission_classes([IsAuthenticatedOrReadOnly])
+def now_movie_list(request):
+    if request.method == 'GET':
+        now_playing_movies = get_list_or_404(Nowplaying.objects.order_by())[:50]
+        serializer = NowMovieListSerializer(now_playing_movies, many=True)
+        return Response(serializer.data)
+    
 # 영화 디테일 조회(GET)
 @api_view(['GET',])
 @permission_classes([IsAuthenticatedOrReadOnly])
