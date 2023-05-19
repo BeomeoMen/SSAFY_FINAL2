@@ -7,7 +7,9 @@ import json
 
 from django.shortcuts import get_list_or_404, get_object_or_404
 from movies.serializers import MovieListSerializer, MovieSerializer, NowMovieListSerializer, ReviewListSerializer, ReviewCreateSerializer, ReviewSerializer
+from accounts.serializers import UserSerializer
 from movies.models import Movie, Genre, Nowplaying, Review
+from accounts.models import User
 from rest_framework import status
 
 # 영화 전체 조회
@@ -84,6 +86,10 @@ def review_list_create(request, movie_pk):
     if serializer.is_valid(raise_exception=True):
         # user, movie 외래키 참조 객체 설정
         serializer.save(user=request.user, movie = movie)
+        print(serializer.data.get('user'))
+
+        user = get_object_or_404(User, pk=serializer.data.get('user'))
+        user_serializer = UserSerializer(user)
         context = {
             'message': '리뷰가 작성되었습니다.',
             'id': serializer.data.get('id'),
@@ -91,6 +97,7 @@ def review_list_create(request, movie_pk):
             'created_at': serializer.data.get('created_at'),
             'good_user': serializer.data.get('good_user'),
             'user': serializer.data.get('user'),
+            'username' : user_serializer.data.get('username'),
             'rank': serializer.data.get('rank'),
         }
         return Response(context, status=status.HTTP_201_CREATED)
