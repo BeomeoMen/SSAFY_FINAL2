@@ -51,7 +51,7 @@ class ReviewListSerializer(serializers.ModelSerializer):
 class ReviewCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
-        fields = ('id', 'created_at', 'content', 'user', 'rank', 'good_user', 'bad_user',)
+        fields = ('id', 'created_at', 'content', 'user', 'rank', 'good_user',)
         read_only_fields = ('id', 'created_at', 'good_user', 'bad_user')
         # 작성 불요 (read_only_fields)
 

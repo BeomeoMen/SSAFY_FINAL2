@@ -89,7 +89,6 @@ def review_list_create(request, movie_pk):
             'content': serializer.data.get('content'),
             'created_at': serializer.data.get('created_at'),
             'good_user': serializer.data.get('good_user'),
-            'bad_user': serializer.data.get('bad_user'),
             'user': serializer.data.get('user'),
             'rank': serializer.data.get('rank'),
         }
