@@ -12,7 +12,9 @@ export default new Vuex.Store({
     createPersistedState(),
    ],
   state: {
+    user: Object,
     movieList: [],
+    nowMovieList: [],
     token: Object, 
     movieDetail: Object,
     searchResults: [],
@@ -27,6 +29,9 @@ export default new Vuex.Store({
   mutations: {
     GET_MOVIELIST(state, movie){
       state.movieList.push(movie)
+    },
+    GET_NOWMOVIELIST(state, movie){
+      state.nowMovieList.push(movie)
     },
     SAVE_TOKEN(state, token){
       state.token = token
@@ -53,6 +58,22 @@ export default new Vuex.Store({
         .then((res) => {
           res.data.forEach((movie) => {
             context.commit('GET_MOVIELIST', movie)
+          })
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+    getNowMovieList(context){
+      axios({
+        url : `${API_URL}/movies/`,
+        headers: {
+          Authorization: `Token ${context.state.token.key}`
+        },
+      })
+        .then((res) => {
+          res.data.forEach((movie) => {
+            context.commit('GET_NOWMOVIELIST', movie)
           })
         })
         .catch((err) => {
@@ -91,7 +112,6 @@ export default new Vuex.Store({
       })
     },
     createReview(context, {movieId, content, rank }){
-      const userId = context.state.token.user_id; 
       if(!content || !rank){
         alert('리뷰와 점수를 모두 입력해주세요')
         return
@@ -103,7 +123,6 @@ export default new Vuex.Store({
           Authorization: `Token ${context.state.token.key}`
         },
         data: {
-          user_id: userId,
           content,
           rank
         },
@@ -164,11 +183,12 @@ export default new Vuex.Store({
         method: 'post',
         url: `${API_URL}/accounts/login/`,
         data:{
-          username, password
+          username, password,
         },
       })
       .then(res => {
           console.log(res.data)
+          console.log(res)
           context.commit('SAVE_TOKEN', res.data)
           router.push({name: "mainView"}) 
       })
@@ -176,6 +196,10 @@ export default new Vuex.Store({
         alert('로그인 정보가 유효하지 않습니다.')
         console.log(err)
       })
+    },
+    logout(context){
+      context.commit('SAVE_TOKEN', null)
+      router.push('/'); 
     }
   },    
   modules: {
