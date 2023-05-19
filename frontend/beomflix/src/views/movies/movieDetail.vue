@@ -4,10 +4,6 @@
   <div class="movie-detail">
     <div class="image-container">
       <img :src="poster + movieDetail.poster_path">
-      <p>
-        주연 배우 : 
-        <span v-for="actor in movieDetail.actors" :key="actor.id">{{ actor }}</span>
-      </p>
     </div>
     <div class="details-container">
       <iframe frameborder="0" allowfullscreen style="width: 100%; height: 400px;" :src="trailerUrlPath"></iframe>
@@ -20,6 +16,10 @@
         <p>평점 : {{ movieDetail.vote_average }}</p>
         <p>개봉일 : {{ movieDetail.release_date }}</p>
       </div>
+      <p >
+        주연 배우 : 
+        <span class="actor" v-for="actor in movieDetail.actors" :key="actor.id">{{ actor.name }}</span>
+      </p>
       <p>{{ movieDetail.overview }}</p>
     </div>
     <div></div>
@@ -70,12 +70,16 @@ export default {
 
 .details-row {
   display: flex;
-  justify-content: space-between;
   margin-bottom: 10px;
 }
 
-.details-row p {
-  flex-basis: 33.33%;
+.details-row p{
+  padding-right: 30px;
 }
+
+.actor{
+  padding-right: 20px;
+}
+
 
 </style>
