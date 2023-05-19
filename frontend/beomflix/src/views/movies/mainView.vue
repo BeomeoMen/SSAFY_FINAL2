@@ -9,18 +9,12 @@
         </p>
       </div>
     </div>
-    <!-- <div v-if="searchResults.length === 0">
-      <movieList />
-    </div>
-    <div v-else>
-      <searchList />
-    </div> -->
     <div>
       <movieList />
       <searchList />
     </div>
     <div>
-      <h1 class="text-white text-center">평점 상위 10</h1>\
+      <h1 class="text-white text-center">최근 상영작</h1>\
     </div>
     <div>
       <h1 class="text-white text-center">찜한 콘텐츠 중 가장 많은 장르</h1>
