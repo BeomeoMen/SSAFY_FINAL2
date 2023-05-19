@@ -9,8 +9,15 @@
         </p>
       </div>
     </div>
+    <!-- <div v-if="searchResults.length === 0">
+      <movieList />
+    </div>
+    <div v-else>
+      <searchList />
+    </div> -->
     <div>
-      <movieList/>
+      <movieList />
+      <searchList />
     </div>
     <div>
       <h1 class="text-white text-center">평점 상위 10</h1>\
@@ -24,20 +31,30 @@
 <script>
 import navBar from '@/components/common/navbar.vue'
 import movieList from '@/components/movies/movieList.vue'
+import searchList from '@/components/movies/searchList.vue'
 
 export default {
   name : "mainView",
   components:{
     navBar,
     movieList,
+    searchList,
   },
   mounted(){
     this.getMovieList()
   },
+  computed: {
+    searchResults() {
+      return this.$store.state.searchResults;
+    }
+  },
   methods:{
     getMovieList(){
       this.$store.dispatch('getMovieList')
-    }
+    },
+    // searchResults() {
+    //   this.$store.dispatch('searchMovie')
+    // }
   }
 }
 </script>
