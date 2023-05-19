@@ -1,6 +1,8 @@
 from rest_framework import serializers
 from movies.models import Movie, Nowplaying, Review, Genre, Actor
 
+from accounts.serializers import UserSerializer
+
 class GenreSerializer(serializers.ModelSerializer):
     class Meta:
         model = Genre
@@ -47,6 +49,9 @@ class NowMovieListSerializer(serializers.ModelSerializer):
 
 # 상세 영화 전체 리뷰 조회(GET)
 class ReviewListSerializer(serializers.ModelSerializer):
+
+    user = UserSerializer()
+
     class Meta:
         model = Review
         fields = ('__all__')
