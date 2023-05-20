@@ -14,7 +14,8 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">내 프로필</a>
           <ul class="dropdown-menu">
-            <router-link class="dropdown-item" to="/proFile">프로필 보기</router-link>
+            <li>{{  }}</li>
+            <li><router-link class="dropdown-item" to="/proFile">프로필 보기</router-link></li>
             <!-- <li><a class="dropdown-item" href="#scrollspyHeading3">프로필 보기</a></li> -->
             <li><a class="dropdown-item" href="#scrollspyHeading4" @click="logout">로그아웃</a></li>
           </ul>
@@ -25,8 +26,12 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   name: "navBar",
+  ...mapState({
+      loginUser: state => state.userId
+    }),
   data() {
     return {
       searchTitle: "",

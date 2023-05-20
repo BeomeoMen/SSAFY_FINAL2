@@ -127,7 +127,7 @@ export default new Vuex.Store({
           rank,
         },
       })
-      .then(res => {
+      .then(() => {
         console.log('리뷰 작성 완료')
         context.dispatch('getReviews', movieId); // 리뷰 작성 후, 새로운 리뷰 정보를 가져옵니다.
       })
@@ -190,6 +190,7 @@ export default new Vuex.Store({
           console.log(res)
           context.commit('SAVE_TOKEN', res.data)
           router.push({name: "mainView"}) 
+          context.dispatch('getUserId');
       })
       .catch(err => {
         alert('로그인 정보가 유효하지 않습니다.')
@@ -201,23 +202,24 @@ export default new Vuex.Store({
       context.commit('SAVE_TOKEN', null)
       router.push('/'); 
     },
-
     getUserId(context){
-      axios({
-        method:'get',
-        url: `${API_URL}/accounts/user/`,
-        headers: {
-          Authorization: `Token ${context.state.token.key}`
-        },
-      })
-      .then(res =>{
-        console.log(res)
-        console.log(res.data.pk)
-        context.commit('GET_USERID', res.data.pk)
-      })
-      .catch(err =>{
-        console.log(err)
-      })
+      if (context.state.token) { 
+        axios({
+          method:'get',
+          url: `${API_URL}/accounts/user/`,
+          headers: {
+            Authorization: `Token ${context.state.token.key}`
+          },
+        })
+        .then(res =>{
+          console.log(res)
+          console.log(res.data.pk)
+          context.commit('GET_USERID', res.data.pk)
+        })
+        .catch(err =>{
+          console.log(err)
+        })
+      }
     }
   },    
   modules: {

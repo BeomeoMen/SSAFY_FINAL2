@@ -45,6 +45,7 @@ export default {
   methods:{
     createReview() {
       const user = this.$store.state.userId
+      console.log('뭐냐고 ㅅㅂ' + user)
       const content = this.content
       const rank = this.rank
       if(!content){

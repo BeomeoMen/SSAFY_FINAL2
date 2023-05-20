@@ -14,7 +14,7 @@
             <label for="password"><b>Password</b></label><br>
             <input v-model="password" style="width: 100%; padding: 5px;  border-radius: 5px; margin-bottom: 10px;" type="password" name="password" id="password" placeholder="비밀번호 입력">
             <div class="modal-footer">
-              <input type="submit" class="btn btn-primary" value="로그인" data-bs-dismiss="modal">
+              <input type="submit" class="btn btn-primary" value="로그인" data-bs-dismiss="modal" >
             </div>
           </form>
         </div>
@@ -43,7 +43,9 @@ export default {
       this.username = "";
       this.password = "";
     },
-    
+    // getUserId(){
+    //   this.$store.dispatch('getUserId')
+    // } 
   }
 
 }
