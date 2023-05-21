@@ -9,6 +9,28 @@
       <ul class="menu">
         <li>영화</li>
         <li>만화</li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">장르</a>
+          <ul class="dropdown-menu">
+            <li><router-link class="dropdown-item" to="/actionPage">액션</router-link></li>
+            <li><router-link class="dropdown-item" to="/animationPage">만화</router-link></li>
+            <li><router-link class="dropdown-item" to="/comedyPage">개그</router-link></li>
+            <li><router-link class="dropdown-item" to="/crimePage">범죄</router-link></li>
+            <li><router-link class="dropdown-item" to="/documentaryPage">다큐멘터리</router-link></li>
+            <li><router-link class="dropdown-item" to="/dramaPage">드라마</router-link></li>
+            <li><router-link class="dropdown-item" to="/familyPage">가족</router-link></li>
+            <li><router-link class="dropdown-item" to="/fantasyPage">판타지</router-link></li>
+            <li><router-link class="dropdown-item" to="/historyPage">역사</router-link></li>
+            <li><router-link class="dropdown-item" to="/horrorPage">공포</router-link></li>
+            <li><router-link class="dropdown-item" to="/musicPage">음악</router-link></li>
+            <li><router-link class="dropdown-item" to="/mysteryPage">미스테리</router-link></li>
+            <li><router-link class="dropdown-item" to="/romancePage">연애</router-link></li>
+            <li><router-link class="dropdown-item" to="/sciencefictionPage">SF</router-link></li>
+            <li><router-link class="dropdown-item" to="/tvmoviePage">TV시리즈</router-link></li>
+            <li><router-link class="dropdown-item" to="/warPage">전쟁</router-link></li>
+            <li><router-link class="dropdown-item" to="/westernPage">서양</router-link></li>
+          </ul>
+        </li>
         <li>내가 찜한 콘텐츠</li>
         <input type="text" placeholder="영화 제목을 입력해주세요" v-model="searchTitle" @keyup.enter="searchMovie">
         <li class="nav-item dropdown">
@@ -16,7 +38,6 @@
           <ul class="dropdown-menu">
             <li>{{  }}</li>
             <li><router-link class="dropdown-item" to="/proFile">프로필 보기</router-link></li>
-            <!-- <li><a class="dropdown-item" href="#scrollspyHeading3">프로필 보기</a></li> -->
             <li><a class="dropdown-item" href="#scrollspyHeading4" @click="logout">로그아웃</a></li>
           </ul>
         </li>

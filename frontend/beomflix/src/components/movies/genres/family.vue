@@ -2,9 +2,9 @@
   <div>
     <navbar/>
     <div class="container">
-      <h1>액션영화</h1>
+      <h1>가족</h1>
       <div class="row row-cols-md-4">
-        <div v-for="movie in actionMovieList" :key="movie.id">
+        <div v-for="movie in familyMovieList" :key="movie.id">
           {{ movie }}
         </div>
       </div>
@@ -16,21 +16,21 @@
 import navbar from '@/components/common/navbar.vue'
 
 export default {
-  name: "actionPage",
+  name:"familyPage",
   components:{
     navbar
   },
   mounted() {
-    this.getActionMovieList();
+    this.getFamilyMovieList();
   },
   computed: {
-    actionMovieList() {
-      return this.$store.state.actionMovieList;
+    familyMovieList() {
+      return this.$store.state.familyMovieList;
     },
   },
   methods: {
-    getActionMovieList() {
-      this.$store.dispatch("getActionMovieList");
+    getFamilyMovieList() {
+      this.$store.dispatch("getFamilyMovieList");
     },
   },
 };
