@@ -1,7 +1,7 @@
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework.decorators import permission_classes
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 
 import json
 
@@ -164,3 +164,54 @@ def like(request, review_pk):
     }
 
     return Response(context, status=status.HTTP_200_OK)
+
+# 영화 좋아요 
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def like_movie(request, movie_id):
+    user = request.user
+    movie = Movie.objects.get(pk=movie_id)
+    user.like_movie(movie)
+    return Response({ 'message' : 'ok' })
+
+@api_view(['GET',])
+@permission_classes([IsAuthenticated])
+def recommend_genre(request):
+    # Create a dictionary to keep track of the number of likes for each genre.
+    genre_likes = {}
+
+    # Loop through all movies and increment the like count for each genre that has been liked by a user.
+    for movie in Movie.objects.all():
+        for user in movie.like_users.all():
+            genre_name = movie.genres.first().name
+            if genre_name in genre_likes:
+                genre_likes[genre_name] += 1
+            else:
+                genre_likes[genre_name] = 1
+
+    # Find the genre with the highest like count.
+    top_genre = max(genre_likes, key=genre_likes.get)
+
+    # Genre 모델에서 검색할 genre를 가져옵니다.
+    genre = Genre.objects.get(name=top_genre)
+
+    # 가져온 genre를 사용하여 해당 genre에 속하는 영화를 검색합니다.
+    movies = genre.movie_set.all()
+
+    # 검색된 영화 정보를 JSON 형식으로 반환합니다.
+    movie_list = []
+    for movie in movies:
+        movie_dict = {
+            'title': movie.title,
+            'release_date': movie.release_date,
+            'popularity': movie.popularity,
+            'vote_count': movie.vote_count,
+            'vote_average': movie.vote_average,
+            'overview': movie.overview,
+            'poster_path': movie.poster_path,
+            'youtube_key': movie.youtube_key,
+            'user_click': movie.user_click
+        }
+        movie_list.append(movie_dict)
+
+    return Response({'movies': movie_list})
