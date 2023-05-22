@@ -172,8 +172,24 @@ def like(request, review_pk):
 def like_movie(request, movie_id):
     user = request.user
     movie = Movie.objects.get(pk=movie_id)
-    user.like_movie(movie)
-    return Response({ 'message' : 'ok' })
+
+    if movie.like_users.filter(pk=user.pk).exists():
+        movie.like_users.remove(user)
+        is_liked = False
+    else:
+        movie.like_users.add(user)
+        is_liked = True
+
+    context = {
+        'is_liked': is_liked, 
+        'count': movie.like_users.count()
+    }
+
+    return Response(context, status=status.HTTP_200_OK)
+
+
+    # user.like_movie(movie)
+    # return Response({ 'message' : 'ok' })
 
 @api_view(['GET',])
 @permission_classes([IsAuthenticated])
