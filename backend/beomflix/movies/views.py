@@ -46,8 +46,9 @@ def movie_detail(request, movie_pk):
 @permission_classes([IsAuthenticatedOrReadOnly])
 def movie_list_by_genre(request):
     # 클라이언트로부터 받은 genre 정보를 파싱합니다.
-    genre_info = json.loads(request.body)
-    genre_name = genre_info['genre_name']
+    # genre_info = json.loads(request.body)
+    # genre_name = genre_info['genre_name']
+    genre_name = request.GET.get('genre_name')
 
     # Genre 모델에서 검색할 genre를 가져옵니다.
     genre = Genre.objects.get(name=genre_name)
