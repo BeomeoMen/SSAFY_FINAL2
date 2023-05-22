@@ -14,11 +14,16 @@ export default new Vuex.Store({
   state: {
     userId: null,
     userName: null,
-    likeCount: 0,
-    is_liked:false,
-    likes: [],
+
+    reviewLikeCount: 0,
+    review_is_liked:false,
+    reviewLikes: [],
+
+    moview_is_liked:false,
+
     movieList: [],
     nowMovieList: [],
+
     // 장르 별 영화
     actionMovieList: [],
     animationMovieList: [],
@@ -30,11 +35,11 @@ export default new Vuex.Store({
     fantasyMovieList: [],
     historyMovieList: [],
     horrorMovieList: [],
-    musciMovieList: [],
+    musicMovieList: [],
     mysteryMovieList: [],
     romanceMovieList: [],
     sciencefictionMovieList: [],
-    thrillMovieList: [],
+    thrillerMovieList: [],
     tvmovieMovieList: [],
     warMovieList: [],
     westernMovieList: [],
@@ -52,7 +57,7 @@ export default new Vuex.Store({
   },
   mutations: {
     UPDATE_LIKE(state, { reviewId, is_liked, count }) {
-      state.likes[reviewId] = { is_liked, count };
+      state.reviewLikes[reviewId] = { is_liked, count };
     },
     GET_MOVIELIST(state, movie){
       state.movieList = movie
@@ -111,7 +116,7 @@ export default new Vuex.Store({
       state.horrorMovieList = movie
     },
     GET_MUSICMOVIELIST(state, movie){
-      state.musciMovieList = movie
+      state.musicMovieList = movie
     },
     GET_MYSTERYMOVIELIST(state, movie){
       state.mysteryMovieList = movie
@@ -123,7 +128,7 @@ export default new Vuex.Store({
       state.sciencefictionMovieList = movie
     },
     GET_THRILLERMOVIELIST(state, movie){
-      state.thrillMovieList = movie
+      state.thrillerMovieList = movie
     },
     GET_TVMOVIEMOVIELIST(state, movie){
       state.tvmovieMovieList = movie
@@ -411,7 +416,7 @@ export default new Vuex.Store({
         })
     },
     getTvmovieMovieList(context){
-      const genre_name = "Tv 영화"
+      const genre_name = "TV 영화"
       axios({
         method:'get',
         url : `${API_URL}/movies/genre/?genre_name=${genre_name}`,
@@ -549,6 +554,23 @@ export default new Vuex.Store({
         console.log(err)
       })
     },
+    likeMovie(context, movieId){
+      axios({
+        method: 'post',
+        url: `${API_URL}/movies/like_movie/${movieId}/`,
+        headers: {
+          Authorization: `Token ${context.state.token.key}`
+        }
+      })
+      .then((res)=>{
+        console.log(res)
+        console.log("영화 좋아용 >.<")
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
+    },
+
     likeReview(context, reviewId){
       axios({
         method: 'post',

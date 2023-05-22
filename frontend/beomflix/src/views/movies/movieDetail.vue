@@ -22,7 +22,11 @@
           <span class="actor" v-for="actor in movieDetail.actors" :key="actor.id">{{ actor.name }}</span>
         </p>
         <p class="overview">{{ movieDetail.overview }}</p>
-      </div>
+        <button class="btn btn-outline-primary" @click="likeMovie">
+          <i class="bi bi-heart" v-if="!isLiked"></i>
+          <i class="bi bi-heart-fill" v-else></i> 좋아요
+        </button>      
+        </div>
     </div>
     <div class="review">
       <reviewList :reviews="reviews" />
@@ -44,12 +48,23 @@ export default {
   computed:{
     ...mapState(
       ['movieDetail',
-      'reviews']
-      )
+      'reviews',
+      'userId',
+      'movieLikes'
+    ]
+      ),
+    isLikewOwner() {
+      return this.loginUser == 1
+    },
+    // movieDetailId(){
+    //   return this.movieDetail.id
+    // },
+    // isLiked() {
+    //   return this.likes[this.movieDetail.id] ? this.likes[this.movieDetail.id].is_liked : false;
+    // },
   },
   mounted(){
     this.getReview()
-    // console.log(this.$store.state.userId)
   },
   data(){
     return{
@@ -60,9 +75,11 @@ export default {
   methods:{
     getReview(){
       const movieId = this.$store.state.movieDetail.id
-      // console.log(movieId)
       this.$store.dispatch('getReviews', movieId)
-    }
+    },
+    likeMovie(){
+      this.$store.dispatch('likeMovie', this.movieDetail.id)
+    },
   }
 }
 </script>
