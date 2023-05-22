@@ -182,7 +182,9 @@ def like_movie(request, movie_id):
 
     context = {
         'is_liked': is_liked, 
-        'count': movie.like_users.count()
+        'count': movie.like_users.count(),
+        'movie_id' : movie_id,
+        'user_id' : user.id
     }
 
     return Response(context, status=status.HTTP_200_OK)
