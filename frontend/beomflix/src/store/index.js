@@ -81,7 +81,7 @@ export default new Vuex.Store({
     },
 
     // 장르 별 영화
-    GET_ActionMOVIELIST(state, movie){
+    GET_ACTIONMOVIELIST(state, movie){
       state.actionMovieList = movie
     },
     GET_ANIMATIONOVIELIST(state, movie){
@@ -536,17 +536,16 @@ export default new Vuex.Store({
         console.log(err)
       })
     },
-    modifyReview(context, {reviewId, content, rank}){
+    modifyReview(context, {id, user, content, rank}){
       const movieId = context.state.movieDetail.id
       axios({
         method: 'put',
-        url: `${API_URL}/movies/review/${reviewId}/`,
+        url: `${API_URL}/movies/review/${id}/`,
         headers: {
           Authorization: `Token ${context.state.token.key}`
         },
         data:{
-          content, 
-          rank
+          user, content, rank
         }
       })
       .then(()=>{

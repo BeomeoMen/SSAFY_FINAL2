@@ -54,6 +54,7 @@ const routes = [
     component: searchMovie
   },
   {
+    // path: '/movies/genre/?genre_name=${genre_name}',
     path: '/actionPage',
     name: 'actionPage',
     component: actionPage
