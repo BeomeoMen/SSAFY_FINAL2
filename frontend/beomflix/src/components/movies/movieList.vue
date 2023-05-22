@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="row row-cols-md-4">
-      <movieListItem v-for="movie in filteredMovieList" :key="movie.id" :movie="movie"/>
+      <movieListItem v-for="movie in movieList" :key="movie.id" :movie="movie"/>
     </div>
   </div>
 </template>
@@ -18,9 +18,10 @@ export default {
     movieList() {
       return this.$store.state.movieList;
     },
-    filteredMovieList() {
-      return this.movieList.slice(0, 20);
-    }
+    // filteredMovieList() {
+      // return this.movieList.slice(0, 20);
+      // return this.movieList.slice();
+    // }
   },
 }
 </script>

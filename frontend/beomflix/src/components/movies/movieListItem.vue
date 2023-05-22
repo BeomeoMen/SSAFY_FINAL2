@@ -41,8 +41,8 @@ export default {
 <style scoped>
   .card{
     margin-bottom: 20px;
-    width: auto;
-    height: 100px;
+    /* width: auto; */
+    /* height: 100px; */
   }
   .card-body{
     background-color: black;

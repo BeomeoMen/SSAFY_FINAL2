@@ -11,7 +11,7 @@
       </div>
     </div>
     <div>
-      <movieList class="movieList"/>
+      <!-- <movieList class="movieList"/> -->
     </div>
     <div>
       <nowMovieList/>
@@ -24,13 +24,13 @@
 
 <script>
 import navBar from '@/components/common/navbar.vue'
-import movieList from '@/components/movies/movieList.vue'
+// import movieList from '@/components/movies/movieList.vue'
 import nowMovieList from '@/components/movies/nowMovieList.vue'
 export default {
   name : "mainView",
   components:{
     navBar,
-    movieList,
+    // movieList,
     nowMovieList,
   },
   mounted(){
@@ -49,9 +49,6 @@ export default {
     getNowMovie(){
       this.$store.dispatch('getNowMovieList')
     },
-    // getUserId(){
-    //   this.$store.dispatch('getUserId')
-    // }
   }
 }
 </script>

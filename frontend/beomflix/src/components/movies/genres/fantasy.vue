@@ -1,10 +1,10 @@
 <template>
   <div>
-    <navbar/>
+    <navbar/>  
     <div class="container">
-      <h1>액션영화</h1>
+      <h1>판타지</h1>
       <div class="row row-cols-md-4">
-        <div v-for="movie in actionMovieList" :key="movie.id">
+        <div v-for="movie in fantasyMovieList" :key="movie.id">
           {{ movie }}
         </div>
       </div>
@@ -16,21 +16,21 @@
 import navbar from '@/components/common/navbar.vue'
 
 export default {
-  name: "actionPage",
+  name:"fantasyPage",
   components:{
     navbar
   },
   mounted() {
-    this.getActionMovieList();
+    this.getFantasyMovieList();
   },
   computed: {
-    actionMovieList() {
-      return this.$store.state.actionMovieList;
+    fantasyMovieList() {
+      return this.$store.state.fantasyMovieList;
     },
   },
   methods: {
-    getActionMovieList() {
-      this.$store.dispatch("getActionMovieList");
+    getFantasyMovieList() {
+      this.$store.dispatch("getFantasyMovieList");
     },
   },
 };
