@@ -16,6 +16,7 @@ export default new Vuex.Store({
     userName: null,
     likeCount: 0,
     is_liked:false,
+    likes: [],
     movieList: [],
     nowMovieList: [],
     // 장르 별 영화
@@ -38,7 +39,6 @@ export default new Vuex.Store({
     warMovieList: [],
     westernMovieList: [],
 
-
     token: Object, 
     movieDetail: Object,
     searchResults: [],
@@ -52,7 +52,6 @@ export default new Vuex.Store({
   },
   mutations: {
     UPDATE_LIKE(state, { reviewId, is_liked, count }) {
-      // 각 리뷰의 좋아요 상태와 카운트를 갱신합니다.
       state.likes[reviewId] = { is_liked, count };
     },
     GET_MOVIELIST(state, movie){
@@ -181,7 +180,6 @@ export default new Vuex.Store({
         },
       })
         .then((res) => {
-          console.log('완료')
           context.commit('GET_ACTIONMOVIELIST', res.data)
         })
         .catch((err) => {
@@ -461,11 +459,6 @@ export default new Vuex.Store({
         })
     },
 
-
-
-
-
-
     getMovieDetail(context, movieId) {
         axios({
           method: 'get',
@@ -565,9 +558,10 @@ export default new Vuex.Store({
         }
       })
       .then((res)=>{
-        const { is_liked, count } = res.data;
+        const is_liked = res.data.is_liked
+        const count = res.data.count
+        console.log(is_liked, count)
         context.commit('UPDATE_LIKE', { reviewId, is_liked, count });
-        console.log('좋아요');      
       })
       .catch((err)=>{
         console.log(err)
