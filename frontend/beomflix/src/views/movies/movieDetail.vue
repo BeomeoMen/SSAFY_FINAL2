@@ -7,13 +7,14 @@
         <img :src="poster + movieDetail.poster_path">
       </div>
       <div class="details-container">
-        <iframe frameborder="0" allowfullscreen style="width: 100%; height: 400px;" :src="trailerUrlPath"></iframe>
+        <iframe frameborder="0" allowfullscreen style="width: 100%; height: 400px;" :src="trailerUrlPath + movieDetail.youtube_key"></iframe>
         <h2>{{ movieDetail.title }}</h2>
         <div class="details-row">
           <p>
             장르 : 
             <span v-for="genre in movieDetail.genres" :key="genre.id">{{ genre.name }} | </span>
           </p>
+          <!-- <h1>{{ movieLikes[movieDetail.id] }}</h1> -->
           <p>평점 : {{ movieDetail.vote_average }}</p>
           <p>개봉일 : {{ movieDetail.release_date }}</p>
         </div>
@@ -50,18 +51,12 @@ export default {
       ['movieDetail',
       'reviews',
       'userId',
-      'movieLikes'
+      'movieLikes',
     ]
       ),
-    // isLikewOwner() {
-    //   return this.loginUser === this.
-    // },
-    // movieDetailId(){
-    //   return this.movieDetail.id
-    // },
-    // isLiked() {
-    //   return this.likes[this.movieDetail.id] ? this.likes[this.movieDetail.id].is_liked : false;
-    // },
+    isLiked() {
+      return this.movieLikes[this.movieDetail.id] ? this.movieLikes[this.movieDetail.id].is_liked : false;
+    }, 
   },
   mounted(){
     this.getReview()
@@ -69,7 +64,8 @@ export default {
   data(){
     return{
       poster: 'https://image.tmdb.org/t/p/original/',
-      trailerUrlPath: this.$store.state. trailerPath
+      // trailerUrlPath: `https://www.youtube.com/watch?v=`
+      trailerUrlPath: `https://www.youtube.com/embed/`
     }
   },
   methods:{

@@ -50,7 +50,7 @@ export default new Vuex.Store({
     movieDetail: Object,
     searchResults: [],
     reviews: [],
-    trailerPath: 'https://www.youtube.com/embed/F-eMt3SrfFU',
+
   },
   getters: {
     isLogin(state){
@@ -61,8 +61,8 @@ export default new Vuex.Store({
     UPDATE_LIKE(state, { reviewId, is_liked, count }) {
       state.reviewLikes[reviewId] = { is_liked, count };
     },
-    UPDATE_MOVIE_LIKE(state, { movieId, is_liked, count }) {
-      state.reviewLikes[movieId] = { is_liked, count };
+    UPDATE_MOVIE_LIKE(state, { movieId, is_liked, count, userId }) {
+      state.movieLikes[movieId] = { is_liked, count, userId };
     },
     GET_MOVIELIST(state, movie){
       state.movieList = movie
@@ -572,7 +572,8 @@ export default new Vuex.Store({
         console.log(res)
         const is_liked = res.data.is_liked
         const count = res.data.count
-        context.commit('UPDATE_MOVIE_LIKE', {movieId, is_liked, count})
+        const userId = res.data.user_id
+        context.commit('UPDATE_MOVIE_LIKE', {movieId, is_liked, count, userId})
       })
       .catch((err)=>{
         console.log(err)
@@ -634,7 +635,10 @@ export default new Vuex.Store({
       .then(
         console.log('회원가입 완료')
       )
-      .catch((err) => console.log(err))
+      .catch((err) => {
+        console.log(err)
+        alert("회원가입 정보가 올바르지 않습니다.")
+      })
     },
 
     login(context, payload){
@@ -651,6 +655,7 @@ export default new Vuex.Store({
           context.commit('SAVE_TOKEN', res.data)
           router.push({name: "mainView"}) 
           context.dispatch('getUserId');
+          console.log(res.data)
       })
       .catch(err => {
         alert('로그인 정보가 유효하지 않습니다.')
