@@ -14,7 +14,10 @@
     <div>
       <a class="btn btn-primary" v-if="isReviewOwner && !isEditing" @click="editReview">수정</a>
       <button class="btn btn-primary" v-if="isReviewOwner && !isEditing" @click="deleteReview">삭제</button>
-      <button v-if="!isEditing" class="btn btn-outline-primary" @click="likeReview"><i class="bi bi-heart"></i>좋아요</button>
+      <button v-if="!isEditing" class="btn btn-outline-primary" @click="likeReview">
+        <i class="bi bi-heart" v-if="!isLiked"></i>
+        <i class="bi bi-heart-fill" v-else></i> 좋아요
+      </button>
       <a class="btn btn-primary" v-if="isReviewOwner && isEditing" @click="submitEdit">수정 완료</a>
       <a class="btn btn-primary" v-if="isReviewOwner && isEditing" @click="cancelEdit">수정 취소</a>
     </div>
@@ -44,8 +47,10 @@ export default {
       return this.loginUser === this.review.user.id; 
     },
     reviewId() {
-      console.log(this.review.id)
       return this.review.id;
+    },
+    isLiked() {
+      return this.likes[this.review.id].is_liked;
     },
   },
   methods:{  
