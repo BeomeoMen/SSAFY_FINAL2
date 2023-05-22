@@ -57,10 +57,9 @@ export default {
     deleteReview(){
       this.$store.dispatch('deleteReview', this.review.id)
     },
-    async likeReview(){
-  await this.$store.dispatch('likeReview', this.review.id);
-  this.likes = {...this.$store.state.likes};
-  },
+    likeReview(){
+      this.$store.dispatch('likeReview', this.review.id)
+    },
     editReview() {
       this.isEditing = !this.isEditing;
       this.editedContent = this.review.content;

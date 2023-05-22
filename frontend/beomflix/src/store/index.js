@@ -19,7 +19,9 @@ export default new Vuex.Store({
     review_is_liked:false,
     reviewLikes: [],
 
-    moview_is_liked:false,
+    movieLikeCount: 0,
+    movie_is_liked:false,
+    movieLikes: [],
 
     movieList: [],
     nowMovieList: [],
@@ -58,6 +60,9 @@ export default new Vuex.Store({
   mutations: {
     UPDATE_LIKE(state, { reviewId, is_liked, count }) {
       state.reviewLikes[reviewId] = { is_liked, count };
+    },
+    UPDATE_MOVIE_LIKE(state, { movieId, is_liked, count }) {
+      state.reviewLikes[movieId] = { is_liked, count };
     },
     GET_MOVIELIST(state, movie){
       state.movieList = movie
@@ -563,8 +568,11 @@ export default new Vuex.Store({
         }
       })
       .then((res)=>{
-        console.log(res)
         console.log("영화 좋아용 >.<")
+        console.log(res)
+        const is_liked = res.data.is_liked
+        const count = res.data.count
+        context.commit('UPDATE_MOVIE_LIKE', {movieId, is_liked, count})
       })
       .catch((err)=>{
         console.log(err)

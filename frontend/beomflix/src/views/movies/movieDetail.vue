@@ -53,9 +53,9 @@ export default {
       'movieLikes'
     ]
       ),
-    isLikewOwner() {
-      return this.loginUser == 1
-    },
+    // isLikewOwner() {
+    //   return this.loginUser === this.
+    // },
     // movieDetailId(){
     //   return this.movieDetail.id
     // },
