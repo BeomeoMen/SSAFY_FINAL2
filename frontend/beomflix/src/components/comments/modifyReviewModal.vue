@@ -9,15 +9,15 @@
         </div>
         <div class="modal-body text-dark-emphasis mt-2 mb-2">
         <form @submit.prevent="modifyReview">
+          <h1 style="color: black;">{{ reviewId }}</h1>
           <label for="content"></label>
-          <p>{{ review }}</p>
           <input v-model="content" class="inputReview" type="text" id="content" placeholder="리뷰를 입력해주세요">
           <div class="rating">
-            <input type="radio" id="star5" name="rating" value="5" v-model="rank" /><label for="star5" title="5 stars"></label>
-            <input type="radio" id="star4" name="rating" value="4" v-model="rank" /><label for="star4" title="4 stars"></label>
-            <input type="radio" id="star3" name="rating" value="3" v-model="rank" /><label for="star3" title="3 stars"></label>
-            <input type="radio" id="star2" name="rating" value="2" v-model="rank" /><label for="star2" title="2 stars"></label>
-            <input type="radio" id="star1" name="rating" value="1" v-model="rank" /><label for="star1" title="1 star"></label>
+            <input type="radio" id="star55" name="rating" value="5" v-model="rank" /><label for="star55" title="5 stars"></label>
+            <input type="radio" id="star44" name="rating" value="4" v-model="rank" /><label for="star44" title="4 stars"></label>
+            <input type="radio" id="star33" name="rating" value="3" v-model="rank" /><label for="star33" title="3 stars"></label>
+            <input type="radio" id="star22" name="rating" value="2" v-model="rank" /><label for="star22" title="2 stars"></label>
+            <input type="radio" id="star11" name="rating" value="1" v-model="rank" /><label for="star11" title="1 star"></label>
           </div>
           <input type="submit" id="submit" value="수정" data-bs-dismiss="modal">
         </form>
@@ -30,7 +30,9 @@
 <script>
 export default {
   name:"modifyReviewModal",
-  props: ['reviewId'],
+  props: {
+    reviewId:Number,
+  },
   data(){
     return{
       content : null,
@@ -40,7 +42,7 @@ export default {
   methods: {
     modifyReview(){
       const content = this.content
-      const rank = 3
+      const rank = this.rank
       const reviewId = this.reviewId
       console.log(reviewId, content)
       if(!content){
@@ -60,7 +62,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .rating {
   direction: rtl;
 }
