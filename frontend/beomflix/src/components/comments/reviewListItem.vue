@@ -41,7 +41,7 @@ export default {
   computed:{
     ...mapState({
       loginUser: state => state.userId,
-      likes: state => state.likes,
+      likes: state => state.reviewLikes,
     }),
     isReviewOwner() {
       return this.loginUser === this.review.user.id; 
@@ -50,16 +50,17 @@ export default {
       return this.review.id;
     },
     isLiked() {
-      return this.likes[this.review.id].is_liked;
+      return this.likes[this.review.id] ? this.likes[this.review.id].is_liked : false;
     },
   },
   methods:{  
     deleteReview(){
       this.$store.dispatch('deleteReview', this.review.id)
     },
-    likeReview(){
-      this.$store.dispatch('likeReview', this.review.id)
-    },
+    async likeReview(){
+  await this.$store.dispatch('likeReview', this.review.id);
+  this.likes = {...this.$store.state.likes};
+  },
     editReview() {
       this.isEditing = !this.isEditing;
       this.editedContent = this.review.content;

@@ -16,6 +16,7 @@
             <li><router-link class="dropdown-item" to="/animationPage">만화</router-link></li>
             <li><router-link class="dropdown-item" to="/comedyPage">개그</router-link></li>
             <li><router-link class="dropdown-item" to="/crimePage">범죄</router-link></li>
+            <li><router-link class="dropdown-item" to="/thrillerPage">스릴러</router-link></li>
             <li><router-link class="dropdown-item" to="/documentaryPage">다큐멘터리</router-link></li>
             <li><router-link class="dropdown-item" to="/dramaPage">드라마</router-link></li>
             <li><router-link class="dropdown-item" to="/familyPage">가족</router-link></li>
@@ -28,7 +29,7 @@
             <li><router-link class="dropdown-item" to="/sciencefictionPage">SF</router-link></li>
             <li><router-link class="dropdown-item" to="/tvmoviePage">TV시리즈</router-link></li>
             <li><router-link class="dropdown-item" to="/warPage">전쟁</router-link></li>
-            <li><router-link class="dropdown-item" to="/westernPage">서양</router-link></li>
+            <li><router-link class="dropdown-item" to="/westernPage">서부</router-link></li>
           </ul>
         </li>
         <li>내가 찜한 콘텐츠</li>
