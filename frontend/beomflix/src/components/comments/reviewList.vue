@@ -15,6 +15,7 @@
       </form>
     <div v-if="reviews.length > 0">
       <reviewListItem v-for="review in reviews" :key="review.id" :review="review" />
+      <!-- <modifyReviewModal v-for="review in reviews" :key="review.id" :review="review" /> -->
     </div>
     <div v-else>아직 리뷰가 없습니다.</div>
   </div>
@@ -22,14 +23,15 @@
 
 <script>
 import reviewListItem from '@/components/comments/reviewListItem.vue'
-
+// import modifyReviewModal from '@/components/comments/modifyReviewModal.vue'
 export default {
   name:"reviewList",
   props:{
     reviews: Array
   },
   components: {
-    reviewListItem
+    reviewListItem,
+    // modifyReviewModal
   },
   data(){
     return{
@@ -45,7 +47,6 @@ export default {
   methods:{
     createReview() {
       const user = this.$store.state.userId
-      // console.log('뭐냐고 ㅅㅂ' + user)
       const content = this.content
       const rank = this.rank
       if(!content){
@@ -64,7 +65,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .rating {
   direction: rtl;
 }

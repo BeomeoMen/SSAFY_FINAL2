@@ -13,9 +13,12 @@ export default new Vuex.Store({
    ],
   state: {
     userId: null,
+    userName: null,
+    likeCount: 0,
+    is_liked:false,
     movieList: [],
     nowMovieList: [],
-
+    // 장르 별 영화
     actionMovieList: [],
     animationMovieList: [],
     comedyMovieList: [],
@@ -48,6 +51,10 @@ export default new Vuex.Store({
     }
   },
   mutations: {
+    UPDATE_LIKE(state, { reviewId, is_liked, count }) {
+      // 각 리뷰의 좋아요 상태와 카운트를 갱신합니다.
+      state.likes[reviewId] = { is_liked, count };
+    },
     GET_MOVIELIST(state, movie){
       state.movieList = movie
     },
@@ -69,10 +76,11 @@ export default new Vuex.Store({
     GET_USERID(state, userId){
       state.userId = userId
     },
+    GET_USERNAME(state, userName){
+      state.userName = userName
+    },
 
-
-
-
+    // 장르 별 영화
     GET_ActionMOVIELIST(state, movie){
       state.actionMovieList = movie
     },
@@ -126,7 +134,7 @@ export default new Vuex.Store({
     },
     GET_WESTERNMOVIELIST(state, movie){
       state.westernMovieList = movie
-    }
+    },
     
   },
   actions: {
@@ -162,8 +170,7 @@ export default new Vuex.Store({
         })
     },
 
-
-
+    // 장르 별 영화
     getActionMovieList(context){
       const genre_name = "액션"
       axios({
@@ -550,6 +557,23 @@ export default new Vuex.Store({
         console.log(err)
       })
     },
+    likeReview(context, reviewId){
+      axios({
+        method: 'post',
+        url: `${API_URL}/movies/review/${reviewId}/like/`,
+        headers: {
+          Authorization: `Token ${context.state.token.key}`
+        }
+      })
+      .then((res)=>{
+        const { is_liked, count } = res.data;
+        context.commit('UPDATE_LIKE', { reviewId, is_liked, count });
+        console.log('좋아요');      
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
+    },
     searchMovie(context, payload){
       const title = payload.title;
       axios({
@@ -601,8 +625,6 @@ export default new Vuex.Store({
         },
       })
       .then(res => {
-          console.log(res.data)
-          console.log(res)
           context.commit('SAVE_TOKEN', res.data)
           router.push({name: "mainView"}) 
           context.dispatch('getUserId');
@@ -617,7 +639,6 @@ export default new Vuex.Store({
       router.push('/'); 
     },
     getUserId(context){
-      // if (context.state.token) { 
         axios({
           method:'get',
           url: `${API_URL}/accounts/user/`,
@@ -627,13 +648,12 @@ export default new Vuex.Store({
         })
         .then(res =>{
           console.log(res)
-          console.log(res.data.pk)
           context.commit('GET_USERID', res.data.pk)
+          context.commit('GET_USERNAME', res.data.username)
         })
         .catch(err =>{
           console.log(err)
         })
-      // }
     },
   },    
   modules: {
