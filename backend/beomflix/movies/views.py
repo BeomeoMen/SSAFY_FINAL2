@@ -17,7 +17,7 @@ from rest_framework import status
 @permission_classes([IsAuthenticatedOrReadOnly])
 def movie_list(request):
     if request.method == 'GET':
-        movies = get_list_or_404(Movie.objects.order_by())[:50]
+        movies = get_list_or_404(Movie.objects.order_by())
         serializer = MovieListSerializer(movies, many=True)
         return Response(serializer.data)
     
