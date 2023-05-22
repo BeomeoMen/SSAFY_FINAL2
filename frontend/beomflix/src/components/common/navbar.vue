@@ -37,7 +37,6 @@
           <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">내 프로필</a>
           <ul class="dropdown-menu">
             <!-- <li>{{ userName }}</li> -->
-            <!-- <li>{{ userId }}</li> -->
             <li><router-link class="dropdown-item" to="/proFile">프로필 보기</router-link></li>
             <li><a class="dropdown-item" href="#scrollspyHeading4" @click="logout">로그아웃</a></li>
           </ul>
@@ -51,14 +50,12 @@
 import { mapState } from 'vuex'
 export default {
   name: "navBar",
-  // ...mapState(['userName']),
   ...mapState({
     userName: state => state.userName
   }),
   data() {
     return {
       searchTitle: "",
-      // userName: this.userName, // 초기 값 설정
     };
   },
   methods: {
