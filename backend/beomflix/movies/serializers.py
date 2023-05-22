@@ -1,8 +1,20 @@
 from rest_framework import serializers
-from movies.models import Movie, Nowplaying, Review
+from movies.models import Movie, Nowplaying, Review, Genre, Actor
 
+from accounts.serializers import UserSerializer
+
+class GenreSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Genre
+        fields = ('id', 'name')
+
+class ActorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Actor
+        fields = ('__all__')
+        
 class MovieListSerializer(serializers.ModelSerializer):
-
+    genres = GenreSerializer(many=True)
     class Meta:
         model = Movie
         fields = ('__all__')
@@ -19,7 +31,8 @@ class ReviewListSerializer(serializers.ModelSerializer):
 
 
 class MovieSerializer(serializers.ModelSerializer):
-    
+    genres = GenreSerializer(many=True)
+    actors = ActorSerializer(many=True)
     review_set = ReviewListSerializer(many=True, read_only=True)
     class Meta:
         model = Movie
@@ -36,6 +49,9 @@ class NowMovieListSerializer(serializers.ModelSerializer):
 
 # 상세 영화 전체 리뷰 조회(GET)
 class ReviewListSerializer(serializers.ModelSerializer):
+
+    user = UserSerializer()
+
     class Meta:
         model = Review
         fields = ('__all__')
@@ -46,7 +62,7 @@ class ReviewListSerializer(serializers.ModelSerializer):
 class ReviewCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
-        fields = ('id', 'created_at', 'content', 'user', 'rank', 'good_user', 'bad_user',)
+        fields = ('id', 'created_at', 'content', 'user', 'rank', 'good_user',)
         read_only_fields = ('id', 'created_at', 'good_user', 'bad_user')
         # 작성 불요 (read_only_fields)
 

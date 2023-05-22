@@ -11,8 +11,6 @@
           <form @submit.prevent="signUp">        
             <label for="username"><b>ID</b></label><br>
             <input v-model="username" style="width: 100%; padding: 5px;  border-radius: 5px; margin-bottom: 10px;" type="text" name="username" id="username" placeholder="이름 입력">
-            <!-- <label for="email"><b>Email</b></label><br>
-            <input v-model="email" style="width: 100%; padding: 5px;  border-radius: 5px; margin-bottom: 10px;" type="text" name="email" id="email" placeholder="이름 입력"> -->
             <label for="password1"><b>Password</b></label><br>
             <input v-model="password1" style="width: 100%; padding: 5px;  border-radius: 5px; margin-bottom: 10px;" type="password" name="password1" id="password1" placeholder="비밀번호 입력">
             <label for="password2"><b>Password Confirmation</b></label><br>
@@ -33,7 +31,6 @@ export default {
   data(){
     return{
       username : null,
-      // email : null,
       password1 : null,
       password2 : null,
     }
@@ -49,8 +46,9 @@ export default {
       }
 
       this.$store.dispatch('signUp', payload)
-      console.log('회원가입 완료')
-      console.log(payload)
+      this.username = null
+      this.password1 = null 
+      this.password2 = null
     }
   }
 }

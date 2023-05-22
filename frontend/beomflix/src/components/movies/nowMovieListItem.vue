@@ -1,10 +1,10 @@
 <template>
   <div class="col">
     <div class="card" style="width: 18rem;">
-      <img :src="poster+movie.poster_path" class="card-img-top" @click="movieDetail(movie.id)">  
+      <img :src="poster+nowMovie.poster_path" class="card-img-top" @click="movieDetail(nowMovie.id)">  
       <div class="card-body">
-        <h4 class="card-title" @click="movieDetail(movie.id)">{{movie.title}}</h4>
-        <p class="card-text" @click="movieDetail(movie.id)">{{ truncateOverview(movie.overview, 100) }}</p>
+        <h4 class="card-title" @click="movieDetail(nowMovie.id)">{{nowMovie.title}}</h4>
+        <p class="card-text" @click="movieDetail(nowMovie.id)">{{ truncateOverview(nowMovie.overview, 100) }}</p>
       </div>
     </div>
   </div>
@@ -12,9 +12,9 @@
 
 <script>
 export default {
-  name:"movieListItem",
+  name:"nowMovieListItem.vue",
   props:{
-    movie:Object,
+    nowMovie:Object,
   },
   data(){
     return{

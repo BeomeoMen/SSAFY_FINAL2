@@ -7,20 +7,14 @@
           무료로 원하는 영화, 만화 등을 찾아보세요.<br>
           신뢰도 높은 알고리즘으로 이용자 맞춤 영화를 추천해 드립니다.
         </p>
+        <!-- <button @click="getUserId"></button> -->
       </div>
     </div>
-    <!-- <div v-if="searchResults.length === 0">
-      <movieList />
-    </div>
-    <div v-else>
-      <searchList />
-    </div> -->
     <div>
-      <movieList />
-      <searchList />
+      <!-- <movieList class="movieList"/> -->
     </div>
     <div>
-      <h1 class="text-white text-center">평점 상위 10</h1>\
+      <nowMovieList/>
     </div>
     <div>
       <h1 class="text-white text-center">찜한 콘텐츠 중 가장 많은 장르</h1>
@@ -30,18 +24,18 @@
 
 <script>
 import navBar from '@/components/common/navbar.vue'
-import movieList from '@/components/movies/movieList.vue'
-import searchList from '@/components/movies/searchList.vue'
-
+// import movieList from '@/components/movies/movieList.vue'
+import nowMovieList from '@/components/movies/nowMovieList.vue'
 export default {
   name : "mainView",
   components:{
     navBar,
-    movieList,
-    searchList,
+    // movieList,
+    nowMovieList,
   },
   mounted(){
     this.getMovieList()
+    this.getNowMovie()
   },
   computed: {
     searchResults() {
@@ -52,9 +46,9 @@ export default {
     getMovieList(){
       this.$store.dispatch('getMovieList')
     },
-    // searchResults() {
-    //   this.$store.dispatch('searchMovie')
-    // }
+    getNowMovie(){
+      this.$store.dispatch('getNowMovieList')
+    },
   }
 }
 </script>

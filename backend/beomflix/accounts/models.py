@@ -6,6 +6,7 @@ from django.contrib.auth.models import AbstractUser
 class User(AbstractUser):
     nickname = models.CharField(max_length=20, blank=True)
     profile_path = models.CharField(max_length=10000, blank=True)
+    followings = models.ManyToManyField('self', related_name='followers', symmetrical=False)
 
-    def __str__(self):
-        return self.username
+    def like_movie(self, movie):
+        movie.like_users.add(self)
