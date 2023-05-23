@@ -14,7 +14,6 @@
             장르 : 
             <span v-for="genre in movieDetail.genres" :key="genre.id">{{ genre.name }} | </span>
           </p>
-          <!-- <h1>{{ movieLikes[movieDetail.id] }}</h1> -->
           <p>평점 : {{ movieDetail.vote_average }}</p>
           <p>개봉일 : {{ movieDetail.release_date }}</p>
         </div>
@@ -40,7 +39,7 @@
 import { mapState } from 'vuex';
 import navbar from '@/components/common/navbar.vue'
 import reviewList from '@/components/comments/reviewList.vue'
-export default {
+export default { 
   components: { 
     navbar,
     reviewList
@@ -107,7 +106,7 @@ export default {
 }
 .details-container {
   color: white;
-  border: solid 1px white;
+  /* border: solid 1px white; */
   padding: 20px;
   height: auto;
 }
