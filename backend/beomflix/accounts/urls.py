@@ -15,4 +15,7 @@ urlpatterns = [
     path('profile/<int:user_id>/following/', views.following_users, name='following_users'), 
     # 유저 프로필 사진
     path('profile/<int:user_id>/picture/', views.user_profile_picture, name='user_profile_picture'), 
+    # 유저 자기 소개
+    path('profile/<int:user_id>/introduce/', views.user_introduce, name='user_introduce'), 
+
 ]

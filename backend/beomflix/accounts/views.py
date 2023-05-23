@@ -99,7 +99,7 @@ def following_users(request, user_id):
     serializer = UserSerializer(following_users, many=True)
     return Response(serializer.data)
 
-
+# 유저 프로필 사진
 @api_view(['GET', 'PUT'])
 @permission_classes([IsAuthenticated])
 def user_profile_picture(request, user_id):
@@ -123,3 +123,22 @@ def user_profile_picture(request, user_id):
     print('사진 get')
     serializer = UserSerializer(user)
     return Response(serializer.data)
+
+# 유저 자기소개
+@api_view(['GET', 'PUT'])
+@permission_classes([IsAuthenticated])
+def user_introduce(request, user_id):
+    user = User.objects.get(pk=user_id)
+    if request.method == 'PUT':
+        introduce = request.data.get('introduce')
+
+        print(introduce)
+
+        user.introduce = introduce
+        user.save()
+        return Response(introduce)
+    
+    return Response(user.introduce)
+    
+
+    
