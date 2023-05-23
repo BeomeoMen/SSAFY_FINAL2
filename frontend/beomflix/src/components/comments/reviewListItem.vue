@@ -1,6 +1,7 @@
 <template>
   <div class="reviews">
-    <h2>유저명 :{{review.user.username}}</h2>
+    <!-- <h2><router-link class="dropdown-item" :to="'/proFile/' + review.user.id">{{review.user.username}}</router-link></h2> -->
+    <h2 @click="getUserProfile">{{ review.user.username }}</h2>
     <h2 v-if="!isEditing">내용 :{{review.content}}</h2>
     <input v-else v-model="editedContent" type="text" placeholder="리뷰를 입력해주세요">
     <h2 v-if="!isEditing">평점 : {{review.rank}}</h2>
@@ -38,6 +39,12 @@ export default {
       editedRank: null,
     }
   },
+  // beforeRouteUpdate(to, from, next){
+  //   this.userId = to.params.userId
+  //   // this.userName = to.params.userName
+  //   this.$store.dispatch("getUserProfile")
+  //   next()
+  // },
   computed:{
     ...mapState({
       loginUser: state => state.userId,
@@ -77,6 +84,9 @@ export default {
     cancelEdit() {
       this.isEditing = false;
     },
+    getUserProfile() {
+      this.$store.dispatch("getUserProfile", this.review.user.id);
+    }
   }
 }
 </script>

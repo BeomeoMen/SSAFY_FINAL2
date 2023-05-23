@@ -1,11 +1,16 @@
 <template>
   <div class="col">
-    <div class="card" style="width: 18rem;">
-      <img :src="poster+nowMovie.poster_path" class="card-img-top" @click="movieDetail(nowMovie.id)">  
+    <div class="card1" @mouseenter="showCard = true" @mouseleave="showCard = false" v-show="!showCard">
       <div class="card-body">
-        <h4 class="card-title" @click="movieDetail(nowMovie.id)">{{nowMovie.title}}</h4>
-        <p class="card-text" @click="movieDetail(nowMovie.id)">{{ truncateOverview(nowMovie.overview, 100) }}</p>
+        <h3 class="card-title mt-4" @click="movieDetail(nowMovie.id)">{{nowMovie.title}}</h3>
+        <h4>평점 : {{ nowMovie.vote_average }}</h4>
+        <h4>인기도 : {{ nowMovie.popularity.toFixed(0) }}</h4>
+        <p class="card-text" @click="movieDetail(nowMovie.id)">{{ truncateOverview(nowMovie.overview, 120) }}</p>
+        <button class="btn btn-primary text-center" @click="movieDetail(nowMovie.id)">상세보기</button>
       </div>
+    </div>
+    <div class="card2" @mouseenter="showCard = false" @mouseleave="showCard = true" v-show="showCard">
+      <img :src="poster+nowMovie.poster_path" class="card-img-top" @click="movieDetail(nowMovie.id)">  
     </div>
   </div>
 </template>
@@ -18,7 +23,8 @@ export default {
   },
   data(){
     return{
-      poster: 'https://image.tmdb.org/t/p/original/'
+      poster: 'https://image.tmdb.org/t/p/original/',
+      showCard: true,
     }
   },
   methods: {
@@ -39,16 +45,28 @@ export default {
 </script>
 
 <style scoped>
+ .col{
+  margin-bottom: 20px;
+ }
   .card{
     margin-bottom: 20px;
-    /* width: auto; */
-    /* height: 100px; */
+    height: 400px;
+    border-radius: 30px;
   }
   .card-body{
     background-color: black;
     color: white;
+    padding: 20px;
+  }
+  .card2{
+    margin-bottom: 20px;
+    height: 400px;
+    border-radius: 30px;
   }
   .card-body > .card-title{
     text-align: center;
+  }
+  img{
+    height: 400px;
   }
 </style>
