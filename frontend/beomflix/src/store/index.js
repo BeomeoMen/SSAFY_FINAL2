@@ -612,23 +612,23 @@ export default new Vuex.Store({
       })
     },
 
-    getLikeMovie(context){
-      axios({
-        method: 'get',
-        url: `${API_URL}/movies/liked_movies/`,
-        headers: {
-          Authorization: `Token ${context.state.token.key}`
-        }
-      })
-      .then((res)=>{
-        console.log(res.data)
-        context.commit('GET_MOVIELIKE', res.data)
+    // getLikeMovie(context){
+    //   axios({
+    //     method: 'get',
+    //     url: `${API_URL}/movies/liked_movies/`,
+    //     headers: {
+    //       Authorization: `Token ${context.state.token.key}`
+    //     }
+    //   })
+    //   .then((res)=>{
+    //     console.log(res.data)
+    //     context.commit('GET_MOVIELIKE', res.data)
         
-      })
-      .catch((err)=>{
-        console.log(err)
-      })
-    },
+    //   })
+    //   .catch((err)=>{
+    //     console.log(err)
+    //   })
+    // },
 
     likeReview(context, reviewId){
       axios({

@@ -26,7 +26,7 @@
           <i class="bi bi-heart" v-if="!isLiked"></i>
           <i class="bi bi-heart-fill" v-else></i> 좋아요
         </button>      
-        </div>
+        </div>,
     </div>
     <div class="review">
       <reviewList :reviews="reviews" />

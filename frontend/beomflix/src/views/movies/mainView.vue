@@ -11,6 +11,9 @@
       </div>
     </div>
     <div>
+
+    </div>
+    <div>
       <movieList class="movieList"/>
     </div>
     <div>
@@ -26,8 +29,15 @@
 import navBar from '@/components/common/navbar.vue'
 import movieList from '@/components/movies/movieList.vue'
 import nowMovieList from '@/components/movies/nowMovieList.vue'
+import axios from 'axios'
+const API_URL = 'http://127.0.0.1:8000'
 export default {
   name : "mainView",
+  data(){
+    return{
+      recommendationMovie:[]
+    }
+  },
   components:{
     navBar,
     movieList,
@@ -36,6 +46,7 @@ export default {
   mounted(){
     this.getMovieList()
     this.getNowMovie()
+    this.getrecommendationMovie()
   },
   computed: {
     searchResults() {
@@ -49,6 +60,22 @@ export default {
     getNowMovie(){
       this.$store.dispatch('getNowMovieList')
     },
+    getrecommendationMovie(){
+      axios({
+        method:'get',
+        url:`${API_URL}/movies/recommend_genre/`,
+        headers: {
+          Authorization: `Token ${this.$store.state.token.key}`,
+        },
+      })
+      .then((res) => {
+        console.log(res.data)
+        this.recommendationMovie = res.data
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+    }
   }
 }
 </script>
