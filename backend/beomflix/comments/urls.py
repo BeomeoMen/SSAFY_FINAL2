@@ -1,7 +1,7 @@
 from django.urls import path
 from comments import views
 
-# movies/ => enculde
+# comments/ => enculde
 urlpatterns = [
     # 프로필 유저 생성
     # path('profileuser/', views.profileuser_list, name='profileuser_list'),
