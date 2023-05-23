@@ -6,11 +6,11 @@
       <h1>사용자 이름 : {{ USERNAME }}</h1>
       <button class="btn btn-primary" v-if="isNotProFileOwner" @click="follow">Follow</button>
       <button class="btn btn-primary" v-if="isNotProFileOwner" @click="follow">UnFollow</button>
-      <h2>followers : {{ follows.followers }}</h2>
-      <h2>followings : {{ follows.followings }}</h2>
-      <div>
+      <h2>followers : </h2>
+      <h2>followings : </h2>
+      <div class="self">
         <h1>자기소개 입니다.</h1>
-        <!-- <input type="text" v-model="introduce" @keyup.enter="createIntroduce"> -->
+        <input type="text" v-model="content" @keyup.enter="createIntroduce">
         <!-- <h1>{{ introduce }}</h1> -->
       </div>
     </div>
@@ -40,7 +40,7 @@ export default {
   },
   data(){
     return{
-      introduce : null,
+      content : null,
       guestBook: null,
     }
   },
@@ -67,8 +67,13 @@ export default {
   },
   methods:{
     createIntroduce(){
-      this.$store.commit('createIntroduce')
+      const content = this.content
+      const profile = this.USERID
+      this.$store.dispatch('createIntroduce', {profile, content})
     },
+    // getIntroduce(){
+    //   this.$store.dispatch('getIntroduce', this.USERID)
+    // },
     createGuestBooke(){
       const profile = this.USERID
       const user = this.userId
@@ -86,9 +91,13 @@ export default {
     },
     follow(){
       const userName = this.USERNAME
-      console.log(userName)
       this.$store.dispatch('follow', userName)
-    }
+    },
+    // getFollow(){
+    //   const userId = this.userId
+    //   console.log(userId + 1111111)
+    //   this.$store.dispatch('getFollow', userId)
+    // }
   }
 }
 </script>
@@ -103,6 +112,10 @@ export default {
     color: white;
   }
   .guestBook{
+    border: solid 1px white;    
+    color: white;
+  }
+  .self{
     border: solid 1px white;    
     color: white;
   }
