@@ -8,7 +8,7 @@ import json
 from django.shortcuts import get_list_or_404, get_object_or_404
 from movies.serializers import MovieListSerializer, MovieSerializer, NowMovieListSerializer, ReviewListSerializer, ReviewCreateSerializer, ReviewSerializer
 from accounts.serializers import UserSerializer
-from movies.models import Movie, Genre, Nowplaying, Review
+from movies.models import Movie, Genre, Nowplaying, Review, Like
 from accounts.models import User
 from rest_framework import status
 
@@ -179,6 +179,8 @@ def like_movie(request, movie_id):
     else:
         movie.like_users.add(user)
         is_liked = True
+        like = Like(user=user, movie=movie)
+        like.save()
 
     context = {
         'is_liked': is_liked, 
@@ -234,3 +236,12 @@ def recommend_genre(request):
         movie_list.append(movie_dict)
 
     return Response({'movies': movie_list})
+
+@api_view(['GET',])
+@permission_classes([IsAuthenticatedOrReadOnly])
+def liked_movies(request):
+    user = request.user
+    liked_movies = Like.objects.filter(user=user).values_list('movie_id', flat=True)
+    movies = Movie.objects.filter(pk__in=liked_movies)
+
+    return Response(liked_movies)

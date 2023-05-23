@@ -6,7 +6,6 @@ from rest_framework.decorators import permission_classes
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from .models import User
-from movies.models import Movie
 from rest_framework import status
 
 
@@ -48,14 +47,6 @@ def profile_username(request, username):
 
             return Response(serializer.data)
 
-
-# 영화 좋아요 
-@api_view(['POST'])
-@permission_classes([IsAuthenticated])
-def like_movie(request, movie_id):
-    user = request.user
-    movie = Movie.objects.get(pk=movie_id)  # Replace 1 with the ID of the movie
-    user.like_movie(movie)
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
