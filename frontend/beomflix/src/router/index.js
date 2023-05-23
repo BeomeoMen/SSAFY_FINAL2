@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import mainView from '@/views/movies/mainView.vue'
 import proFile from '@/views/accounts/profileView.vue'
+
 import first from '@/views/movies/first.vue'
 import movieDetail from '@/views/movies/movieDetail.vue'
 import searchMovie from '@/views/movies/searchMovie.vue'
@@ -25,6 +26,7 @@ import tvmoviePage from '@/components/movies/genres/tvmovie.vue'
 import warPage from '@/components/movies/genres/war.vue'
 import westernPage from '@/components/movies/genres/western.vue'
 
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -39,9 +41,9 @@ const routes = [
     component: mainView
   },
   {
-    path: '/proFile',
+    path: '/proFile/:userId',
     name: 'proFile',
-    component: proFile
+    component: proFile,
   },
   {
     path: '/movieDetail',
@@ -54,7 +56,6 @@ const routes = [
     component: searchMovie
   },
   {
-    // path: '/movies/genre/?genre_name=${genre_name}',
     path: '/actionPage',
     name: 'actionPage',
     component: actionPage
