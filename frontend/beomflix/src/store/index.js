@@ -30,7 +30,7 @@ export default new Vuex.Store({
     movieList: Object,
     nowMovieList: [],
 
-    introduce:null,
+    introduce:Object,
     guestBookList : null,
 
     follows:[],
@@ -110,12 +110,16 @@ export default new Vuex.Store({
       state.USERNAME = USERNAME
     },
 
+    GET_INTRODUCE(state, {introduce, profile}){
+      state.introduce[profile] = introduce
+    },
     GET_GUESTBOOKLIST(state, guestBookList){
       state.guestBookList = guestBookList
     },
-    GET_FOLLOW(state, {followers, followings, is_followed}){
-      state.follows = {followers, followings, is_followed}
+    GET_FOLLOW(state, {now_followers_count, now_followings_count,target_followers_count, target_followings_count, is_followed}){
+      state.follows = {now_followers_count, now_followings_count,target_followers_count, target_followings_count, is_followed}
     },
+
     // 장르 별 영화
     GET_ACTIONMOVIELIST(state, movie){
       state.actionMovieList = movie
@@ -601,9 +605,6 @@ export default new Vuex.Store({
         const count = res.data.count
         const userId = res.data.user_id
         const movieId = res.data.movie_id
-        // const likeMap = new Map()
-        // likeMap.set(movieId, userId)
-        // context.commit('UPDATE_MOVIE_LIKE', {movieId, is_liked, count, userId})
         context.commit('UPDATE_MOVIE_LIKE', {movieId, userId, is_liked, count})
       })
       .catch((err)=>{
@@ -742,7 +743,6 @@ export default new Vuex.Store({
         },
       })
       .then(res =>{
-        // console.log(res.data)
         context.commit('GET_USER_ID', res.data.pk)
 
       })
@@ -785,7 +785,6 @@ export default new Vuex.Store({
       })
       .then(() => {
         console.log('방명록 작성 완료')
-        // context.dispatch('getReviews', movieId); 
       })
       .catch(err =>{
         console.log(err)
@@ -810,7 +809,6 @@ export default new Vuex.Store({
       })
     },
     deleteGuestBook(context, {profileId, guestBookId}){
-      // console.log()
       axios({
         method: 'delete',
         url: `${API_URL}/comments/profileuser/${profileId}/comment/${guestBookId}/`,
@@ -834,39 +832,91 @@ export default new Vuex.Store({
         },
       })
       .then((res) => {
-        console.log(res)
-        const followers = res.data.followers_count
-        const followings = res.data.followings_count
-        const is_followed = res.data.is_followed
-        console.log(followers, followings, is_followed)
-        console.log("팔로우 완료")
-        context.commit('GET_FOLLOW', {followers, followings, is_followed})
+        console.log(res.data)
+        // context.dispatch('getFollow')
       })
       .catch((err) => {
         console.log(err)
       })
-    }
-
-    // createIntroduce(context){
+    },
+    // getFollower(context, userId){
     //   axios({
-    //     method:'post',
-    //     url: `${API_URL}/comments/profileuser/${profile}/comment/`,
+    //     method:'get',
+    //     url:`${API_URL}/accounts/profile/${userId}/follower/`,
     //     headers: {
     //       Authorization: `Token ${context.state.token.key}`
     //     },
-    //     data: {
-    //       user,
-    //       content,
-    //     },
     //   })
-    //   .then(() => {
-    //     console.log('방명록 작성 완료')
-    //     // context.dispatch('getReviews', movieId); 
+    //   .then((res) => {
+    //     console.log(res.data)
+    //     console.log("팔로워 조회 완료")
     //   })
-    //   .catch(err =>{
+    //   .catch((err) => {
     //     console.log(err)
     //   })
-    // }
+    // },
+    getFollowings(context, userId){
+      axios({
+        method:'get',
+        url:`${API_URL}/accounts/profile/${userId}/following/`,
+        headers: {
+          Authorization: `Token ${context.state.token.key}`
+        },
+      })
+      .then((res) => {
+        console.log(res.data)
+        const target_followers_count = res.data.target_followers_count
+        const target_followings_count = res.data.target_followings_count 
+        const now_followers_count = res.data.now_followers_count
+        const now_followings_count = res.data.now_followings_count
+        const is_followed = res.data.is_followed
+        console.log("팔로잉 조회 완료")
+        context.commit('GET_FOLLOW', {now_followers_count, now_followings_count,target_followers_count, target_followings_count, is_followed})
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+    },
+
+    createIntroduce(context, {profile, introduce}){
+      axios({
+        method:'put',
+        url: `${API_URL}/accounts/profile/${profile}/introduce/`,
+        headers: {
+          Authorization: `Token ${context.state.token.key}`
+        },
+        data: {
+          introduce,
+        },
+      })
+      .then(() => {
+        console.log('자기소개 작성 완료')
+      })
+      .catch(err =>{
+        console.log(err)
+      })
+    },
+
+    createPicture(context, {profile, profile_picture}){
+      axios({
+        method:'put',
+        url: `${API_URL}/accounts/profile/${profile}/introduce/`,
+        headers: {
+          Authorization: `Token ${context.state.token.key}`
+        },
+        data: {
+          profile_picture,
+        },
+      })
+      .then(() => {
+        console.log('자기소개 작성 완료')
+      })
+      .catch(err =>{
+        console.log(err)
+      })
+    },
+    
+
   },    
   modules: {
   }
