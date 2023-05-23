@@ -7,6 +7,7 @@ from rest_framework import status
 from django.shortcuts import get_list_or_404, get_object_or_404
 from comments.serializers import ProfileSerializer, CommentSerializer, ProfileListSerializer
 from comments.models import Comment, Profile
+from accounts.models import User
 from django.contrib.auth import get_user_model
 
 
@@ -44,6 +45,7 @@ def comment_list(request, profile_pk):
     comments = profile.comment_set.all()
     # 역참조 profile : comment 1:N
     serializers = CommentSerializer(comments, many=True)
+
     return Response(serializers.data)
 
 # 댓글 삭제

@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from comments.models import Profile, Comment
+from accounts.serializers import UserSerializer
 
 class ProfileListSerializer(serializers.ModelSerializer):
 
@@ -9,6 +10,7 @@ class ProfileListSerializer(serializers.ModelSerializer):
 
 
 class CommentSerializer(serializers.ModelSerializer):
+    username = serializers.CharField(source='user.username', read_only=True)
 
     class Meta:
         model = Comment
