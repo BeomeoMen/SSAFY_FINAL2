@@ -70,10 +70,14 @@ def follow(request, username):
             follower.followings.add(target_user)
             is_followed = True
 
+        following_users = follower.followings.all()
+        followed_users = User.objects.filter(followings=follower)
         context = {
             'is_followed': is_followed,
-            'followers_count': target_user.followers.count(),
-            'followings_count': target_user.followings.count(),
+            'target_followers_count': target_user.followers.count(),
+            'target_followings_count': target_user.followings.count(),
+            'now_followings_count' : following_users.count(),
+            'now_followers_count' : followed_users.count()
         }
         return Response(context, status=status.HTTP_200_OK)
     
@@ -81,7 +85,6 @@ def follow(request, username):
 @api_view(['GET'])
 @permission_classes([IsAuthenticatedOrReadOnly])
 def followed_users(request, user_id):
-    print(1)
     user = User.objects.get(pk=user_id)
     followed_users = User.objects.filter(followings=user)
     serializer = UserSerializer(followed_users, many=True)
