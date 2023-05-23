@@ -17,6 +17,6 @@ class CustomRegisterSerializer(RegisterSerializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = get_user_model()
-        # fields = ('id', 'username', 'nickname', 'profile_path',)
-        fields = '__all__'
+        fields = ('id', 'username', 'nickname', 'profile_path',)
+        # fields = '__all__'
         

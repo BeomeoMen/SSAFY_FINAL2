@@ -4,7 +4,7 @@ from accounts.serializers import UserSerializer
 from rest_framework.decorators import api_view
 from rest_framework.decorators import permission_classes
 from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 from .models import User
 from rest_framework import status
 
@@ -58,7 +58,7 @@ def follow(request, username):
 
         # 자기 자신 팔로우 한 경우
         if follower == target_user:
-            return Response({"error": "자기 자신은 팔로우 할 수 없습니다ㅠ"}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"error": "자기 자신은 팔로우 할 수 없습니다"}, status=status.HTTP_400_BAD_REQUEST)
 
         if follower.followings.filter(username=target_user.username).exists():
             # 이미 팔로우 중인 경우, 팔로우 해제
@@ -75,3 +75,22 @@ def follow(request, username):
             'followings_count': target_user.followings.count(),
         }
         return Response(context, status=status.HTTP_200_OK)
+    
+# 내 팔로워 조회
+@api_view(['GET'])
+@permission_classes([IsAuthenticatedOrReadOnly])
+def followed_users(request, user_id):
+    print(1)
+    user = User.objects.get(pk=user_id)
+    followed_users = User.objects.filter(followings=user)
+    serializer = UserSerializer(followed_users, many=True)
+    return Response(serializer.data)
+
+# 내가 팔로잉 하는 사람 조회
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def following_users(request, user_id):
+    user = User.objects.get(pk=user_id)
+    following_users = user.followings.all()
+    serializer = UserSerializer(following_users, many=True)
+    return Response(serializer.data)
