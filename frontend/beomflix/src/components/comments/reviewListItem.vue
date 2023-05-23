@@ -39,12 +39,6 @@ export default {
       editedRank: null,
     }
   },
-  // beforeRouteUpdate(to, from, next){
-  //   this.userId = to.params.userId
-  //   // this.userName = to.params.userName
-  //   this.$store.dispatch("getUserProfile")
-  //   next()
-  // },
   computed:{
     ...mapState({
       loginUser: state => state.userId,

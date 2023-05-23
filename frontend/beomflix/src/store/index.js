@@ -25,12 +25,15 @@ export default new Vuex.Store({
     movieLikeCount: 0,
     movie_is_liked:false,
     movieLikes: Object,
+    likeMovie : [],
 
     movieList: Object,
     nowMovieList: [],
 
     introduce:null,
     guestBookList : null,
+
+    follows:[],
     // 장르 별 영화
     actionMovieList: [],
     animationMovieList: [],
@@ -71,6 +74,10 @@ export default new Vuex.Store({
       state.movieLikes[movieId] = { userId, is_liked, count };
       console.log(state.movieLikes[movieId]);
     },    
+    GET_MOVIELIKE(state, movie){
+      state.likeMovie = movie
+    },
+
     GET_MOVIELIST(state, movie){
       state.movieList = movie
     },
@@ -106,7 +113,9 @@ export default new Vuex.Store({
     GET_GUESTBOOKLIST(state, guestBookList){
       state.guestBookList = guestBookList
     },
-
+    GET_FOLLOW(state, {followers, followings, is_followed}){
+      state.follows = {followers, followings, is_followed}
+    },
     // 장르 별 영화
     GET_ACTIONMOVIELIST(state, movie){
       state.actionMovieList = movie
@@ -602,6 +611,24 @@ export default new Vuex.Store({
       })
     },
 
+    getLikeMovie(context){
+      axios({
+        method: 'get',
+        url: `${API_URL}/movies/liked_movies/`,
+        headers: {
+          Authorization: `Token ${context.state.token.key}`
+        }
+      })
+      .then((res)=>{
+        console.log(res.data)
+        context.commit('GET_MOVIELIKE', res.data)
+        
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
+    },
+
     likeReview(context, reviewId){
       axios({
         method: 'post',
@@ -798,34 +825,27 @@ export default new Vuex.Store({
         console.log(err)
       })
     },
-    follow(context, {userName, is_followed, followers_count, followings_count}){
-      
+    follow(context, userName){
       axios({
         method:'post',
         url:`${API_URL}/accounts/profile/${userName}/follow/`,
         headers: {
           Authorization: `Token ${context.state.token.key}`
         },
-        data:{
-          is_followed, followers_count, followings_count
-        }
       })
       .then((res) => {
         console.log(res)
+        const followers = res.data.followers_count
+        const followings = res.data.followings_count
+        const is_followed = res.data.is_followed
+        console.log(followers, followings, is_followed)
         console.log("팔로우 완료")
+        context.commit('GET_FOLLOW', {followers, followings, is_followed})
       })
       .catch((err) => {
         console.log(err)
       })
     }
-
-    // - is_followed : Boolean
-    // - 이미 팔로우 중인지
-    // - followers_count : int
-    //     - 현재 팔로우 한 상대의 팔로워 수
-    // - followings_count : int
-    //     - 나의 현재 팔로잉 수
-
 
     // createIntroduce(context){
     //   axios({

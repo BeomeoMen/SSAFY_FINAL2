@@ -1,26 +1,26 @@
 <template>
   <div>
     <navbar/>
-    <div>
+    <div class="profile">
       <h1>프로필 사진, 프로필명, 팔로우와 팔로잉 부분입니다.</h1>
       <h1>사용자 이름 : {{ USERNAME }}</h1>
-      <!-- <button class="btn btn-primary" v-if="isProFileOwner" @click="follow">Follow</button> -->
-      <!-- <button class="btn btn-primary" v-if="isProFileOwner" @click="follow">UnFollow</button> -->
-      <h1>{{USERID}}</h1>
+      <button class="btn btn-primary" v-if="isNotProFileOwner" @click="follow">Follow</button>
+      <button class="btn btn-primary" v-if="isNotProFileOwner" @click="follow">UnFollow</button>
+      <h2>followers : {{ follows.followers }}</h2>
+      <h2>followings : {{ follows.followings }}</h2>
+      <div>
+        <h1>자기소개 입니다.</h1>
+        <!-- <input type="text" v-model="introduce" @keyup.enter="createIntroduce"> -->
+        <!-- <h1>{{ introduce }}</h1> -->
+      </div>
     </div>
-    <div>
-      <h1>자기소개 입니다.</h1>
-      <!-- <input type="text" v-model="introduce" @keyup.enter="createIntroduce"> -->
-      <!-- <h1>{{ introduce }}</h1> -->
-    </div>
-    <div>
+    <div class="likeMovies">
       <h1>찜한 목록 부분입니다.</h1>
-      <h1 v-for="likedMovieIndex in likedMovies" :key="likedMovieIndex">
-        <h2>{{ movieList[likedMovieIndex] }}</h2>
-        <h2>{{ likedMovieIndex }}</h2>
+      <h1 v-for="movie in filteredMovies" :key="movie.id">
+        <h2 @click="movieDetail(movie.id)">{{ movie.title }}</h2>
       </h1>
     </div>
-    <div>
+    <div class="guestBook">
       <h1>방명록 부분입니다.</h1>
       <input type="text" v-model="guestBook" @keyup.enter="createGuestBooke">
       <guestBookList/>
@@ -55,20 +55,15 @@ export default {
       'USERNAME',
       'movieLikes',
       'movieList',
+      'likeMovie',
+      'follows',
     ]),
-    isProFileOwner(){
+    isNotProFileOwner(){
       return this.userId !== this.USERID
     },
-    likedMovies() {
-      const loggedInUserId = this.userId;
-      console.log(Object.keys(this.movieLikes))
-      return Object.keys(this.movieLikes)
-        .filter(movieId => {
-          const movie = this.movieLikes[movieId];
-          return movie.is_liked && movie.userId === loggedInUserId;
-        })
-        .map(movieId => parseInt(movieId));
-    },
+    filteredMovies() {
+      return this.movieList.filter(movie => this.likeMovie.includes(movie.id));
+    }
   },
   methods:{
     createIntroduce(){
@@ -86,21 +81,29 @@ export default {
     getGuestBook(){
       this.$store.dispatch('getGuestBook', this.USERID)
     },
-    // follow(){
-    //   const is_followed =
-    //   const followers_count = 
-    //   const followings_count = 
-    // //   - is_followed : Boolean
-    // // - 이미 팔로우 중인지
-    // // - followers_count : int
-    // //     - 현재 팔로우 한 상대의 팔로워 수
-    // // - followings_count : int
-    // //     - 나의 현재 팔로잉 수
-    // }
+    movieDetail(movieId) {
+      this.$store.dispatch('getMovieDetail', movieId);
+    },
+    follow(){
+      const userName = this.USERNAME
+      console.log(userName)
+      this.$store.dispatch('follow', userName)
+    }
   }
 }
 </script>
 
 <style>
-
+  .profile{
+    border: solid 1px white;    
+    color: white;
+  }
+  .likeMovies{
+    border: solid 1px white;   
+    color: white;
+  }
+  .guestBook{
+    border: solid 1px white;    
+    color: white;
+  }
 </style>

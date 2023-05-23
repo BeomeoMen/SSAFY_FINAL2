@@ -8,11 +8,10 @@
     <div class="menubar">
       <ul class="menu">
         <li><input type="text" placeholder="영화 제목을 입력해주세요" v-model="searchTitle" @keyup.enter="searchMovie">
-          <!-- <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-search" viewBox="-2 -5 15 20">
+          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-search" viewBox="-2 -5 15 20">
             <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-          </svg> -->
+          </svg>
         </li>
-        
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">장르</a>
           <ul class="dropdown-menu">
@@ -36,11 +35,10 @@
             <li><router-link class="dropdown-item" to="/westernPage">서부</router-link></li>
           </ul>
         </li>
-        
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">내 프로필</a>
           <ul class="dropdown-menu">
-            <li><router-link class="dropdown-item" :to="'/proFile/' + userId">프로필 보기</router-link></li>
+            <li class="dropdown-item" style="color: black;" @click="getUserProfile">내 프로필 보기</li>
             <li><a class="dropdown-item" href="#scrollspyHeading4" @click="logout">로그아웃</a></li>
           </ul>
         </li>
@@ -74,6 +72,9 @@ export default {
     logout() {
       this.$store.dispatch("logout");
     },
+    getUserProfile() {
+      this.$store.dispatch("getUserProfile", this.userId);
+    }
   }
 };
 </script>
