@@ -30,7 +30,7 @@ export default new Vuex.Store({
     movieList: Object,
     nowMovieList: [],
 
-    introduce:null,
+    introduce:Object,
     guestBookList : null,
 
     follows:[],
@@ -110,6 +110,9 @@ export default new Vuex.Store({
       state.USERNAME = USERNAME
     },
 
+    GET_INTRODUCE(state, {introduce, profile}){
+      state.introduce[profile] = introduce
+    },
     GET_GUESTBOOKLIST(state, guestBookList){
       state.guestBookList = guestBookList
     },
@@ -830,28 +833,28 @@ export default new Vuex.Store({
       })
       .then((res) => {
         console.log(res.data)
-        context.dispatch('getFollow')
+        // context.dispatch('getFollow')
       })
       .catch((err) => {
         console.log(err)
       })
     },
-    getFollow(context){
-      const userId = context.state.USERID
-      axios({
-        method:'get',
-        url:`${API_URL}/accounts/profile/${userId}/follower/`,
-        headers: {
-          Authorization: `Token ${context.state.token.key}`
-        },
-      })
-      .then(() => {
-        console.log("팔로워 조회 완료")
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-    },
+    // getFollower(context, userId){
+    //   axios({
+    //     method:'get',
+    //     url:`${API_URL}/accounts/profile/${userId}/follower/`,
+    //     headers: {
+    //       Authorization: `Token ${context.state.token.key}`
+    //     },
+    //   })
+    //   .then((res) => {
+    //     console.log(res.data)
+    //     console.log("팔로워 조회 완료")
+    //   })
+    //   .catch((err) => {
+    //     console.log(err)
+    //   })
+    // },
     getFollowings(context, userId){
       axios({
         method:'get',
@@ -888,28 +891,32 @@ export default new Vuex.Store({
       })
       .then(() => {
         console.log('자기소개 작성 완료')
-        context.dispatch('getIntroduce', profile); 
       })
       .catch(err =>{
         console.log(err)
       })
     },
 
-    getIntroduce(context, profile){
+    createPicture(context, {profile, profile_picture}){
       axios({
-        method:'get',
+        method:'put',
         url: `${API_URL}/accounts/profile/${profile}/introduce/`,
         headers: {
           Authorization: `Token ${context.state.token.key}`
         },
+        data: {
+          profile_picture,
+        },
       })
       .then(() => {
-        console.log('자기소개 조회 완료')
+        console.log('자기소개 작성 완료')
       })
       .catch(err =>{
         console.log(err)
       })
-    }
+    },
+    
+
   },    
   modules: {
   }
