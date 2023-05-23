@@ -25,5 +25,5 @@ urlpatterns = [
     path('like_movie/<int:movie_id>/', views.like_movie, name='like_movie'),
     # 좋아요 한 영화 영화 조회
     # path('<int:user_id>/liked_movies/', views.liked_movies, name='liked_movies'),
-    path('liked_movies/', views.liked_movies, name='liked_movies'),
+    path('<int:user_id>/liked_movies/', views.liked_movies, name='liked_movies'),
 ]

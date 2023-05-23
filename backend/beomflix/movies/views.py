@@ -239,8 +239,8 @@ def recommend_genre(request):
 
 @api_view(['GET',])
 @permission_classes([IsAuthenticatedOrReadOnly])
-def liked_movies(request):
-    user = request.user
+def liked_movies(request, user_id):
+    user = User.objects.get(id=user_id)
     liked_movies = Like.objects.filter(user=user).values_list('movie_id', flat=True)
     movies = Movie.objects.filter(pk__in=liked_movies)
 
