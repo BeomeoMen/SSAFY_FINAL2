@@ -13,4 +13,6 @@ urlpatterns = [
     path('profile/<int:user_id>/follower/', views.followed_users, name='followed_users'), 
     # 내가 팔로잉 하는 사람 조회
     path('profile/<int:user_id>/following/', views.following_users, name='following_users'), 
+    # 유저 프로필 사진
+    path('profile/<int:user_id>/picture/', views.user_profile_picture, name='user_profile_picture'), 
 ]

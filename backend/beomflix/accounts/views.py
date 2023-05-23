@@ -7,6 +7,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 from .models import User
 from rest_framework import status
+import os
 
 
 # 유저 아이디로 접근
@@ -93,4 +94,29 @@ def following_users(request, user_id):
     user = User.objects.get(pk=user_id)
     following_users = user.followings.all()
     serializer = UserSerializer(following_users, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['GET', 'PUT'])
+@permission_classes([IsAuthenticated])
+def user_profile_picture(request, user_id):
+    user = User.objects.get(pk=user_id)
+
+    if request.method == 'PUT':
+        print('들어옴?')
+        profile_picture = request.FILES.get('profile_picture')
+
+        if profile_picture:
+            print('사진 잇음?')
+            if user.profile_picture:
+                os.remove(user.profile_picture.path)
+
+            user.profile_picture = profile_picture
+            user.save()
+
+        serializer = UserSerializer(user)
+        return Response(serializer.data)
+
+    print('사진 get')
+    serializer = UserSerializer(user)
     return Response(serializer.data)

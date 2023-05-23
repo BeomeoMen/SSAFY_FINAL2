@@ -10,10 +10,10 @@ from django.dispatch import receiver
 class Profile(models.Model):
     usernumber = models.OneToOneField(User, on_delete=models.CASCADE)
 
-@receiver(post_save, sender=User)
-def create_profile(sender, instance, created, **kwargs):
-    if created:
-        Profile.objects.create(usernumber=instance)
+    @receiver(post_save, sender=User)
+    def create_profile(sender, instance, created, **kwargs):
+        if created:
+            Profile.objects.create(usernumber=instance)
 
 class Comment(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
