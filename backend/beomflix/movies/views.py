@@ -16,11 +16,37 @@ from rest_framework import status
 # 영화 전체 조회
 @api_view(['GET',])
 @permission_classes([IsAuthenticatedOrReadOnly])
-def movie_list(request):
+def movie_popular_list(request):
     if request.method == 'GET':
         movies = get_list_or_404(Movie.objects.order_by('-vote_average'))
 
         movies = movies[:20]
+
+        movie_list = []
+        for movie in movies:
+            movie_dict = {
+                'id': movie.id,
+                'title': movie.title,
+                'release_date': movie.release_date,
+                'popularity': movie.popularity,
+                'vote_count': movie.vote_count,
+                'vote_average': movie.vote_average,
+                'overview': movie.overview,
+                'poster_path': movie.poster_path,
+                'youtube_key': movie.youtube_key,
+                'user_click': movie.user_click
+            }
+            movie_list.append(movie_dict)
+
+    return Response({'movies': movie_list})
+
+
+# 영화 전체 조회
+@api_view(['GET',])
+@permission_classes([IsAuthenticatedOrReadOnly])
+def movie_list(request):
+    if request.method == 'GET':
+        movies = get_list_or_404(Movie.objects.order_by())
 
         movie_list = []
         for movie in movies:
