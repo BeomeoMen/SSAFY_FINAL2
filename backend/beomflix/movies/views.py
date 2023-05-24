@@ -18,7 +18,10 @@ from rest_framework import status
 @permission_classes([IsAuthenticatedOrReadOnly])
 def movie_list(request):
     if request.method == 'GET':
-        movies = get_list_or_404(Movie.objects.order_by())
+        movies = get_list_or_404(Movie.objects.order_by('-vote_average'))
+
+        movies = movies[:20]
+
         serializer = MovieListSerializer(movies, many=True)
         return Response(serializer.data)
     
@@ -219,8 +222,8 @@ def recommend_genre(request):
 
     # 가져온 genre를 사용하여 해당 genre에 속하는 영화를 검색합니다.
     movies = genre.movie_set.all()
-    if len(movies) >= 8:
-        movies = random.sample(list(movies), k=8)
+    if len(movies) >= 20:
+        movies = random.sample(list(movies), k=20)
     
     # 검색된 영화 정보를 JSON 형식으로 반환합니다.
     movie_list = []
