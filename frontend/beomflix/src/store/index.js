@@ -58,6 +58,7 @@ export default new Vuex.Store({
     warMovieList: [],
     westernMovieList: [],
 
+    recommendGenre:[],
     token: Object, 
     movieDetail: Object,
     searchResults: [],
@@ -187,6 +188,9 @@ export default new Vuex.Store({
       state.westernMovieList = movie
     },
     
+    GET_RECOMMENDGENRE(state, movie){
+      state.recommendGenre = movie
+    }
   },
   actions: {
     getMovieList(context) {
@@ -927,6 +931,22 @@ export default new Vuex.Store({
       .catch(err =>{
         console.log(err)
       })
+    },
+    
+    getRecommendGenre(context){
+      axios({
+        method:'get',
+        url : `${API_URL}/movies/recommend_genre/`,
+        headers: {
+          Authorization: `Token ${context.state.token.key}`
+        },
+      })
+        .then((res) => {
+          context.commit('GET_RECOMMENDGENRE', res.data.movies)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
     },
     
 

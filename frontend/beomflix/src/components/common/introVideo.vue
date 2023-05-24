@@ -16,7 +16,7 @@ export default {
   videoElement.addEventListener('loadedmetadata', () => {
     setTimeout(() => {
       this.navigateToMainView();
-    }, 3000); // 5초 후에 페이지 이동 
+    }, 5000); // 5초 후에 페이지 이동 
   });
 
   // 동영상 로드 시작

@@ -14,7 +14,7 @@
       <recommendGenre/>
     </div>
     <div>
-      <movieList class="movieList"/>
+      <!-- <movieList class="movieList"/> -->
     </div>
     <div>
       <nowMovieList/>
@@ -27,11 +27,11 @@
 
 <script>
 import navBar from '@/components/common/navbar.vue'
-import movieList from '@/components/movies/movieList.vue'
+// import movieList from '@/components/movies/movieList.vue'
 import nowMovieList from '@/components/movies/nowMovieList.vue'
 import recommendGenre from '@/components/movies/recommendGenre.vue'
-import axios from 'axios'
-const API_URL = 'http://127.0.0.1:8000'
+// import axios from 'axios'
+// const API_URL = 'http://127.0.0.1:8000'
 export default {
   name : "mainView",
   data(){
@@ -41,7 +41,7 @@ export default {
   },
   components:{
     navBar,
-    movieList,
+    // movieList,
     nowMovieList,
     recommendGenre,
   },
@@ -49,7 +49,6 @@ export default {
     this.$store.commit('setShowIntro', false)
     this.getMovieList()
     this.getNowMovie()
-    this.getrecommendationMovie()
   },
   computed: {
     searchResults() {
@@ -63,22 +62,7 @@ export default {
     getNowMovie(){
       this.$store.dispatch('getNowMovieList')
     },
-    getrecommendationMovie(){
-      axios({
-        method:'get',
-        url:`${API_URL}/movies/recommend_genre/`,
-        headers: {
-          Authorization: `Token ${this.$store.state.token.key}`,
-        },
-      })
-      .then((res) => {
-        console.log(res.data)
-        this.recommendationMovie = res.data
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-    }
+    
   }
 }
 </script>

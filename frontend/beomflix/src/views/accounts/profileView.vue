@@ -158,6 +158,7 @@ export default {
     follow(){
       const userName = this.USERNAME
       this.$store.dispatch('follow', userName)
+      location.reload()
     },
     getFollower(){
       axios({
