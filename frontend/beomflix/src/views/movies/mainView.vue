@@ -11,7 +11,7 @@
       </div>
     </div>
     <div>
-
+      <recommendGenre/>
     </div>
     <div>
       <movieList class="movieList"/>
@@ -29,6 +29,7 @@
 import navBar from '@/components/common/navbar.vue'
 import movieList from '@/components/movies/movieList.vue'
 import nowMovieList from '@/components/movies/nowMovieList.vue'
+import recommendGenre from '@/components/movies/recommendGenre.vue'
 import axios from 'axios'
 const API_URL = 'http://127.0.0.1:8000'
 export default {
@@ -42,6 +43,7 @@ export default {
     navBar,
     movieList,
     nowMovieList,
+    recommendGenre,
   },
   mounted(){
     this.$store.commit('setShowIntro', false)
@@ -81,7 +83,10 @@ export default {
 }
 </script>
 
-<style>
+<style >
+img{
+  border-radius: 20px;
+}
 .first{
   color: white;
   font-size: 30px;
