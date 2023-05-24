@@ -44,6 +44,7 @@ export default {
     nowMovieList,
   },
   mounted(){
+    this.$store.commit('setShowIntro', false)
     this.getMovieList()
     this.getNowMovie()
     this.getrecommendationMovie()

@@ -3,6 +3,7 @@ import router from '@/router'
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
+import userModule from '@/store/user'
 
 const API_URL = 'http://127.0.0.1:8000'
 Vue.use(Vuex)
@@ -12,6 +13,9 @@ export default new Vuex.Store({
     createPersistedState(),
    ],
   state: {
+    isLoggedIn: false,
+    showIntro: false,
+
     userId: null,
     userName: null,
     
@@ -61,11 +65,18 @@ export default new Vuex.Store({
 
   },
   getters: {
-    isLogin(state){
-      return state.token ? true : false
-    }
+    // isLogin(state){
+    //   return state.token ? true : false
+    // }
   },
   mutations: {
+    setLoggedIn(state, isLoggedIn) {
+      state.isLoggedIn = isLoggedIn
+    },
+    setShowIntro(state, showIntro) {
+      state.showIntro = showIntro
+    },
+
     UPDATE_LIKE(state, { reviewId, is_liked, count }) {
       state.reviewLikes[reviewId] = { is_liked, count };
     },
@@ -97,7 +108,7 @@ export default new Vuex.Store({
       state.reviews = review
     },
 
-    GET_USERID(state, userId){
+    GET_USERID(state, userId){ 
       state.userId = userId
     },
     GET_USERNAME(state, userName){
@@ -703,7 +714,9 @@ export default new Vuex.Store({
       })
       .then(res => {
           context.commit('SAVE_TOKEN', res.data)
-          router.push({name: "mainView"}) 
+          context.commit('setLoggedIn', true)
+          context.commit('setShowIntro', true)
+          router.push({name: "introVideo"}) 
           context.dispatch('getUserId');
           console.log(res.data)
       })
@@ -919,6 +932,7 @@ export default new Vuex.Store({
 
   },    
   modules: {
+    user:userModule
   }
 })
 
