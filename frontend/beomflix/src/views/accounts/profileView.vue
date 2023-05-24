@@ -5,14 +5,25 @@
       <h1>사용자 이름 : {{ USERNAME }}</h1>
       <button class="btn btn-primary" v-if="isNotProFileOwner" @click="follow">Follow</button>
       <button class="btn btn-primary" v-if="isNotProFileOwner" @click="follow">UnFollow</button>
-      <h2>followers : <span @click="openFollowersModal">{{ getFollowers.length }}</span></h2>
-      <modal v-if="isFollowersModalOpen" @close="closeFollowersModal">
-        <h3>Followers</h3>
-        <ul>
-          <li v-for="follower in getFollowers" :key="follower.id">{{ follower.username }}</li>
-        </ul>
-      </modal>
-      <h2>followings : {{ getFollowings.length }}</h2>
+
+
+      <h2 v-if="this.followerCheck" @click="isFollowers">followers : {{ getFollowers.length }}</h2>
+      <span v-else-if="getFollowers.length != 0">
+        <h2 v-for="follower in getFollowers" :key="follower.id"  @click="isFollowers">followers : {{ follower.username }}</h2>
+      </span>
+      <span v-else-if="getFollowers.length == 0">
+        <h2 @click="isFollowers">followers : {{ getFollowers.length }}</h2>        
+      </span>
+
+
+      <h2 v-if="this.followingsCheck" @click="isFollowings">followings : {{ getFollowings.length }}</h2>
+      <span v-else-if="getFollowings.length != 0">
+        <h2 @click="isFollowings"> followings : </h2><h2 v-for="follower in getFollowings" :key="follower.id"  @click="isFollowings">{{ follower.username }}</h2>        
+      </span>
+      <span v-else-if="getFollowings.length == 0">
+        <h2 @click="isFollowings">followings : {{ getFollowings.length }}</h2>        
+      </span>
+
       <div class="self">
         <h1>자기소개</h1>
         <input type="text" v-model="content" v-if="!isNotProFileOwner" @keyup.enter="createIntroduce">
@@ -54,8 +65,9 @@ export default {
       getContnet: null,
       getFollowers: [],
       getFollowings: [],
-      isFollowersModalOpen: false,
-      likeMovie: []
+      likeMovie: [],
+      followerCheck: true,
+      followingsCheck: true,
     }
   },
   mounted(){
@@ -63,6 +75,7 @@ export default {
     this.getIntroduce()
     this.getFollower()
     this.getFollowing()
+    this.getLikeMovie()
   },
   computed:{
     ...mapState([
@@ -72,7 +85,6 @@ export default {
       'USERNAME',
       'movieLikes',
       'movieList',
-      // 'likeMovie',
       'follows',
       'introduce'
     ]),
@@ -84,11 +96,11 @@ export default {
     },
   },
   methods:{
-    openFollowersModal() {
-      this.isFollowersModalOpen = true;
+    isFollowers(){
+      return this.followerCheck = !this.followerCheck
     },
-    closeFollowersModal() {
-      this.isFollowersModalOpen = false;
+    isFollowings(){
+      return this.followingsCheck = !this.followingsCheck
     },
     createIntroduce(){
       const introduce = this.content
@@ -99,16 +111,14 @@ export default {
     getLikeMovie(){
       axios({
         method: 'get',
-        url: `${API_URL}/movies/liked_movies/`,
+        url: `${API_URL}/movies/${this.USERID}/liked_movies/`,
         headers: {
           Authorization: `Token ${this.$store.state.token.key}`,
         }
       })
       .then((res)=>{
         console.log(res.data)
-        this.likeMovie = res.data
-        // context.commit('GET_MOVIELIKE', res.data)
-        
+        this.likeMovie = res.data        
       })
       .catch((err)=>{
         console.log(err)
@@ -125,7 +135,7 @@ export default {
       .then((res) => {
         this.getContnet = res.data
         console.log('자기소개 조회 완료')
-      })
+      })    
       .catch(err =>{
         console.log(err)
       })

@@ -1,6 +1,6 @@
 <template>
   <div class="Item">
-    <h1>작성자 : {{ guestBook.user }}</h1>
+    <h1>작성자 : {{ guestBook.username }}</h1>
     <h1>내용 : {{ guestBook.content }}</h1>
     <button class="btn btn-primary" v-if="isGuestBookOwner" @click="deleteGuestBook">삭제</button>
   </div>
