@@ -22,8 +22,23 @@ def movie_list(request):
 
         movies = movies[:20]
 
-        serializer = MovieListSerializer(movies, many=True)
-        return Response(serializer.data)
+        movie_list = []
+        for movie in movies:
+            movie_dict = {
+                'id': movie.id,
+                'title': movie.title,
+                'release_date': movie.release_date,
+                'popularity': movie.popularity,
+                'vote_count': movie.vote_count,
+                'vote_average': movie.vote_average,
+                'overview': movie.overview,
+                'poster_path': movie.poster_path,
+                'youtube_key': movie.youtube_key,
+                'user_click': movie.user_click
+            }
+            movie_list.append(movie_dict)
+
+    return Response({'movies': movie_list})
     
 # 최근 영화 전체 조회
 # 영화 전체 조회
