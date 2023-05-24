@@ -2,9 +2,9 @@
   <div>
     <navbar/>
     <div class="container">
-      <h1>다큐멘터리</h1>
+      <h1>액션</h1>
       <div class="row row-cols-md-4">
-        <actionItem v-for="movie in documentaryMovieList.movies" :key="movie.id" :movie="movie"/>
+        <actionItem v-for="movie in actionMovieList.movies" :key="movie.id" :movie="movie"/>
       </div>
     </div>
   </div>
