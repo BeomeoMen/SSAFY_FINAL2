@@ -56,7 +56,7 @@ export default {
   },
   methods:{
     getMovieList(){
-      this.$store.dispatch('getMoㄹvieList')
+      this.$store.dispatch('getMovieList')
     },
     getNowMovie(){
       this.$store.dispatch('getNowMovieList')
