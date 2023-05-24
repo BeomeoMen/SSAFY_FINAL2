@@ -4,6 +4,7 @@ from rest_framework.decorators import permission_classes
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 
 import json
+import random
 
 from django.shortcuts import get_list_or_404, get_object_or_404
 from movies.serializers import MovieListSerializer, MovieSerializer, NowMovieListSerializer, ReviewListSerializer, ReviewCreateSerializer, ReviewSerializer
@@ -219,7 +220,7 @@ def recommend_genre(request):
     # 가져온 genre를 사용하여 해당 genre에 속하는 영화를 검색합니다.
     movies = genre.movie_set.all()
     if len(movies) >= 8:
-        movies = movies[0:8]
+        movies = random.sample(list(movies), k=8)
     
     # 검색된 영화 정보를 JSON 형식으로 반환합니다.
     movie_list = []
