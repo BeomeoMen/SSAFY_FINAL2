@@ -23,8 +23,8 @@
         </p>
         <p class="overview">{{ movieDetail.overview }}</p>
         <button class="btn btn-outline-primary" @click="likeMovie">
-          <!-- <i class="bi bi-heart" v-if="likeCheck"></i>
-          <i class="bi bi-heart-fill" v-else></i> 좋아요 -->
+          <i class="bi bi-heart" v-if="likeCheck"></i>
+          <i class="bi bi-heart-fill" v-else></i> 좋아요
         </button>      
         </div>,
     </div>
@@ -51,19 +51,27 @@ export default {
       'reviews',
       'userId',
       'movieLikes',
-    ]
-      ),
+    ]),
+    poster: function () {
+      return 'https://image.tmdb.org/t/p/original';
+    },
+    trailerUrlPath: function () {
+      return 'https://www.youtube.com/embed/';
+    },
+    likeCheck: function () {
+      return this.movieLikes[this.movieDetail.id]?.is_liked;
+    }
   },
   mounted(){
     this.getReview()
   },
-  data(){
-    return{
-      poster: 'https://image.tmdb.org/t/p/original/',
-      trailerUrlPath: `https://www.youtube.com/embed/`,
-      likeCheck : this.movieLikes[this.movieDetail.id].is_liked
-    }
-  },
+  // data(){
+  //   return {
+  //     poster: 'https://image.tmdb.org/t/p/original/',
+  //     trailerUrlPath: 'https://www.youtube.com/embed/',
+  //     likeCheck : this.movieLikes[this.movieDetail.id].is_liked,
+  //   }
+  // },
   methods:{
     getReview(){
       const movieId = this.$store.state.movieDetail.id

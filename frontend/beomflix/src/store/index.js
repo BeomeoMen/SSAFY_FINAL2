@@ -3,7 +3,7 @@ import router from '@/router'
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
-import userModule from '@/store/user'
+// import userModule from '@/store/user'
 
 const API_URL = 'http://127.0.0.1:8000'
 Vue.use(Vuex)
@@ -89,6 +89,7 @@ export default new Vuex.Store({
     },    
     GET_MOVIELIKE(state, movie){
       state.likeMovie = movie
+      console.log(movie)
     },
 
     GET_MOVIELIST(state, movie){
@@ -529,6 +530,7 @@ export default new Vuex.Store({
           }
         })
           .then((res) => {
+            console.log(res.data)
             context.commit('GET_MOVIEDETAIL', res.data)
             router.push(`/movieDetail/`) 
           })
@@ -676,7 +678,8 @@ export default new Vuex.Store({
         },
       })
         .then((res) => {
-          const filteredMovies = res.data.filter(movie => movie.title.includes(title));
+          console.log(res.data.movies)
+          const filteredMovies = res.data.movies.filter(movie => movie.title.includes(title));
           if(filteredMovies.length === 0){
             alert('일치하는 영화가 없습니다.')
           }else{
@@ -858,44 +861,6 @@ export default new Vuex.Store({
         console.log(err)
       })
     },
-    // getFollower(context, userId){
-    //   axios({
-    //     method:'get',
-    //     url:`${API_URL}/accounts/profile/${userId}/follower/`,
-    //     headers: {
-    //       Authorization: `Token ${context.state.token.key}`
-    //     },
-    //   })
-    //   .then((res) => {
-    //     console.log(res.data)
-    //     console.log("팔로워 조회 완료")
-    //   })
-    //   .catch((err) => {
-    //     console.log(err)
-    //   })
-    // },
-    getFollowings(context, userId){
-      axios({
-        method:'get',
-        url:`${API_URL}/accounts/profile/${userId}/following/`,
-        headers: {
-          Authorization: `Token ${context.state.token.key}`
-        },
-      })
-      .then((res) => {
-        console.log(res.data)
-        const target_followers_count = res.data.target_followers_count
-        const target_followings_count = res.data.target_followings_count 
-        const now_followers_count = res.data.now_followers_count
-        const now_followings_count = res.data.now_followings_count
-        const is_followed = res.data.is_followed
-        console.log("팔로잉 조회 완료")
-        context.commit('GET_FOLLOW', {now_followers_count, now_followings_count,target_followers_count, target_followings_count, is_followed})
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-    },
 
     createIntroduce(context, {profile, introduce}){
       axios({
@@ -960,7 +925,6 @@ export default new Vuex.Store({
       })
         .then((res) => {
           context.commit('GET_POPULARMOVIE', res.data.movies)
-          console.log(res.data.movies)
         })
         .catch((err) => {
           console.log(err)
@@ -970,7 +934,6 @@ export default new Vuex.Store({
 
   },    
   modules: {
-    user:userModule
   }
 })
 

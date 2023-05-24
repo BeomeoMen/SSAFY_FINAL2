@@ -23,7 +23,7 @@ export default {
   },
   data(){
     return{
-      poster: 'https://image.tmdb.org/t/p/  /',
+      poster: 'https://image.tmdb.org/t/p/original',
       showCard: true,
     }
   },

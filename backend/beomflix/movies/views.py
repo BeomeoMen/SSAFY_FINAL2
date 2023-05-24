@@ -270,6 +270,7 @@ def recommend_genre(request):
     movie_list = []
     for movie in movies:
         movie_dict = {
+            'id' : movie.id,
             'title': movie.title,
             'release_date': movie.release_date,
             'popularity': movie.popularity,
