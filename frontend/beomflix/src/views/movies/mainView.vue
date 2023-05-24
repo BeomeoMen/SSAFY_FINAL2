@@ -44,6 +44,7 @@ export default {
     nowMovieList,
   },
   mounted(){
+    this.$store.commit('setShowIntro', false)
     this.getMovieList()
     this.getNowMovie()
     this.getrecommendationMovie()
@@ -55,7 +56,7 @@ export default {
   },
   methods:{
     getMovieList(){
-      this.$store.dispatch('getMovieList')
+      this.$store.dispatch('getMoㄹvieList')
     },
     getNowMovie(){
       this.$store.dispatch('getNowMovieList')
