@@ -2,7 +2,7 @@
   <header>
     <h1>
       <router-link to="/mainView">
-        <img style="width:100px; height: 100px;" src="https://github.com/Jinga02/Baekjoon/assets/110621233/f5eecac2-948c-4471-8596-46cad9ee1729" alt="로고">
+        <img style="width:100px; height: 100px;" src="https://github.com/Jinga02/Algorithm/assets/110621233/035bdd8f-afac-46ee-8d85-c08b6ecae0cf" alt="로고">
       </router-link>
     </h1>
     <div class="menubar">

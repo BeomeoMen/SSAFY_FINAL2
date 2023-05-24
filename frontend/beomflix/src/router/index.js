@@ -1,11 +1,13 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import introVideo from '@/components/common/introVideo.vue'
 import mainView from '@/views/movies/mainView.vue'
 import proFile from '@/views/accounts/profileView.vue'
 
 import first from '@/views/movies/first.vue'
 import movieDetail from '@/views/movies/movieDetail.vue'
 import searchMovie from '@/views/movies/searchMovie.vue'
+
 
 import actionPage from '@/components/movies/genres/action.vue'
 import animationPage from '@/components/movies/genres/animation.vue'
@@ -34,6 +36,11 @@ const routes = [
     path: '/',
     name: 'first',
     component: first
+  },
+  {
+    path: '/introVideo',
+    name: 'introVideo',
+    component: introVideo
   },
   {
     path: '/mainView',
