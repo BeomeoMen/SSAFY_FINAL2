@@ -59,6 +59,7 @@ export default new Vuex.Store({
     westernMovieList: [],
 
     recommendGenre:[],
+    popularMovie:[],
     token: Object, 
     movieDetail: Object,
     searchResults: [],
@@ -190,7 +191,11 @@ export default new Vuex.Store({
     
     GET_RECOMMENDGENRE(state, movie){
       state.recommendGenre = movie
+    },
+    GET_POPULARMOVIE(state, movie){
+      state.popularMovie = movie
     }
+
   },
   actions: {
     getMovieList(context) {
@@ -614,8 +619,6 @@ export default new Vuex.Store({
         }
       })
       .then((res)=>{
-        console.log("영화 좋아용 >.<")
-        console.log(res)
         const is_liked = res.data.is_liked
         const count = res.data.count
         const userId = res.data.user_id
@@ -819,7 +822,6 @@ export default new Vuex.Store({
       })
       .then((res) => {
         context.commit('GET_GUESTBOOKLIST', res.data)
-        console.log('방명록 조회 완료')
       })
       .catch(err =>{
         console.log(err)
@@ -943,6 +945,22 @@ export default new Vuex.Store({
       })
         .then((res) => {
           context.commit('GET_RECOMMENDGENRE', res.data.movies)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+    getPopluarMovie(context){
+      axios({
+        method:'get',
+        url : `${API_URL}/movies/popular/`,
+        headers: {
+          Authorization: `Token ${context.state.token.key}`
+        },
+      })
+        .then((res) => {
+          context.commit('GET_POPULARMOVIE', res.data.movies)
+          console.log(res.data.movies)
         })
         .catch((err) => {
           console.log(err)

@@ -18,10 +18,6 @@ export default {
     movieList() {
       return this.$store.state.movieList;
     },
-    // filteredMovieList() {
-      // return this.movieList.slice(0, 20);
-      // return this.movieList.slice();
-    // }
   },
 }
 </script>

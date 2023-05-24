@@ -17,13 +17,13 @@
 
 <script>
 export default {
-  name:"nowMovieListItem.vue",
+  name:"popularMovieItem",
   props:{
     movie:Object,
   },
   data(){
     return{
-      poster: 'https://image.tmdb.org/t/p/original/',
+      poster: 'https://image.tmdb.org/t/p/  /',
       showCard: true,
     }
   },

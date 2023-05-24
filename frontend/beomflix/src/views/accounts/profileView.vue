@@ -26,7 +26,8 @@
 
       <div class="self">
         <h1>자기소개</h1>
-        <input type="text" v-model="content" v-if="!isNotProFileOwner" @keyup.enter="createIntroduce">
+        <input type="text" v-model="content" v-if="!isNotProFileOwner" @keyup.enter="createIntroduce" >
+        <!-- <input type="file" > -->
         <h1>{{ getContnet }}</h1>
       </div>
     </div>
@@ -92,7 +93,7 @@ export default {
       return this.userId !== this.USERID
     },
     filteredMovies() {
-      return this.movieList.filter(movie => this.likeMovie.includes(movie.id));
+      return this.movieList.movies.filter(movie => this.likeMovie.includes(movie.id));
     },
   },
   methods:{
@@ -117,7 +118,6 @@ export default {
         }
       })
       .then((res)=>{
-        console.log(res.data)
         this.likeMovie = res.data        
       })
       .catch((err)=>{
@@ -134,7 +134,6 @@ export default {
       })
       .then((res) => {
         this.getContnet = res.data
-        console.log('자기소개 조회 완료')
       })    
       .catch(err =>{
         console.log(err)
@@ -144,7 +143,6 @@ export default {
       const profile = this.USERID
       const user = this.userId
       const content = this.guestBook
-      console.log(profile, user, content)
       this.$store.dispatch('createGuestBook', {profile, user, content})
       location.reload()
     },
@@ -169,9 +167,7 @@ export default {
         },
       })
       .then((res) => {
-        console.log(res.data)
         this.getFollowers = res.data
-        console.log("팔로워 조회 완료")
       })
       .catch((err) => {
         console.log(err)
@@ -186,9 +182,7 @@ export default {
         },
       })
       .then((res) => {
-        console.log(res.data)
         this.getFollowings = res.data
-        console.log("팔로잉 조회 완료")
       })
       .catch((err) => {
         console.log(err)

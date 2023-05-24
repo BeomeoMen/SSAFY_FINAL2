@@ -36,5 +36,6 @@ export default {
   h1{
     color: white;
     text-align: center;
+    margin-bottom: 50px;
   }
 </style>

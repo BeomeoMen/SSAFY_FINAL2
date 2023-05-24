@@ -7,7 +7,7 @@
         <img :src="poster + movieDetail.poster_path">
       </div>
       <div class="details-container">
-        <iframe frameborder="0" allowfullscreen style="width: 100%; height: 400px;" :src="trailerUrlPath + movieDetail.youtube_key"></iframe>
+        <iframe frameborder="0" allowfullscreen style="width: 100%; height: 400px;" :src="trailerUrlPath + movieDetail.youtube_key + `?autoplay=1&mute=1&amp;playlist=${movieDetail.youtube_key}&loop=1&controls=0&modestbranding=1`" ></iframe>
         <h2>{{ movieDetail.title }}</h2>
         <div class="details-row">
           <p>
@@ -23,8 +23,8 @@
         </p>
         <p class="overview">{{ movieDetail.overview }}</p>
         <button class="btn btn-outline-primary" @click="likeMovie">
-          <i class="bi bi-heart" v-if="!isLiked"></i>
-          <i class="bi bi-heart-fill" v-else></i> 좋아요
+          <!-- <i class="bi bi-heart" v-if="likeCheck"></i>
+          <i class="bi bi-heart-fill" v-else></i> 좋아요 -->
         </button>      
         </div>,
     </div>
@@ -53,9 +53,6 @@ export default {
       'movieLikes',
     ]
       ),
-    isLiked() {
-      return this.movieLikes[this.movieDetail.id] ? this.movieLikes[this.movieDetail.id].is_liked : false;
-    }, 
   },
   mounted(){
     this.getReview()
@@ -63,8 +60,8 @@ export default {
   data(){
     return{
       poster: 'https://image.tmdb.org/t/p/original/',
-      // trailerUrlPath: `https://www.youtube.com/watch?v=`
-      trailerUrlPath: `https://www.youtube.com/embed/`
+      trailerUrlPath: `https://www.youtube.com/embed/`,
+      likeCheck : this.movieLikes[this.movieDetail.id].is_liked
     }
   },
   methods:{
@@ -84,7 +81,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin: 50px;
+  margin: 20px;
 }
 .content-container {
   display: flex;
