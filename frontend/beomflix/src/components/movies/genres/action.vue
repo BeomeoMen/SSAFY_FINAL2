@@ -2,11 +2,9 @@
   <div>
     <navbar/>
     <div class="container">
-      <h1>액션영화</h1>
+      <h1>액션</h1>
       <div class="row row-cols-md-4">
-        <div v-for="movie in actionMovieList" :key="movie.id">
-          {{ movie }}
-        </div>
+        <actionItem v-for="movie in actionMovieList.movies" :key="movie.id" :movie="movie"/>
       </div>
     </div>
   </div>
@@ -14,11 +12,12 @@
 
 <script>
 import navbar from '@/components/common/navbar.vue'
-
+import actionItem from '@/components/movies/genres/actionItem.vue'
 export default {
   name: "actionPage",
   components:{
-    navbar
+    navbar,
+    actionItem
   },
   mounted() {
     this.getActionMovieList();
@@ -36,8 +35,6 @@ export default {
 };
 </script>
 
-<style>
-h1 {
-  color: white;
-}
+<style scoped>
+
 </style>

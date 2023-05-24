@@ -16,16 +16,21 @@
 </template>
 
 <script>
+
 export default {
-  name:"movieListItem",
+  name: "animationItem",
+  components:{
+  },
   props:{
-    movie:Object,
+    movie:Object
   },
   data(){
     return{
       poster: 'https://image.tmdb.org/t/p/original/',
       showCard: true,
     }
+  },
+  computed: {
   },
   methods: {
     truncateOverview(overview, maxLength) {
@@ -36,12 +41,12 @@ export default {
       } else {
         return overview
       }
-    }, 
+    },
     movieDetail(movieId) {
       this.$store.dispatch('getMovieDetail', movieId);
     }
-  }
-}
+  },
+};
 </script>
 
 <style scoped>

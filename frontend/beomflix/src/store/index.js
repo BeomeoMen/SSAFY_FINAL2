@@ -3,6 +3,7 @@ import router from '@/router'
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
+import userModule from '@/store/user'
 
 const API_URL = 'http://127.0.0.1:8000'
 Vue.use(Vuex)
@@ -12,12 +13,31 @@ export default new Vuex.Store({
     createPersistedState(),
    ],
   state: {
+    isLoggedIn: false,
+    showIntro: false,
+
     userId: null,
     userName: null,
-    likeCount: 0,
-    is_liked:false,
-    movieList: [],
+    
+    USERID: null,
+    USERNAME: null,
+
+    reviewLikeCount: 0,
+    review_is_liked:false,
+    reviewLikes: [],
+
+    movieLikeCount: 0,
+    movie_is_liked:false,
+    movieLikes: Object,
+    likeMovie : [],
+
+    movieList: Object,
     nowMovieList: [],
+
+    introduce:Object,
+    guestBookList : null,
+
+    follows:[],
     // 장르 별 영화
     actionMovieList: [],
     animationMovieList: [],
@@ -29,32 +49,46 @@ export default new Vuex.Store({
     fantasyMovieList: [],
     historyMovieList: [],
     horrorMovieList: [],
-    musciMovieList: [],
+    musicMovieList: [],
     mysteryMovieList: [],
     romanceMovieList: [],
     sciencefictionMovieList: [],
-    thrillMovieList: [],
+    thrillerMovieList: [],
     tvmovieMovieList: [],
     warMovieList: [],
     westernMovieList: [],
-
 
     token: Object, 
     movieDetail: Object,
     searchResults: [],
     reviews: [],
-    trailerPath: 'https://www.youtube.com/embed/F-eMt3SrfFU',
+
   },
   getters: {
-    isLogin(state){
-      return state.token ? true : false
-    }
+    // isLogin(state){
+    //   return state.token ? true : false
+    // }
   },
   mutations: {
-    UPDATE_LIKE(state, { reviewId, is_liked, count }) {
-      // 각 리뷰의 좋아요 상태와 카운트를 갱신합니다.
-      state.likes[reviewId] = { is_liked, count };
+    setLoggedIn(state, isLoggedIn) {
+      state.isLoggedIn = isLoggedIn
     },
+    setShowIntro(state, showIntro) {
+      state.showIntro = showIntro
+    },
+
+    UPDATE_LIKE(state, { reviewId, is_liked, count }) {
+      state.reviewLikes[reviewId] = { is_liked, count };
+    },
+    UPDATE_MOVIE_LIKE(state, { movieId, userId, is_liked, count }) {
+      console.log(movieId, userId, is_liked, count)
+      state.movieLikes[movieId] = { userId, is_liked, count };
+      console.log(state.movieLikes[movieId]);
+    },    
+    GET_MOVIELIKE(state, movie){
+      state.likeMovie = movie
+    },
+
     GET_MOVIELIST(state, movie){
       state.movieList = movie
     },
@@ -73,11 +107,28 @@ export default new Vuex.Store({
     GET_REVIEWS(state, review){
       state.reviews = review
     },
-    GET_USERID(state, userId){
+
+    GET_USERID(state, userId){ 
       state.userId = userId
     },
     GET_USERNAME(state, userName){
       state.userName = userName
+    },
+    GET_USER_ID(state, USERID){
+      state.USERID = USERID
+    },
+    GET_USER_NAME(state, USERNAME){
+      state.USERNAME = USERNAME
+    },
+
+    GET_INTRODUCE(state, {introduce, profile}){
+      state.introduce[profile] = introduce
+    },
+    GET_GUESTBOOKLIST(state, guestBookList){
+      state.guestBookList = guestBookList
+    },
+    GET_FOLLOW(state, {now_followers_count, now_followings_count,target_followers_count, target_followings_count, is_followed}){
+      state.follows = {now_followers_count, now_followings_count,target_followers_count, target_followings_count, is_followed}
     },
 
     // 장르 별 영화
@@ -112,7 +163,7 @@ export default new Vuex.Store({
       state.horrorMovieList = movie
     },
     GET_MUSICMOVIELIST(state, movie){
-      state.musciMovieList = movie
+      state.musicMovieList = movie
     },
     GET_MYSTERYMOVIELIST(state, movie){
       state.mysteryMovieList = movie
@@ -124,7 +175,7 @@ export default new Vuex.Store({
       state.sciencefictionMovieList = movie
     },
     GET_THRILLERMOVIELIST(state, movie){
-      state.thrillMovieList = movie
+      state.thrillerMovieList = movie
     },
     GET_TVMOVIEMOVIELIST(state, movie){
       state.tvmovieMovieList = movie
@@ -181,7 +232,6 @@ export default new Vuex.Store({
         },
       })
         .then((res) => {
-          console.log('완료')
           context.commit('GET_ACTIONMOVIELIST', res.data)
         })
         .catch((err) => {
@@ -413,7 +463,7 @@ export default new Vuex.Store({
         })
     },
     getTvmovieMovieList(context){
-      const genre_name = "Tv 영화"
+      const genre_name = "TV 영화"
       axios({
         method:'get',
         url : `${API_URL}/movies/genre/?genre_name=${genre_name}`,
@@ -460,11 +510,6 @@ export default new Vuex.Store({
           console.log(err)
         })
     },
-
-
-
-
-
 
     getMovieDetail(context, movieId) {
         axios({
@@ -556,6 +601,46 @@ export default new Vuex.Store({
         console.log(err)
       })
     },
+    likeMovie(context, movieId){
+      axios({
+        method: 'post',
+        url: `${API_URL}/movies/like_movie/${movieId}/`,
+        headers: {
+          Authorization: `Token ${context.state.token.key}`
+        }
+      })
+      .then((res)=>{
+        console.log("영화 좋아용 >.<")
+        console.log(res)
+        const is_liked = res.data.is_liked
+        const count = res.data.count
+        const userId = res.data.user_id
+        const movieId = res.data.movie_id
+        context.commit('UPDATE_MOVIE_LIKE', {movieId, userId, is_liked, count})
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
+    },
+
+    // getLikeMovie(context){
+    //   axios({
+    //     method: 'get',
+    //     url: `${API_URL}/movies/liked_movies/`,
+    //     headers: {
+    //       Authorization: `Token ${context.state.token.key}`
+    //     }
+    //   })
+    //   .then((res)=>{
+    //     console.log(res.data)
+    //     context.commit('GET_MOVIELIKE', res.data)
+        
+    //   })
+    //   .catch((err)=>{
+    //     console.log(err)
+    //   })
+    // },
+
     likeReview(context, reviewId){
       axios({
         method: 'post',
@@ -565,9 +650,10 @@ export default new Vuex.Store({
         }
       })
       .then((res)=>{
-        const { is_liked, count } = res.data;
+        const is_liked = res.data.is_liked
+        const count = res.data.count
+        console.log(is_liked, count)
         context.commit('UPDATE_LIKE', { reviewId, is_liked, count });
-        console.log('좋아요');      
       })
       .catch((err)=>{
         console.log(err)
@@ -610,7 +696,10 @@ export default new Vuex.Store({
       .then(
         console.log('회원가입 완료')
       )
-      .catch((err) => console.log(err))
+      .catch((err) => {
+        console.log(err)
+        alert("회원가입 정보가 올바르지 않습니다.")
+      })
     },
 
     login(context, payload){
@@ -625,8 +714,11 @@ export default new Vuex.Store({
       })
       .then(res => {
           context.commit('SAVE_TOKEN', res.data)
-          router.push({name: "mainView"}) 
+          context.commit('setLoggedIn', true)
+          context.commit('setShowIntro', true)
+          router.push({name: "introVideo"}) 
           context.dispatch('getUserId');
+          console.log(res.data)
       })
       .catch(err => {
         alert('로그인 정보가 유효하지 않습니다.')
@@ -648,14 +740,199 @@ export default new Vuex.Store({
         .then(res =>{
           console.log(res)
           context.commit('GET_USERID', res.data.pk)
-          context.commit('GET_USERNAME', res.data.username)
+          context.commit('GET_USER_NAME', res.data.username)
         })
         .catch(err =>{
           console.log(err)
         })
     },
+
+    getUSERID(context){
+      axios({
+        method:'get',
+        url: `${API_URL}/accounts/user/`,
+        headers: {
+          Authorization: `Token ${context.state.token.key}`
+        },
+      })
+      .then(res =>{
+        context.commit('GET_USER_ID', res.data.pk)
+
+      })
+      .catch(err =>{
+        console.log(err)
+      })
+    },
+
+    getUserProfile(context, userId){
+      axios({
+        method:'get',
+        url: `${API_URL}/accounts/profile/${userId}/`,
+        headers: {
+          Authorization: `Token ${context.state.token.key}`
+        },
+      })
+      .then(res =>{
+        console.log(res)
+        context.commit('GET_USER_ID', res.data.id)
+        context.commit('GET_USER_NAME', res.data.username)
+        router.push(`/proFile/${res.data.id}/`) 
+      })
+      .catch(err =>{
+        console.log(err)
+      })
+    },
+
+    createGuestBook(context, {profile, user, content }){
+      axios({
+        method:'post',
+        url: `${API_URL}/comments/profileuser/${profile}/comment/`,
+        headers: {
+          Authorization: `Token ${context.state.token.key}`
+        },
+        data: {
+          profile,
+          user,
+          content,
+        },
+      })
+      .then(() => {
+        console.log('방명록 작성 완료')
+      })
+      .catch(err =>{
+        console.log(err)
+      })
+    },
+
+    getGuestBook(context, USERID){
+      axios({
+        method:'get',
+        url: `${API_URL}/comments/profileuser/${USERID}/comments/`,
+        
+        headers: {
+          Authorization: `Token ${context.state.token.key}`
+        },
+      })
+      .then((res) => {
+        context.commit('GET_GUESTBOOKLIST', res.data)
+        console.log('방명록 조회 완료')
+      })
+      .catch(err =>{
+        console.log(err)
+      })
+    },
+    deleteGuestBook(context, {profileId, guestBookId}){
+      axios({
+        method: 'delete',
+        url: `${API_URL}/comments/profileuser/${profileId}/comment/${guestBookId}/`,
+        headers: {
+          Authorization: `Token ${context.state.token.key}`
+        },
+      })
+      .then(()=>{
+        console.log('방명록 삭제 완료')
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
+    },
+    follow(context, userName){
+      axios({
+        method:'post',
+        url:`${API_URL}/accounts/profile/${userName}/follow/`,
+        headers: {
+          Authorization: `Token ${context.state.token.key}`
+        },
+      })
+      .then((res) => {
+        console.log(res.data)
+        // context.dispatch('getFollow')
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+    },
+    // getFollower(context, userId){
+    //   axios({
+    //     method:'get',
+    //     url:`${API_URL}/accounts/profile/${userId}/follower/`,
+    //     headers: {
+    //       Authorization: `Token ${context.state.token.key}`
+    //     },
+    //   })
+    //   .then((res) => {
+    //     console.log(res.data)
+    //     console.log("팔로워 조회 완료")
+    //   })
+    //   .catch((err) => {
+    //     console.log(err)
+    //   })
+    // },
+    getFollowings(context, userId){
+      axios({
+        method:'get',
+        url:`${API_URL}/accounts/profile/${userId}/following/`,
+        headers: {
+          Authorization: `Token ${context.state.token.key}`
+        },
+      })
+      .then((res) => {
+        console.log(res.data)
+        const target_followers_count = res.data.target_followers_count
+        const target_followings_count = res.data.target_followings_count 
+        const now_followers_count = res.data.now_followers_count
+        const now_followings_count = res.data.now_followings_count
+        const is_followed = res.data.is_followed
+        console.log("팔로잉 조회 완료")
+        context.commit('GET_FOLLOW', {now_followers_count, now_followings_count,target_followers_count, target_followings_count, is_followed})
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+    },
+
+    createIntroduce(context, {profile, introduce}){
+      axios({
+        method:'put',
+        url: `${API_URL}/accounts/profile/${profile}/introduce/`,
+        headers: {
+          Authorization: `Token ${context.state.token.key}`
+        },
+        data: {
+          introduce,
+        },
+      })
+      .then(() => {
+        console.log('자기소개 작성 완료')
+      })
+      .catch(err =>{
+        console.log(err)
+      })
+    },
+
+    createPicture(context, {profile, profile_picture}){
+      axios({
+        method:'put',
+        url: `${API_URL}/accounts/profile/${profile}/introduce/`,
+        headers: {
+          Authorization: `Token ${context.state.token.key}`
+        },
+        data: {
+          profile_picture,
+        },
+      })
+      .then(() => {
+        console.log('자기소개 작성 완료')
+      })
+      .catch(err =>{
+        console.log(err)
+      })
+    },
+    
+
   },    
   modules: {
+    user:userModule
   }
 })
 

@@ -15,7 +15,7 @@ class Movie(models.Model):
     vote_count = models.IntegerField()
     vote_average = models.FloatField()
     overview = models.TextField()
-    poster_path = models.CharField(max_length=200)
+    poster_path = models.CharField(max_length=200, null=True)
     youtube_key = models.CharField(max_length=100)
     genres = models.ManyToManyField(Genre)
     like_users = models.ManyToManyField(settings.AUTH_USER_MODEL)

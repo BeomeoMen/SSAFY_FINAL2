@@ -8,7 +8,7 @@ import json
 from django.shortcuts import get_list_or_404, get_object_or_404
 from movies.serializers import MovieListSerializer, MovieSerializer, NowMovieListSerializer, ReviewListSerializer, ReviewCreateSerializer, ReviewSerializer
 from accounts.serializers import UserSerializer
-from movies.models import Movie, Genre, Nowplaying, Review
+from movies.models import Movie, Genre, Nowplaying, Review, Like
 from accounts.models import User
 from rest_framework import status
 
@@ -17,7 +17,7 @@ from rest_framework import status
 @permission_classes([IsAuthenticatedOrReadOnly])
 def movie_list(request):
     if request.method == 'GET':
-        movies = get_list_or_404(Movie.objects.order_by())[:50]
+        movies = get_list_or_404(Movie.objects.order_by())
         serializer = MovieListSerializer(movies, many=True)
         return Response(serializer.data)
     
@@ -60,6 +60,7 @@ def movie_list_by_genre(request):
     movie_list = []
     for movie in movies:
         movie_dict = {
+            'id': movie.id,
             'title': movie.title,
             'release_date': movie.release_date,
             'popularity': movie.popularity,
@@ -171,8 +172,28 @@ def like(request, review_pk):
 def like_movie(request, movie_id):
     user = request.user
     movie = Movie.objects.get(pk=movie_id)
-    user.like_movie(movie)
-    return Response({ 'message' : 'ok' })
+
+    if movie.like_users.filter(pk=user.pk).exists():
+        movie.like_users.remove(user)
+        is_liked = False
+    else:
+        movie.like_users.add(user)
+        is_liked = True
+        like = Like(user=user, movie=movie)
+        like.save()
+
+    context = {
+        'is_liked': is_liked, 
+        'count': movie.like_users.count(),
+        'movie_id' : movie_id,
+        'user_id' : user.id
+    }
+
+    return Response(context, status=status.HTTP_200_OK)
+
+
+    # user.like_movie(movie)
+    # return Response({ 'message' : 'ok' })
 
 @api_view(['GET',])
 @permission_classes([IsAuthenticated])
@@ -215,3 +236,12 @@ def recommend_genre(request):
         movie_list.append(movie_dict)
 
     return Response({'movies': movie_list})
+
+@api_view(['GET',])
+@permission_classes([IsAuthenticatedOrReadOnly])
+def liked_movies(request, user_id):
+    user = User.objects.get(id=user_id)
+    liked_movies = Like.objects.filter(user=user).values_list('movie_id', flat=True)
+    movies = Movie.objects.filter(pk__in=liked_movies)
+
+    return Response(liked_movies)

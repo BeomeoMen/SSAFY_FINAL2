@@ -7,7 +7,7 @@
         <img :src="poster + movieDetail.poster_path">
       </div>
       <div class="details-container">
-        <iframe frameborder="0" allowfullscreen style="width: 100%; height: 400px;" :src="trailerUrlPath"></iframe>
+        <iframe frameborder="0" allowfullscreen style="width: 100%; height: 400px;" :src="trailerUrlPath + movieDetail.youtube_key"></iframe>
         <h2>{{ movieDetail.title }}</h2>
         <div class="details-row">
           <p>
@@ -22,7 +22,11 @@
           <span class="actor" v-for="actor in movieDetail.actors" :key="actor.id">{{ actor.name }}</span>
         </p>
         <p class="overview">{{ movieDetail.overview }}</p>
-      </div>
+        <button class="btn btn-outline-primary" @click="likeMovie">
+          <i class="bi bi-heart" v-if="!isLiked"></i>
+          <i class="bi bi-heart-fill" v-else></i> 좋아요
+        </button>      
+        </div>,
     </div>
     <div class="review">
       <reviewList :reviews="reviews" />
@@ -35,7 +39,7 @@
 import { mapState } from 'vuex';
 import navbar from '@/components/common/navbar.vue'
 import reviewList from '@/components/comments/reviewList.vue'
-export default {
+export default { 
   components: { 
     navbar,
     reviewList
@@ -44,25 +48,33 @@ export default {
   computed:{
     ...mapState(
       ['movieDetail',
-      'reviews']
-      )
+      'reviews',
+      'userId',
+      'movieLikes',
+    ]
+      ),
+    isLiked() {
+      return this.movieLikes[this.movieDetail.id] ? this.movieLikes[this.movieDetail.id].is_liked : false;
+    }, 
   },
   mounted(){
     this.getReview()
-    // console.log(this.$store.state.userId)
   },
   data(){
     return{
       poster: 'https://image.tmdb.org/t/p/original/',
-      trailerUrlPath: this.$store.state. trailerPath
+      // trailerUrlPath: `https://www.youtube.com/watch?v=`
+      trailerUrlPath: `https://www.youtube.com/embed/`
     }
   },
   methods:{
     getReview(){
       const movieId = this.$store.state.movieDetail.id
-      // console.log(movieId)
       this.$store.dispatch('getReviews', movieId)
-    }
+    },
+    likeMovie(){
+      this.$store.dispatch('likeMovie', this.movieDetail.id)
+    },
   }
 }
 </script>
@@ -94,7 +106,7 @@ export default {
 }
 .details-container {
   color: white;
-  border: solid 1px white;
+  /* border: solid 1px white; */
   padding: 20px;
   height: auto;
 }

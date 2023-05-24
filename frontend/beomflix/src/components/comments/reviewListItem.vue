@@ -1,6 +1,7 @@
 <template>
   <div class="reviews">
-    <h2>유저명 :{{review.user.username}}</h2>
+    <!-- <h2><router-link class="dropdown-item" :to="'/proFile/' + review.user.id">{{review.user.username}}</router-link></h2> -->
+    <h2 @click="getUserProfile">{{ review.user.username }}</h2>
     <h2 v-if="!isEditing">내용 :{{review.content}}</h2>
     <input v-else v-model="editedContent" type="text" placeholder="리뷰를 입력해주세요">
     <h2 v-if="!isEditing">평점 : {{review.rank}}</h2>
@@ -14,7 +15,10 @@
     <div>
       <a class="btn btn-primary" v-if="isReviewOwner && !isEditing" @click="editReview">수정</a>
       <button class="btn btn-primary" v-if="isReviewOwner && !isEditing" @click="deleteReview">삭제</button>
-      <button v-if="!isEditing" class="btn btn-outline-primary" @click="likeReview"><i class="bi bi-heart"></i>좋아요</button>
+      <button v-if="!isEditing" class="btn btn-outline-primary" @click="likeReview">
+        <i class="bi bi-heart" v-if="!isLiked"></i>
+        <i class="bi bi-heart-fill" v-else></i> 좋아요
+      </button>
       <a class="btn btn-primary" v-if="isReviewOwner && isEditing" @click="submitEdit">수정 완료</a>
       <a class="btn btn-primary" v-if="isReviewOwner && isEditing" @click="cancelEdit">수정 취소</a>
     </div>
@@ -38,14 +42,16 @@ export default {
   computed:{
     ...mapState({
       loginUser: state => state.userId,
-      likes: state => state.likes,
+      likes: state => state.reviewLikes,
     }),
     isReviewOwner() {
       return this.loginUser === this.review.user.id; 
     },
     reviewId() {
-      console.log(this.review.id)
       return this.review.id;
+    },
+    isLiked() {
+      return this.likes[this.review.id] ? this.likes[this.review.id].is_liked : false;
     },
   },
   methods:{  
@@ -72,6 +78,9 @@ export default {
     cancelEdit() {
       this.isEditing = false;
     },
+    getUserProfile() {
+      this.$store.dispatch("getUserProfile", this.review.user.id);
+    }
   }
 }
 </script>

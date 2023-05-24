@@ -1,31 +1,30 @@
 <template>
-<div>
-  <navbar/>
-  <div class="container">
-    <h1>애니메이션</h1>
-    <div class="row row-cols-md-4">
-      <div v-for="movie in animationMovieList" :key="movie.id">
-        {{ movie }}
+  <div>
+    <navbar/>
+    <div class="container">
+      <h1>애니메이션</h1>
+      <div class="row row-cols-md-4">
+        <animationItem v-for="movie in animationMovieList.movies" :key="movie.id" :movie="movie"/>
       </div>
     </div>
   </div>
-</div>
 </template>
 
 <script>
 import navbar from '@/components/common/navbar.vue'
-
+import animationItem from '@/components/movies/genres/animationItem.vue'
 export default {
   name:"animationPage",
   components:{
-    navbar
+    navbar,
+    animationItem
   },
   mounted() {
     this.getAnimationMovieList();
   },
   computed: {
     animationMovieList() {
-      return this.$store.state.actionMovieList;
+      return this.$store.state.animationMovieList;
     },
   },
   methods: {
@@ -37,7 +36,5 @@ export default {
 </script>
 
 <style>
-h1 {
-  color: white;
-}
+
 </style>

@@ -2,13 +2,16 @@
   <header>
     <h1>
       <router-link to="/mainView">
-        <img style="width:100px; height: 100px;" src="https://github.com/Jinga02/Baekjoon/assets/110621233/f5eecac2-948c-4471-8596-46cad9ee1729" alt="로고">
+        <img style="width:100px; height: 100px;" src="https://github.com/Jinga02/Algorithm/assets/110621233/035bdd8f-afac-46ee-8d85-c08b6ecae0cf" alt="로고">
       </router-link>
     </h1>
     <div class="menubar">
       <ul class="menu">
-        <li>영화</li>
-        <li>만화</li>
+        <li><input type="text" placeholder="영화 제목을 입력해주세요" v-model="searchTitle" @keyup.enter="searchMovie">
+          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-search" viewBox="-2 -5 15 20">
+            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+          </svg>
+        </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">장르</a>
           <ul class="dropdown-menu">
@@ -16,6 +19,7 @@
             <li><router-link class="dropdown-item" to="/animationPage">만화</router-link></li>
             <li><router-link class="dropdown-item" to="/comedyPage">개그</router-link></li>
             <li><router-link class="dropdown-item" to="/crimePage">범죄</router-link></li>
+            <li><router-link class="dropdown-item" to="/thrillerPage">스릴러</router-link></li>
             <li><router-link class="dropdown-item" to="/documentaryPage">다큐멘터리</router-link></li>
             <li><router-link class="dropdown-item" to="/dramaPage">드라마</router-link></li>
             <li><router-link class="dropdown-item" to="/familyPage">가족</router-link></li>
@@ -28,17 +32,13 @@
             <li><router-link class="dropdown-item" to="/sciencefictionPage">SF</router-link></li>
             <li><router-link class="dropdown-item" to="/tvmoviePage">TV시리즈</router-link></li>
             <li><router-link class="dropdown-item" to="/warPage">전쟁</router-link></li>
-            <li><router-link class="dropdown-item" to="/westernPage">서양</router-link></li>
+            <li><router-link class="dropdown-item" to="/westernPage">서부</router-link></li>
           </ul>
         </li>
-        <li>내가 찜한 콘텐츠</li>
-        <input type="text" placeholder="영화 제목을 입력해주세요" v-model="searchTitle" @keyup.enter="searchMovie">
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">내 프로필</a>
           <ul class="dropdown-menu">
-            <!-- <li>{{ userName }}</li> -->
-            <!-- <li>{{ userId }}</li> -->
-            <li><router-link class="dropdown-item" to="/proFile">프로필 보기</router-link></li>
+            <li class="dropdown-item" style="color: black;" @click="getUserProfile">내 프로필 보기</li>
             <li><a class="dropdown-item" href="#scrollspyHeading4" @click="logout">로그아웃</a></li>
           </ul>
         </li>
@@ -51,15 +51,16 @@
 import { mapState } from 'vuex'
 export default {
   name: "navBar",
-  // ...mapState(['userName']),
-  ...mapState({
-    userName: state => state.userName
-  }),
   data() {
     return {
       searchTitle: "",
-      // userName: this.userName, // 초기 값 설정
     };
+  },
+  computed:{
+    ...mapState([
+    "userName",
+    "userId"
+  ]),
   },
   methods: {
     searchMovie() {
@@ -71,6 +72,9 @@ export default {
     logout() {
       this.$store.dispatch("logout");
     },
+    getUserProfile() {
+      this.$store.dispatch("getUserProfile", this.userId);
+    }
   }
 };
 </script>
@@ -96,6 +100,7 @@ header ul.menu li{
   float: left;
   padding: 10px 20px;
   list-style: none;
+  font-size: 18px;
   color: white;
 }
 header ul.menu input {
