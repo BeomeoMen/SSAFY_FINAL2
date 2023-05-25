@@ -11,15 +11,26 @@
         </p>
       </div>
     </div>
-    <div class="button">
-      <button class="btn btn-primary" @click="slideToPrev">이전</button>
-      <button class="btn btn-primary" @click="slideToNext">다음</button>
+    <div class="button mt-5">
+      <button class="btn btn-primary " @click="slideToPrev">
+        <i class="fa-solid fa-caret-left"></i>
+      </button>
+      <h2 class="button-gap">목록</h2>
+      <button class="btn btn-primary" @click="slideToNext">
+        <i class="fa-solid fa-caret-right"></i>
+      </button>
     </div>
+    <br><br>
 		<swiper ref="filterSwiper" role="tablist">
 			<swiper-slide role="tab"><recommendGenre /></swiper-slide>
 			<swiper-slide role="tab"><nowMovieList /></swiper-slide>
       <swiper-slide role="tab"><popularMovie /></swiper-slide>
 		</swiper>
+    <footer class="bg-black py-5">
+      <div class="container px-4 px-lg-5">
+        <div class="small text-center text-white">Copyright &copy; 2023 - BeomNe</div>
+      </div>
+    </footer>
   </div>
 </template>
 
@@ -36,23 +47,6 @@ export default {
 	
 
   name: "mainView",
-  // data () {
-  //    const _vm = this
-  //    return {
-  //     swiperOption: {
-  //       on: {
-  //         click: function () {
-  //           _vm.slideMoveTo()
-  //           _vm.activeTab()
-  //         },
-  //         tap: function () {
-  //           _vm.slideMoveTo()
-  //           _vm.activeTab()
-  //         }
-  //       }
-  //     }
-  //   }
-  // },
   components: {
     navBar,
     popularMovie,
@@ -99,12 +93,15 @@ export default {
 
 
 <style lang="scss" scoped>
+.button-gap {
+  display: inline;
+  color: white;
+  padding: 20px;
+}
 .button{
   text-align: center;
 }
-img {
-  border-radius: 20px;
-}
+
 .first {
   color: white;
   font-size: 30px;

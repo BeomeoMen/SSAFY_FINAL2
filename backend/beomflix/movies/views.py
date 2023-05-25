@@ -224,8 +224,8 @@ def like_movie(request, movie_id):
     else:
         movie.like_users.add(user)
         is_liked = True
-        like = Like(user=user, movie=movie)
-        like.save()
+        # like = Like(user=user, movie=movie)
+        # like.save()
 
     context = {
         'is_liked': is_liked, 
@@ -285,11 +285,18 @@ def recommend_genre(request):
 
     return Response({'movies': movie_list})
 
+
 @api_view(['GET',])
 @permission_classes([IsAuthenticatedOrReadOnly])
 def liked_movies(request, user_id):
-    user = User.objects.get(id=user_id)
-    liked_movies = Like.objects.filter(user=user).values_list('movie_id', flat=True)
-    movies = Movie.objects.filter(pk__in=liked_movies)
+    # user = User.objects.get(id=user_id)
+    # liked_movies = Like.objects.filter(user=user).values_list('movie_id', flat=True)
+    # movies = Movie.objects.filter(pk__in=liked_movies)
 
-    return Response(liked_movies)
+    # return Response(liked_movies)
+
+    user = User.objects.get(id=user_id)
+    liked_movies = Movie.objects.filter(like_users=user)
+
+    serializer = MovieSerializer(liked_movies, many=True)
+    return Response(serializer.data)
