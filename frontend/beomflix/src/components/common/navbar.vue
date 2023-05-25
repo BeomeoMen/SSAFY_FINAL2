@@ -37,25 +37,32 @@
           </ul>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">내 프로필</a>
+          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><i class="fa-light fa-users"></i>
+          </a>
           <ul class="dropdown-menu">
             <li class="dropdown-item" style="color: black;" @click="getUserProfile">내 프로필 보기</li>
-            <li><a class="dropdown-item" href="#scrollspyHeading4" @click="logout">로그아웃</a></li>
+            <li><a class="dropdown-item" href="#modifyUserModal" data-bs-toggle="modal" data-target="#modifyUserModal" >비밀번호 변경</a></li>
+            <li><a class="dropdown-item" @click="logout">로그아웃</a></li>
           </ul>
         </li>
       </ul>
     </div>
+    <modifyUserModal/>
   </header>
 </template>
 
 <script>
 import { mapState } from 'vuex'
+import modifyUserModal from '@/components/accounts/modifyUserModal.vue'
 export default {
   name: "navBar",
   data() {
     return {
       searchTitle: "",
     };
+  },
+  components:{
+    modifyUserModal
   },
   computed:{
     ...mapState([
@@ -128,3 +135,6 @@ input:focus {
   box-shadow: 0 0 5px rgba(0, 170, 255, 0.5);
 }
 </style>
+
+
+

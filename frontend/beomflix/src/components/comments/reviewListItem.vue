@@ -120,4 +120,3 @@ export default {
   margin-right: 5px;
 }
 </style>
-위 코드에서는 v-for를 사용하여 review.rank 값에 따라 별 이모지를 반복해서 보여주도록 했습니다. 또한, .star 클래스를 추가하여 별 이모지의 스타일을 설정했습니

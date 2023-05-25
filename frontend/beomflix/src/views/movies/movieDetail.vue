@@ -7,48 +7,21 @@
           <img :src="poster + movieDetail.poster_path" />
         </div>
         <div class="details-container">
-          <iframe
-            frameborder="0"
-            allowfullscreen
-            style="width: 100%; height: 400px"
-            :src="
-              trailerUrlPath +
-              movieDetail.youtube_key +
-              `?autoplay=1&mute=1&amp;playlist=${movieDetail.youtube_key}&loop=1&controls=0&modestbranding=1`
-            "
-          ></iframe>
+          <iframe frameborder="0" allowfullscreen style="width: 100%; height: 400px" :src="trailerUrlPath +movieDetail.youtube_key +`?autoplay=1&mute=1&amp;playlist=${movieDetail.youtube_key}&loop=1&controls=0&modestbranding=1`" ></iframe>
           <div class="details-row">
             <h2>{{ movieDetail.title }}</h2>
             <div class="like-buttons">
-              <i
-                class="fa-solid fa-thumbs-up fa-2xl"
-                @click="likeMovie"
-                style="color: rgb(0, 123, 255)"
-              ></i>
+              <i class="fa-solid fa-thumbs-up fa-2xl" @click="likeMovie" style="color: rgb(0, 123, 255)" ></i>
               <span style="width: 15px;"></span>
-              <i
-                class="fa-regular fa-thumbs-up fa-2xl"
-                @click="likeMovie"
-                style="color: rgb(0, 123, 255)"
-              ></i>
+              <i class="fa-regular fa-thumbs-up fa-2xl" @click="likeMovie" style="color: rgb(0, 123, 255)"></i>
             </div>
           </div>
-          <p>
-            장르 :
-            <span v-for="genre in movieDetail.genres" :key="genre.id"
-              >{{ genre.name }} |
-            </span>
-          </p>
+          <p> 장르 : <span v-for="genre in movieDetail.genres" :key="genre.id" >{{ genre.name }} |</span> </p>
           <p>평점 : {{ movieDetail.vote_average }}</p>
           <p>개봉일 : {{ movieDetail.release_date }}</p>
           <p>
             주연 배우 :
-            <span
-              class="actor"
-              v-for="actor in movieDetail.actors"
-              :key="actor.id"
-              >{{ actor.name }}</span
-            >
+            <span class="actor" v-for="actor in movieDetail.actors" :key="actor.id">{{ actor.name }}</span>
           </p>
           <p class="overview">{{ movieDetail.overview }}</p>
         </div>

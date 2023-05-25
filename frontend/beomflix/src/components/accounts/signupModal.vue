@@ -12,9 +12,9 @@
             <label for="username"><b>ID</b></label><br>
             <input v-model="username" style="width: 100%; padding: 5px;  border-radius: 5px; margin-bottom: 10px;" type="text" name="username" id="username" placeholder="이름 입력">
             <label for="password1"><b>Password</b></label><br>
-            <input v-model="password1" style="width: 100%; padding: 5px;  border-radius: 5px; margin-bottom: 10px;" type="password" name="password1" id="password1" placeholder="비밀번호 입력">
+            <input v-model="password1" style="width: 100%; padding: 5px;  border-radius: 5px; margin-bottom: 10px;" type="password" name="password1" id="password1" placeholder="비밀번호 입력(8자 이상)">
             <label for="password2"><b>Password Confirmation</b></label><br>
-            <input v-model="password2" style="width: 100%; padding: 5px;  border-radius: 5px; margin-bottom: 10px;" type="password" name="password2" id="password2" placeholder="비밀번호 확인">
+            <input v-model="password2" style="width: 100%; padding: 5px;  border-radius: 5px; margin-bottom: 10px;" type="password" name="password2" id="password2" placeholder="비밀번호 확인(8자 이상)">
             <div class="modal-footer">
               <input type="submit" class="btn btn-primary" value="회원가입" data-bs-dismiss="modal">
             </div>
