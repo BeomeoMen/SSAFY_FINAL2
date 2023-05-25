@@ -1,7 +1,7 @@
 <template>
   <div class="Item">
-    <h1>작성자 : {{ guestBook.username }}</h1>
-    <h1>내용 : {{ guestBook.content }}</h1>
+    <h4>작성자 : {{ guestBook.username }}</h4>
+    <h4>내용 : {{ guestBook.content }}</h4>
     <button class="btn btn-primary" v-if="isGuestBookOwner" @click="deleteGuestBook">삭제</button>
   </div>
 </template>
@@ -35,8 +35,9 @@ export default {
 
 <style scoped>
   .Item{
-    margin: 10px;
+    margin: 10px 0px;
     border: solid 1px white;
     padding: 10px;
+    width: 863px;
   }
 </style>

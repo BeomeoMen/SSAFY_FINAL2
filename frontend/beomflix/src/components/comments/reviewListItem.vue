@@ -1,11 +1,15 @@
 <template>
   <div class="reviews">
-    <span @click="getUserProfile"><h5>작성자 :{{ review.user.username }}</h5></span>
-    <span v-if="!isEditing"> <h4>내용: {{ review.content }}</h4></span>
-    <input v-else v-model="editedContent" type="text" placeholder="리뷰를 입력해주세요">
-    <span v-if="!isEditing">평점:
-      <span v-for="star in review.rank" :key="star" class="star">★</span>
-    </span>
+    <div style="display: flex;">
+      <span @click="getUserProfile">
+        <h4>작성자: {{ review.user.username }}</h4>
+      </span>
+      <p style="margin-left: 300px;">
+        작성시간: {{ review.created_at | formatDate }}
+        수정시간: {{ review.updated_at | formatDate }}
+      </p>
+    </div>
+    <span v-if="!isEditing">평점: <span v-for="star in review.rank" :key="star" class="star">★</span></span>
     <div v-else class="rating">
       <input type="radio" id="star55" name="rating" value="5" v-model="editedRank" /><label for="star55" title="5 stars"></label>
       <input type="radio" id="star44" name="rating" value="4" v-model="editedRank" /><label for="star44" title="4 stars"></label>
@@ -14,31 +18,55 @@
       <input type="radio" id="star11" name="rating" value="1" v-model="editedRank" /><label for="star11" title="1 star"></label>
     </div>
     <div>
-      <a class="btn btn-primary" v-if="isReviewOwner && !isEditing" @click="editReview">수정</a>
-      <button class="btn btn-primary" v-if="isReviewOwner && !isEditing" @click="deleteReview">삭제</button>
-      <button v-if="!isEditing" class="btn btn-outline-primary" @click="likeReview">
-        <i class="bi bi-heart" v-if="!isLiked"></i>
-        <i class="bi bi-heart-fill" v-else></i> 좋아요
-      </button>
-      <a class="btn btn-primary" v-if="isReviewOwner && isEditing" @click="submitEdit">수정 완료</a>
-      <a class="btn btn-primary" v-if="isReviewOwner && isEditing" @click="cancelEdit">수정 취소</a>
+      <h5 v-if="!isEditing" style="margin: 20px 0px" class="review-content">내용: {{ review.content }}</h5>
+      <textarea v-else v-model="editedContent" cols="100" rows="3" type="text" placeholder="리뷰를 입력해주세요"></textarea>
+    </div>
+    <div class="buttons-container">
+      <span v-if="!isEditing" @click="likeReview">
+        <i class="bi bi-heart fa-2xl" v-if="!isLiked" style="color: rgb(0, 123, 255)"></i>
+        <i class="bi bi-heart-fill fa-2xl" v-else style="color: rgb(0, 123, 255)"></i>
+      </span>
+      <span v-if="isEditing" @click="likeReview">
+        <i class="bi bi-heart fa-2xl" v-if="!isLiked" style="color: rgb(0, 123, 255)"></i>
+        <i class="bi bi-heart-fill fa-2xl" v-else style="color: rgb(0, 123, 255)"></i>
+      </span>
+      <div>
+        <div class="edit-buttons" v-if="isReviewOwner && !isEditing">
+          <a class="btn btn-primary" @click="editReview">수정</a>
+          <button class="btn btn-primary" @click="deleteReview" style="margin-left: 10px;">삭제</button>
+        </div>
+        <div class="edit-buttons" v-if="isReviewOwner && isEditing">
+          <a class="btn btn-primary" @click="submitEdit">수정 완료</a>
+          <a class="btn btn-primary" @click="cancelEdit" style="margin-left: 10px;">수정 취소</a>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
+import moment from 'moment';
 export default {
   name: "reviewListItem",
   props: {
     review:Object
+  },
+  filters: {
+    formatDate(datetime) {
+      return moment(datetime).format('YYYY-MM-DD HH:mm');
+    },
   },
   data() {
     return {
       isEditing: false,
       editedContent: '',
       editedRank: null,
+      likeReviews:[],
     }
+  },
+  mounted(){
+    this.getLikeReview()
   },
   computed:{
     ...mapState({
@@ -47,9 +75,6 @@ export default {
     }),
     isReviewOwner() {
       return this.loginUser === this.review.user.id; 
-    },
-    reviewId() {
-      return this.review.id;
     },
     isLiked() {
       return this.likes[this.review.id] ? this.likes[this.review.id].is_liked : false;
@@ -61,6 +86,7 @@ export default {
     },
     likeReview(){
       this.$store.dispatch('likeReview', this.review.id)
+      
     },
     editReview() {
       this.isEditing = !this.isEditing;
@@ -89,12 +115,14 @@ export default {
 <style scoped>
 .reviews {
   margin: 10px;
-  border: solid 0.5px white;
-  width: 1000px;
+  width: 950px;
   border-radius: 10px;
   background-color: rgba(128, 128, 128, 0.319);
   justify-content: center;
-
+  padding: 20px;
+}
+.review-content {
+  white-space: pre-wrap;
 }
 .rating {
   direction: rtl;
@@ -119,5 +147,22 @@ export default {
   color: #ffd700;
   font-size: 1.5em;
   margin-right: 5px;
+}
+
+textarea {
+  background-color: rgba(128, 128, 128, 0.319);
+  border-radius: 10px;
+  color: white;
+  padding: 20px;
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.edit-buttons {
+  display: flex;
+  justify-content: flex-end;
 }
 </style>

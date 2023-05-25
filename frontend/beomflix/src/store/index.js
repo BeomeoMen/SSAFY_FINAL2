@@ -28,7 +28,9 @@ export default new Vuex.Store({
 
     movieLikeCount: 0,
     movie_is_liked:false,
-    movieLikes: Object,
+    movieLike : false,
+    isLikedMovie: false,
+    // movieLikes: [],
     // likeMovie : [],
 
     movieList: Object,
@@ -82,9 +84,9 @@ export default new Vuex.Store({
     UPDATE_LIKE(state, { reviewId, is_liked, count }) {
       state.reviewLikes[reviewId] = { is_liked, count };
     },
-    UPDATE_MOVIE_LIKE(state, { movieId, userId, is_liked, count }) {
-      state.movieLikes[movieId] = { userId, is_liked, count };
-    },    
+    // UPDATE_MOVIE_LIKE(state, { movieId, userId, is_liked, count }) {
+    //   state.movieLikes[movieId] = { userId, is_liked, count };
+    // },
     // GET_MOVIELIKE(state, movie){
     //   state.likeMovie = movie
     // },
@@ -613,11 +615,13 @@ export default new Vuex.Store({
         }
       })
       .then((res)=>{
-        const is_liked = res.data.is_liked
-        const count = res.data.count
-        const userId = res.data.user_id
-        const movieId = res.data.movie_id
-        context.commit('UPDATE_MOVIE_LIKE', {movieId, userId, is_liked, count})
+        // const is_liked = res.data.is_liked
+        // const count = res.data.count
+        // const userId = res.data.user_id
+        // const movieId = res.data.movie_id
+        console.log(res.data)
+        // context.commit('UPDATE_MOVIE_LIKE', )
+        // location.reload()
       })
       .catch((err)=>{
         console.log(err)

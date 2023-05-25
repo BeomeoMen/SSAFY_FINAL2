@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="container">
-      <h2>추천 영화</h2>
+      <h1>추천 영화</h1>
       <div class="row row-cols-md-4">
         <recommendGenreItem v-for="movie in recommendGenre" :key="movie.id" :movie="movie"/>
       </div>
@@ -33,7 +33,7 @@ export default {
 </script>
 
 <style scoped>
-  h2{
+  h1{
     color: white;
     text-align: center;
     margin-bottom: 50px;

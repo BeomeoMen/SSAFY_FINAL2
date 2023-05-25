@@ -10,12 +10,13 @@
     <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
       <div class="col-lg-8 align-self-end mb-5">
         <h1 class="text-white">원하는 영화, 만화를 찾고 싶다면 <br><br> 어떤 영화가 좋은지, 어떤 영화가 재밌는지 모르겠다면</h1> <br>
-        <h3 class="text-white">
+        <h3 class="text-white" style="margin-bottom: 40px;">
           무료로 원하는 영화, 만화 등을 찾아보세요.<br><br>
           신뢰도 높은 알고리즘으로 이용자 맞춤 영화를 추천해 드립니다.
         </h3>
-        <a class="btn btn-primary btn-xl m-5" href="#loginModal" data-bs-toggle="modal" data-target="#login">시작하기</a>
-        <a class="btn btn-primary btn-xl m-5" href="#signUpModal" data-bs-toggle="modal" data-target="#signup">회원가입</a>
+        <a class="btn btn-primary btn-xl" href="#loginModal" data-bs-toggle="modal" data-target="#login">시작하기</a>
+        <span style="margin: 10px;"></span>
+        <a class="btn btn-primary btn-xl" href="#signUpModal" data-bs-toggle="modal" data-target="#signup">회원가입</a>
       </div>
     </div>
     <div>
@@ -27,11 +28,11 @@
 
     <loginModal/>
     <signUpModal/>
-    <footer class="bg-black py-5">
+    <!-- <footer class="bg-black py-5">
       <div class="container px-4 px-lg-5">
         <div class="small text-center text-white">Copyright &copy; 2023 - Company Name</div>
       </div>
-    </footer>
+    </footer> -->
   </div>
 </template>
 

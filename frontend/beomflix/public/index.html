@@ -15,28 +15,41 @@
         font-style: italic
       }
       #video-background {
-  /* 배경 동영상이 화면 전체를 채우도록 설정 */
-  position: fixed;
-  right: 0; 
-  bottom: 0;
-  min-width: 100%; 
-  min-height: 100%;
-  width: auto; 
-  height: auto;
-  z-index: -100;
-}
+        /* 배경 동영상이 화면 전체를 채우도록 설정 */
+        position: fixed;
+        right: 0; 
+        bottom: 0;
+        min-width: 100%; 
+        min-height: 100%;
+        width: auto; 
+        height: auto;
+        z-index: -100;
+      }
 
-#video-background iframe {
-  /* 배경 동영상이 화면 전체를 채우도록 설정 */
-  position: fixed;
-  right: 0; 
-  bottom: 0;
-  min-width: 100%; 
-  min-height: 100%;
-  width: auto; 
-  height: auto;
-  z-index: -100;
-}
+      #video-background iframe {
+        /* 배경 동영상이 화면 전체를 채우도록 설정 */
+        position: fixed;
+        right: 0; 
+        bottom: 0;
+        min-width: 100%; 
+        min-height: 100%;
+        width: auto; 
+        height: auto;
+        z-index: -100;
+      }
+      body::-webkit-scrollbar {
+        width: 5px; /* 스크롤바 너비 */
+      }
+
+      body::-webkit-scrollbar-thumb {
+        background-color: rgb(0, 123, 255); /* 스크롤바 색상 */
+        border-radius: 5px; /* 스크롤바 모서리 둥글게 */
+      }
+
+      body::-webkit-scrollbar-track {
+        background-color:  black; /* 스크롤바 트랙 색상 */
+        border-radius: 5px; /* 스크롤바 트랙 모서리 둥글게 */
+      }
     </style>
   </head>
   <body>

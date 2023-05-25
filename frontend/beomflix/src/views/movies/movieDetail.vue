@@ -11,11 +11,11 @@
           <div class="details-row">
             <h2>{{ movieDetail.title }}</h2>
             <div class="like-buttons">
-              <i class="bi bi-heart fa-xl" style="color: rgb(0, 123, 255)" v-if="!isLiked" @click="likeMovie"></i>
-              <i class="bi bi-heart-fill fa-xl" style="color: rgb(0, 123, 255)" v-if="isLiked" @click="likeMovie"></i>
+              <i class="bi bi-heart fa-xl" style="color: rgb(0, 123, 255)" v-if="!isLikeMovie"  @click="likeMovie"></i>
+              <i class="bi bi-heart-fill fa-xl" style="color: rgb(0, 123, 255)" v-if="isLikeMovie" @click="likeMovie"></i>
             </div>
           </div>
-          <p> 장르 : <span v-for="genre in movieDetail.genres" :key="genre.id" >{{ genre.name }} |</span> </p>
+          <p>장르 : <span v-for="genre in movieDetail.genres" :key="genre.id" >{{ genre.name }} |</span> </p>
           <p>평점 : {{ movieDetail.vote_average }}</p>
           <p>개봉일 : {{ movieDetail.release_date }}</p>
           <p>
@@ -36,6 +36,8 @@
 import { mapState } from "vuex";
 import navbar from "@/components/common/navbar.vue";
 import reviewList from "@/components/comments/reviewList.vue";
+import axios from "axios";
+const API_URL = "http://127.0.0.1:8000";
 export default {
   components: {
     navbar,
@@ -46,18 +48,21 @@ export default {
     ...mapState({
       movieDetail: "movieDetail",
       reviews: "reviews",
-      user: "user/userId",
-      movieLikes: "movieLikes",
+      user: "userId",
+      movieLike: "movieLike",
     }),
-    isLiked() {
-      return this.movieLikes[this.movieDetail.id]
+    isLikeMovie() {
+      console.log(this.isLikedMovie)
+      return this.isLikedMovie;
     }
   },
   mounted() {
     this.getReview();
+    this.getLikeMovie();
   },
   data() {
     return {
+      isLikedMovie : false,
       poster: "https://image.tmdb.org/t/p/original/",
       trailerUrlPath: "https://www.youtube.com/embed/",
     };
@@ -67,8 +72,39 @@ export default {
       const movieId = this.$store.state.movieDetail.id;
       this.$store.dispatch("getReviews", movieId);
     },
-    likeMovie() {
-      this.$store.dispatch("likeMovie", this.movieDetail.id);
+    likeMovie(){
+      const movieId = this.$store.state.movieDetail.id;
+      this.$store.dispatch('likeMovie', movieId)
+      location.reload()
+
+    },
+    getLikeMovie(){
+      const userId = this.$store.state.userId;
+      axios({
+        method: 'get',
+        url: `${API_URL}/movies/${userId}/liked_movies/`,
+        headers: {
+          Authorization: `Token ${this.$store.state.token.key}`,
+        }
+      })
+      .then((res)=>{
+        this.movieLikes = res.data.filter(movie => {
+          return movie.id == this.movieDetail.id
+        });
+        // console.log(this.movieLikes)
+        this.movieLikes = this.movieLikes[0].id
+        if (this.movieLikes == this.movieDetail.id){
+          this.isLikedMovie = true
+          // console.log(this.isLikedMovie)
+        }
+        else{
+          this.isLikedMovie = false
+          // console.log(this.isLikedMovie)
+        }
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
     },
   },
 };
@@ -125,10 +161,11 @@ p{
 .review {
     display: flex;
     width: 100%;
+    height: 100%;
     color: white;
     background-color: rgba(128, 128, 128, 0.09);
     border-radius: 10px;
-    justify-content: center;
+    /* justify-content: center; */
     margin-top: 20px;
   }
 </style>

@@ -1,27 +1,31 @@
 <template>
-  <div>
-    <h1>리뷰</h1>
-    <br>
-    <form @submit.prevent="createReview">
-      <label for="content"></label>
-      <div class="textarea-container">
-        <textarea v-model="content" cols="100" rows="5"></textarea>
-        <div class="rating">
-          <input type="radio" id="star5" name="rating" value="5" v-model="rank" /><label for="star5" title="5 stars"></label>
-          <input type="radio" id="star4" name="rating" value="4" v-model="rank" /><label for="star4" title="4 stars"></label>
-          <input type="radio" id="star3" name="rating" value="3" v-model="rank" /><label for="star3" title="3 stars"></label>
-          <input type="radio" id="star2" name="rating" value="2" v-model="rank" /><label for="star2" title="2 stars"></label>
-          <input type="radio" id="star1" name="rating" value="1" v-model="rank" /><label for="star1" title="1 star"></label>
+  <div class="review-wrapper">
+    <div class="review-creation">
+      <h2 style="font-size: 30px; margin-top: 20px;">리뷰</h2>
+      <form @submit.prevent="createReview">
+        <div class="textarea-container">
+          <textarea v-model="content" cols="53" rows="5"></textarea>
+          <div class="rating">
+            <input type="radio" id="star1" name="rating" value="1" v-model="rank" /><label for="star1" title="1 star"></label>
+            <input type="radio" id="star2" name="rating" value="2" v-model="rank" /><label for="star2" title="2 stars"></label>
+            <input type="radio" id="star3" name="rating" value="3" v-model="rank" /><label for="star3" title="3 stars"></label>
+            <input type="radio" id="star4" name="rating" value="4" v-model="rank" /><label for="star4" title="4 stars"></label>
+            <input type="radio" id="star5" name="rating" value="5" v-model="rank" /><label for="star5" title="5 stars"></label>
+          </div>
+          <input class="btn btn-primary" type="submit" id="submit" value="작성">
         </div>
-      </div>
-      <input class="btn btn-primary" type="submit" id="submit" value="작성">
-    </form>
-    <div v-if="reviews.length > 0">
-      <reviewListItem v-for="review in reviews" :key="review.id" :review="review" />
+      </form>
     </div>
-    <div v-else>아직 리뷰가 없습니다.</div>
+
+    <div class="review-list">
+      <div v-if="reviews.length > 0">
+        <reviewListItem v-for="review in reviews" :key="review.id" :review="review" />
+      </div>
+      <div v-else style="font-size: 30px; margin-top: 20px;">아직 리뷰가 없습니다.</div>
+    </div>
   </div>
 </template>
+
 
 <script>
 import reviewListItem from '@/components/comments/reviewListItem.vue'
@@ -60,6 +64,9 @@ export default {
       this.$store.dispatch('createReview', {user, content, rank})
       this.content = null
       this.rank = null
+    },
+    isFollowedByCurrentUser() {
+      return this.getFollowers.some(follower => follower.id === this.userId);
     }
   }
 }
@@ -73,15 +80,13 @@ export default {
   display: none;
 }
 .rating label {
-  font-size:2em;
+  font-size:1.5em;
   color: #ffd900dc;
   cursor: pointer;
-  margin-top: 70px;
-  margin-right: 30px;
+  margin-top: 100px;
 }
 .rating label:before {
   content: "☆";
-  position: absolute;
 }
 .rating input:checked ~ label:before {
   content: "★";
@@ -94,12 +99,33 @@ export default {
   background-color: rgba(128, 128, 128, 0.319);
   border-radius: 10px;
   color: white;
+  padding: 20px;
 }
 
 .textarea-container .rating {
   position: absolute;
   right: 10px;
-  top: 10px;
+  bottom: 60px;
+}
+.textarea-container #submit{
+  position: absolute;
+  width: 120px;
+  right: 15px;
+  bottom: 20px;
+}
+.review-wrapper {
+  display: flex;
+  justify-content: space-between;
 }
 
+.review-creation {
+  flex: 1;
+  margin-right: 20px;  /* if needed */
+}
+
+.review-list {
+  flex: 2;
+  overflow-y: auto;
+  height: calc(100vh - 50px);  /* Adjust as needed */
+}
 </style>
