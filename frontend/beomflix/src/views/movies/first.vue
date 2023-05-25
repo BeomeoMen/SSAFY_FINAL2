@@ -14,25 +14,13 @@
           무료로 원하는 영화, 만화 등을 찾아보세요.<br><br>
           신뢰도 높은 알고리즘으로 이용자 맞춤 영화를 추천해 드립니다.
         </h3>
-        <a class="btn btn-primary btn-xl" href="#loginModal" data-bs-toggle="modal" data-target="#login">시작하기</a>
+        <a class="btn btn-primary btn-xl" style="padding: 10px 40px;" href="#loginModal" data-bs-toggle="modal" data-target="#login"><h4>시작하기</h4></a>
         <span style="margin: 10px;"></span>
-        <a class="btn btn-primary btn-xl" href="#signUpModal" data-bs-toggle="modal" data-target="#signup">회원가입</a>
+        <a class="btn btn-primary btn-xl" style="padding: 10px 40px;" href="#signUpModal" data-bs-toggle="modal" data-target="#signup"><h4>회원가입</h4></a>
       </div>
     </div>
-    <div>
-      <h1 class="text-white text-center">소개 글 뭐적지</h1>
-    </div>
-    <div>
-      <h1 class="text-white text-center">소개 글 뭐적지</h1>
-    </div>
-
     <loginModal/>
     <signUpModal/>
-    <!-- <footer class="bg-black py-5">
-      <div class="container px-4 px-lg-5">
-        <div class="small text-center text-white">Copyright &copy; 2023 - Company Name</div>
-      </div>
-    </footer> -->
   </div>
 </template>
 
