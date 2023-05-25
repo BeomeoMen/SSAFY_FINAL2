@@ -676,8 +676,9 @@ export default new Vuex.Store({
           username, password1, password2
         }
       })
-      .then(
-      )
+      .then(() =>{
+        alert('회원가입 완료!') 
+      })
       .catch((err) => {
         console.log(err)
         alert("회원가입 정보가 올바르지 않습니다.")
@@ -695,6 +696,7 @@ export default new Vuex.Store({
         },
       })
       .then(res => {
+          console.log(res)
           context.commit('SAVE_TOKEN', res.data)
           context.commit('setLoggedIn', true)
           context.commit('setShowIntro', true)
@@ -744,17 +746,19 @@ export default new Vuex.Store({
       })
     },
 
-    ModifyUser(context){
+    modifyUser(context, {new_password1, new_password2}){
       axios({
-        method:'put',
-        url: `${API_URL}/accounts/profile/`,
+        method:'post',
+        url: `${API_URL}/accounts/password/change/`,
         headers: {
           Authorization: `Token ${context.state.token.key}`
         },
+        data:{
+          new_password1, new_password2
+        }
       })
       .then(res =>{
-        context.commit('GET_USER_ID', res.data.pk)
-
+        console.log(res)
       })
       .catch(err =>{
         console.log(err)
@@ -893,6 +897,7 @@ export default new Vuex.Store({
           context.commit('GET_RECOMMENDGENRE', res.data.movies)
         })
         .catch((err) => {
+          console.log('좋아요 한 영화가 없습니다. 랜덤으로 추천 영화를 출력하겠습니다.')
           console.log(err)
         })
     },

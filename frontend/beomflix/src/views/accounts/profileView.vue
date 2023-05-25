@@ -2,74 +2,57 @@
   <div>
     <navbar />
     <div class="profile">
-      <h1>사용자 이름 : {{ USERNAME }}</h1>
-      <button class="btn btn-primary" v-if="isNotProFileOwner" @click="follow">
-        Follow
-      </button>
-      <button class="btn btn-primary" v-if="isNotProFileOwner" @click="follow">
-        UnFollow
-      </button>
+      <div class="userInfo">
+        <h1>프로필 정보</h1>
+        <div class="userInfoJ">
+          <h3>사용자 이름 : {{ USERNAME }}</h3>
+          <i class="bi bi-heart fa-xl" style="color: rgb(0, 123, 255)" v-if="isNotProFileOwner && isFollowedByCurrentUser" @click="follow">팔로우 취소</i>
+          <i class="bi bi-heart-fill fa-xl" style="color: rgb(0, 123, 255)" v-if="isNotProFileOwner && !isFollowedByCurrentUser" @click="follow">팔로우</i>
 
-      <h2 v-if="this.followerCheck" @click="isFollowers">
-        followers : {{ getFollowers.length }}
-      </h2>
-      <span v-else-if="getFollowers.length != 0">
-        <h2
-          v-for="follower in getFollowers"
-          :key="follower.id"
-          @click="isFollowers"
-        >
-          followers : {{ follower.username }}
-        </h2>
-      </span>
-      <span v-else-if="getFollowers.length == 0">
-        <h2 @click="isFollowers">followers : {{ getFollowers.length }}</h2>
-      </span>
+          <h3 v-if="this.followerCheck" @click="isFollowers">팔로워 : {{ getFollowers.length }}</h3>
 
-      <h2 v-if="this.followingsCheck" @click="isFollowings">
-        followings : {{ getFollowings.length }}
-      </h2>
-      <span v-else-if="getFollowings.length != 0">
-        <h2 @click="isFollowings">followings :</h2>
-        <h2
-          v-for="follower in getFollowings"
-          :key="follower.id"
-          @click="isFollowings"
-        >
-          {{ follower.username }}
-        </h2>
-      </span>
-      <span v-else-if="getFollowings.length == 0">
-        <h2 @click="isFollowings">followings : {{ getFollowings.length }}</h2>
-      </span>
+          <span v-else-if="getFollowers.length != 0 ">
+            <h3 v-for="follower in getFollowers" :key="follower.id" @click="isFollowers"> 팔로워 : {{ follower.username }} </h3>
+          </span>
 
-      <div class="self">
-        <h1>자기소개</h1>
-        <input
-          type="text"
-          v-model="content"
-          v-if="!isNotProFileOwner"
-          @keyup.enter="createIntroduce"
-        />
-        <!-- <input type="file" > -->
-        <h1>{{ getContnet }}</h1>
+          <span v-else-if="getFollowers.length == 0">
+            <h3 @click="isFollowers">팔로워가 없습니다</h3>
+          </span>
+
+          <h3 v-if="this.followingsCheck" @click="isFollowings"> 팔로잉 : {{ getFollowings.length }} </h3>
+          
+          <span v-else-if="getFollowings.length != 0  && !isNotProFileOwner">
+            <h3 v-for="follower in getFollowings" :key="follower.id" @click="isFollowings"> 팔로잉 : {{ follower.username }} </h3>
+          </span>
+          <span v-else-if="getFollowings.length == 0  && !isNotProFileOwner">
+            <h3 @click="isFollowings">팔로잉한 유저가 없습니다.</h3>
+          </span>
+          <span v-else-if="getFollowings.length != 0">
+            <h3 v-for="follower in getFollowings" :key="follower.id" @click="isFollowings">팔로잉 : {{ getFollowings.length }}</h3>
+          </span>
+          <span v-else-if="getFollowings.length == 0">
+            <h3 @click="isFollowings">팔로잉한 유저가 없습니다.</h3>
+          </span>
+          
+          <div class="introduction-container">
+            <textarea v-model="content" v-if="!isNotProFileOwner" cols="100" rows="5"></textarea>
+            <button class="btn btn-primary" v-if="!isNotProFileOwner" @click="createIntroduce">작성</button>
+          </div>
+          <!-- <h4 >{{ getContnet }}</h4> -->
+          <h4 v-html="formattedContent"></h4>
+        </div>
       </div>
-    </div>
-    <div class="likeMovies">
-      <h1>{{ USERNAME }}이 찜한 영화</h1>
-      <h1 v-for="movie in likeMovie" :key="movie.id">
-        <h2 @click="movieDetail(movie.id)">{{ movie.title }}</h2>
-      </h1>
-    </div>
-    <div class="guestBook">
-      <h1>방명록</h1>
-      <input
-        type="text"
-        v-model="guestBook"
-        v-if="isNotProFileOwner"
-        @keyup.enter="createGuestBooke"
-      />
-      <guestBookList />
+      <div class="likeMovies">
+        <h2>{{ USERNAME }}이 찜한 영화</h2>
+        <h1 v-for="movie in likeMovie" :key="movie.id">
+          <h3 @click="movieDetail(movie.id)">{{ movie.title }}</h3>
+        </h1>
+      </div>
+      <div class="guestBook">
+        <h2>방명록</h2>
+        <input type="text" v-model="guestBook" v-if="isNotProFileOwner" @keyup.enter="createGuestBooke"/>
+        <guestBookList />
+      </div>
     </div>
   </div>
 </template>
@@ -97,6 +80,7 @@ export default {
       likeMovie: [],
       followerCheck: true,
       followingsCheck: true,
+      isFollowing: false,
     };
   },
   mounted() {
@@ -105,6 +89,7 @@ export default {
     this.getFollower();
     this.getFollowing();
     this.getLikeMovie();
+    this.checkFollowingStatus();
   },
   computed: {
     ...mapState([
@@ -119,8 +104,33 @@ export default {
     isNotProFileOwner() {
       return this.userId !== this.USERID;
     },
+    formattedContent() {
+    if (this.getContnet) {
+      return this.getContnet.replace(/\n/g, '<br>');
+    }
+    return null;
+    },
+    isFollowedByCurrentUser() {
+    return this.getFollowers.some(follower => follower.id === this.userId);
+  }
   },
   methods: {
+    checkFollowingStatus() {
+    axios({
+      method: "get",
+      url: `${API_URL}/accounts/profile/${this.USERID}/following/`,
+      headers: {
+        Authorization: `Token ${this.$store.state.token.key}`,
+      },
+    })
+      .then((res) => {
+        this.isFollowing = res.data.some(user => user.id === this.userId);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  },
+  
     isFollowers() {
       return (this.followerCheck = !this.followerCheck);
     },
@@ -179,9 +189,16 @@ export default {
 
     follow() {
       const userName = this.USERNAME;
-      this.$store.dispatch("follow", userName);
-      location.reload();
+      this.$store.dispatch("follow", userName)
+      .then(() => {
+        this.checkFollowingStatus();
+        location.reload()
+      })
+      .catch(err => {
+        console.log(err);
+      });
     },
+    
     getFollower() {
       axios({
         method: "get",
@@ -213,28 +230,49 @@ export default {
         });
     },
 
-    ModifyUser(){
-      this.$store.dispatch('ModifyUser', this.userId)
-    }
+    ModifyUser() {
+      this.$store.dispatch("ModifyUser", this.userId);
+    },
   },
 };
 </script>
 
 <style>
 .profile {
-  border: solid 1px white;
+  padding: 20px;
+  color: white;
+  width: 100%;
+  max-width: 1500px;
+  justify-content: center;
+}
+.userInfo{
+  display: flex;
+  margin-right: 100px;
   color: white;
 }
-.likeMovies {
-  border: solid 1px white;
+.introduction-container {
+  display: flex;
+  /* align-items: center; */
+  justify-content: space-between;
+}
+
+.userInfoJ{
+  margin-left: 200px;
   color: white;
 }
-.guestBook {
-  border: solid 1px white;
-  color: white;
+.userInfoJ h3{
+  padding-bottom: 10px;
 }
 .self {
-  border: solid 1px white;
   color: white;
+  background-color: purple;
+}
+.likeMovies {
+  color: white;
+  background-color: blue;
+}
+.guestBook {
+  color: white;
+  background-color: green;
 }
 </style>
