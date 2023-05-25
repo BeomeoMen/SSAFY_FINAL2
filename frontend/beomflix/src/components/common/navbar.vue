@@ -7,7 +7,8 @@
     </h1>
     <div class="menubar">
       <ul class="menu">
-        <li><input type="text" placeholder="영화 제목을 입력해주세요" v-model="searchTitle" @keyup.enter="searchMovie">
+        <li>
+          <input type="text" placeholder="영화 제목을 입력해주세요" v-model="searchTitle" @keyup.enter="searchMovie">
           <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-search" viewBox="-2 -5 15 20">
             <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
           </svg>
@@ -86,6 +87,7 @@ header {
   position: relative;
   height: 120px;
   border-bottom: 0.1px solid rgb(29, 28, 28);
+  margin: auto;
 }
 header h1 {
   position: absolute;
@@ -109,5 +111,20 @@ header ul.menu input {
   list-style: none;
   color: black;
 }
+input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  outline: none;
+}
 
+input::placeholder {
+  color: #999;
+}
+
+input:focus {
+  border-color: #00aaff;
+  box-shadow: 0 0 5px rgba(0, 170, 255, 0.5);
+}
 </style>

@@ -1,16 +1,16 @@
 <template>
   <div class="col">
-    <div class="card1" @mouseenter="showCard = true" @mouseleave="showCard = false" v-show="!showCard">
+    <div class="card1" @click="showCard = !showCard" v-show="!showCard">
       <div class="card-body">
-        <h3 class="card-title mt-4" @click="movieDetail(nowMovie.id)">{{nowMovie.title}}</h3>
-        <h4>평점 : {{ nowMovie.vote_average }}</h4>
-        <h4>인기도 : {{ nowMovie.popularity.toFixed(0) }}</h4>
-        <p class="card-text" @click="movieDetail(nowMovie.id)">{{ truncateOverview(nowMovie.overview, 120) }}</p>
-        <button class="btn btn-primary text-center" @click="movieDetail(nowMovie.id)">상세보기</button>
+        <h3 class="card-title mt-4" >{{movie.title}}</h3>
+        <h4>평점 : {{ movie.vote_average }}</h4>
+        <h4>인기도 : {{ movie.popularity.toFixed(0) }}</h4>
+        <p class="card-text">{{ truncateOverview(movie.overview, 120) }}</p>
+        <button class="btn btn-primary" @click="movieDetail(movie.id)">상세보기</button>
       </div>
     </div>
-    <div class="card2" @mouseenter="showCard = false" @mouseleave="showCard = true" v-show="showCard">
-      <img :src="poster+nowMovie.poster_path" class="card-img-top" @click="movieDetail(nowMovie.id)">  
+    <div class="card2" @click="showCard = !showCard" v-show="showCard">
+      <img :src="poster+movie.poster_path" class="card-img-top" >  
     </div>
   </div>
 </template>
@@ -19,11 +19,11 @@
 export default {
   name:"nowMovieListItem.vue",
   props:{
-    nowMovie:Object,
+    movie:Object,
   },
   data(){
     return{
-      poster: 'https://image.tmdb.org/t/p/original/',
+      poster: 'https://image.tmdb.org/t/p/original',
       showCard: true,
     }
   },

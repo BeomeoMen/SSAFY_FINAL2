@@ -17,7 +17,7 @@
 
 <script>
 export default {
-  name:"recommendGenreItem",
+  name:"popularMovieItem",
   props:{
     movie:Object,
   },

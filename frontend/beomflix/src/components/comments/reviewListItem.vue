@@ -1,10 +1,11 @@
 <template>
   <div class="reviews">
-    <!-- <h2><router-link class="dropdown-item" :to="'/proFile/' + review.user.id">{{review.user.username}}</router-link></h2> -->
-    <h2 @click="getUserProfile">{{ review.user.username }}</h2>
-    <h2 v-if="!isEditing">내용 :{{review.content}}</h2>
+    <span @click="getUserProfile"><h3>{{ review.user.username }}</h3></span>
+    <span v-if="!isEditing"> <h4>내용: {{ review.content }}</h4></span>
     <input v-else v-model="editedContent" type="text" placeholder="리뷰를 입력해주세요">
-    <h2 v-if="!isEditing">평점 : {{review.rank}}</h2>
+    <span v-if="!isEditing">평점:
+      <span v-for="star in review.rank" :key="star" class="star">★</span>
+    </span>
     <div v-else class="rating">
       <input type="radio" id="star55" name="rating" value="5" v-model="editedRank" /><label for="star55" title="5 stars"></label>
       <input type="radio" id="star44" name="rating" value="4" v-model="editedRank" /><label for="star44" title="4 stars"></label>
@@ -86,9 +87,13 @@ export default {
 </script>
 
 <style scoped>
-.reviews{
+.reviews {
   margin: 10px;
-  border: solid 1px white;
+  border: solid 0.5px white;
+  width: 1000px;
+  border-radius: 10px;
+  justify-content: center;
+
 }
 .rating {
   direction: rtl;
@@ -109,4 +114,10 @@ export default {
 .rating input:checked ~ label:before {
   content: "★";
 }
+.star {
+  color: #ffd700;
+  font-size: 1.5em;
+  margin-right: 5px;
+}
 </style>
+위 코드에서는 v-for를 사용하여 review.rank 값에 따라 별 이모지를 반복해서 보여주도록 했습니다. 또한, .star 클래스를 추가하여 별 이모지의 스타일을 설정했습니

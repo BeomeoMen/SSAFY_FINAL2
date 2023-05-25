@@ -224,8 +224,6 @@ def like_movie(request, movie_id):
     else:
         movie.like_users.add(user)
         is_liked = True
-        like = Like(user=user, movie=movie)
-        # like.save()
 
     context = {
         'is_liked': is_liked, 
@@ -284,6 +282,7 @@ def recommend_genre(request):
         movie_list.append(movie_dict)
 
     return Response({'movies': movie_list})
+
 
 @api_view(['GET',])
 @permission_classes([IsAuthenticatedOrReadOnly])
