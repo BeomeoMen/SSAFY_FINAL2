@@ -7,7 +7,7 @@
       </a>
     </h1>
     <!-- 시작하기 -->
-    <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
+    <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center" style="margin-top: 200px;">
       <div class="col-lg-8 align-self-end mb-5">
         <h1 class="text-white">원하는 영화, 만화를 찾고 싶다면 <br><br> 어떤 영화가 좋은지, 어떤 영화가 재밌는지 모르겠다면</h1> <br>
         <h3 class="text-white" style="margin-bottom: 40px;">
@@ -38,5 +38,11 @@ export default {
 </script>
 
 <style>
-
+/* .align-items-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+  } */
 </style>
