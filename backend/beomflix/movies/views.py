@@ -261,6 +261,8 @@ def recommend_genre(request):
 
         # 가져온 genre를 사용하여 해당 genre에 속하는 영화를 검색합니다.
         movies = genre.movie_set.all()
+    else:
+        movies = Movie.objects.all()
 
 
     if len(movies) >= 20:
