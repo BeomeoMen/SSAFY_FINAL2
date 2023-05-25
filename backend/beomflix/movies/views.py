@@ -254,13 +254,15 @@ def recommend_genre(request):
                 genre_likes[genre_name] = 1
 
     # Find the genre with the highest like count.
-    top_genre = max(genre_likes, key=genre_likes.get)
+    if len(genre_likes) > 0:
+        top_genre = max(genre_likes, key=genre_likes.get)
+            # Genre 모델에서 검색할 genre를 가져옵니다.
+        genre = Genre.objects.get(name=top_genre)
 
-    # Genre 모델에서 검색할 genre를 가져옵니다.
-    genre = Genre.objects.get(name=top_genre)
+        # 가져온 genre를 사용하여 해당 genre에 속하는 영화를 검색합니다.
+        movies = genre.movie_set.all()
 
-    # 가져온 genre를 사용하여 해당 genre에 속하는 영화를 검색합니다.
-    movies = genre.movie_set.all()
+
     if len(movies) >= 20:
         movies = random.sample(list(movies), k=20)
     
