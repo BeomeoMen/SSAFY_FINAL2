@@ -40,4 +40,5 @@ export default {
     padding: 10px;
     width: 863px;
   }
+
 </style>
