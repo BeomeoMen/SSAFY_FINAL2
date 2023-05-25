@@ -2,7 +2,7 @@
   <div>
     <navbar/>
     <div class="container">
-      <h1>개그</h1>
+      <h1 style="color: white; margin: 20px;" >개그</h1>
       <div class="row row-cols-md-4">
         <comedyItem v-for="movie in comedyMovieList.movies" :key="movie.id" :movie="movie"/>
       </div>

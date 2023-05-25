@@ -2,7 +2,7 @@
   <div>
     <navbar/>
     <div class="container">
-      <h1>드라마</h1>
+      <h1 style="color: white; margin: 20px;" >드라마</h1>
       <div class="row row-cols-md-4">
         <dramaItem v-for="movie in dramaMovieList.movies" :key="movie.id" :movie="movie"/>
       </div>

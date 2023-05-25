@@ -2,7 +2,7 @@
   <div>
     <navbar/>
     <div class="container">
-      <h1>애니메이션</h1>
+      <h1 style="color: white; margin: 20px;" >애니메이션</h1>
       <div class="row row-cols-md-4">
         <animationItem v-for="movie in animationMovieList.movies" :key="movie.id" :movie="movie"/>
       </div>

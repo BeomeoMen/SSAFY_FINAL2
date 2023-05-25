@@ -2,7 +2,7 @@
   <div>
     <navbar/>
     <div class="container">
-      <h1>SF</h1>
+      <h1 style="color: white; margin: 20px;" >SF</h1>
       <div class="row row-cols-md-4">
         <sciencefictionItem v-for="movie in sciencefictionMovieList.movies" :key="movie.id" :movie="movie"/>
       </div>

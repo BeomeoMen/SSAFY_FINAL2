@@ -1,15 +1,18 @@
 <template>
   <div>
     <h1>리뷰</h1>
+    <br>
     <form @submit.prevent="createReview">
       <label for="content"></label>
-      <input v-model="content" class="inputReview" type="text" id="content" placeholder="리뷰를 입력해주세요">
-      <div class="rating">
-        <input type="radio" id="star5" name="rating" value="5" v-model="rank" /><label for="star5" title="5 stars"></label>
-        <input type="radio" id="star4" name="rating" value="4" v-model="rank" /><label for="star4" title="4 stars"></label>
-        <input type="radio" id="star3" name="rating" value="3" v-model="rank" /><label for="star3" title="3 stars"></label>
-        <input type="radio" id="star2" name="rating" value="2" v-model="rank" /><label for="star2" title="2 stars"></label>
-        <input type="radio" id="star1" name="rating" value="1" v-model="rank" /><label for="star1" title="1 star"></label>
+      <div class="textarea-container">
+        <textarea v-model="content" cols="100" rows="5"></textarea>
+        <div class="rating">
+          <input type="radio" id="star5" name="rating" value="5" v-model="rank" /><label for="star5" title="5 stars"></label>
+          <input type="radio" id="star4" name="rating" value="4" v-model="rank" /><label for="star4" title="4 stars"></label>
+          <input type="radio" id="star3" name="rating" value="3" v-model="rank" /><label for="star3" title="3 stars"></label>
+          <input type="radio" id="star2" name="rating" value="2" v-model="rank" /><label for="star2" title="2 stars"></label>
+          <input type="radio" id="star1" name="rating" value="1" v-model="rank" /><label for="star1" title="1 star"></label>
+        </div>
       </div>
       <input class="btn btn-primary" type="submit" id="submit" value="작성">
     </form>
@@ -70,10 +73,11 @@ export default {
   display: none;
 }
 .rating label {
-  font-size: 1.5em;
+  font-size:2em;
   color: #ffd900dc;
   cursor: pointer;
-  margin-right: 20px;
+  margin-top: 70px;
+  margin-right: 30px;
 }
 .rating label:before {
   content: "☆";
@@ -82,4 +86,20 @@ export default {
 .rating input:checked ~ label:before {
   content: "★";
 }
+.textarea-container {
+  position: relative;
+}
+
+.textarea-container textarea {
+  background-color: rgba(128, 128, 128, 0.319);
+  border-radius: 10px;
+  color: white;
+}
+
+.textarea-container .rating {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+
 </style>

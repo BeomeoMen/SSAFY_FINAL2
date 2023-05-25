@@ -84,7 +84,6 @@ export default new Vuex.Store({
     },
     UPDATE_MOVIE_LIKE(state, { movieId, userId, is_liked, count }) {
       state.movieLikes[movieId] = { userId, is_liked, count };
-      console.log(state.movieLikes[movieId])
     },    
     // GET_MOVIELIKE(state, movie){
     //   state.likeMovie = movie

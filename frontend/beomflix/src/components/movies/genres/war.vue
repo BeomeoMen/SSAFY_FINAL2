@@ -2,7 +2,7 @@
   <div>
     <navbar/>
     <div class="container">
-      <h1>전쟁</h1>
+      <h1 style="color: white; margin: 20px;" >전쟁</h1>
       <div class="row row-cols-md-4">
         <warItem v-for="movie in warMovieList.movies" :key="movie.id" :movie="movie"/>
       </div>

@@ -2,7 +2,7 @@
   <div>
     <navbar/>
     <div class="container">
-      <h1>판타지</h1>
+      <h1 style="color: white; margin: 20px;" >판타지</h1>
       <div class="row row-cols-md-4">
         <fantasyItem v-for="movie in fantasyMovieList.movies" :key="movie.id" :movie="movie"/>
       </div>
