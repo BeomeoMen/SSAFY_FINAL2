@@ -2,7 +2,7 @@
   <div class="container">
     <h1>최근 상영작</h1>
     <div class="row row-cols-md-4">
-      <nowMovieListItem v-for="nowMovie in filteredMovieList" :key="`nm-${nowMovie.id}`" :nowMovie="nowMovie"/>
+      <nowMovieListItem v-for="movie in filteredMovieList" :key="movie.id" :movie="movie"/>
     </div>
   </div>
 </template>
@@ -30,5 +30,6 @@ export default {
   h1{
     color: white;
     text-align: center;
+    margin-bottom: 50px;
   }
 </style>

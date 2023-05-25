@@ -1,7 +1,7 @@
 <template>
 <div class="container">
     <div class="row row-cols-md-4">
-      <searchResults v-for="searchResult in searchList" :key="searchResult.id" :searchResult="searchResult"/>
+      <searchResults v-for="movie in searchList" :key="movie.id" :movie="movie"/>
     </div>
   </div>
 </template>

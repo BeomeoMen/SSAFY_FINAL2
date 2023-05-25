@@ -17,7 +17,7 @@
 
 <script>
 export default {
-  name:"nowMovieListItem.vue",
+  name:"popularMovieItem",
   props:{
     movie:Object,
   },

@@ -16,16 +16,21 @@
 </template>
 
 <script>
+
 export default {
-  name:"nowMovieListItem.vue",
+  name: "tvmovieItem",
+  components:{
+  },
   props:{
-    movie:Object,
+    movie:Object
   },
   data(){
     return{
-      poster: 'https://image.tmdb.org/t/p/original',
+      poster: 'https://image.tmdb.org/t/p/original/',
       showCard: true,
     }
+  },
+  computed: {
   },
   methods: {
     truncateOverview(overview, maxLength) {
@@ -36,19 +41,19 @@ export default {
       } else {
         return overview
       }
-    }, 
+    },
     movieDetail(movieId) {
       this.$store.dispatch('getMovieDetail', movieId);
     }
-  }
-}
+  },
+};
 </script>
 
 <style scoped>
- .col{
-  margin-bottom: 20px;
- }
-  .card{
+  .col{
+    margin-bottom: 20px;
+  }
+  .card1{
     margin-bottom: 20px;
     height: 400px;
     border-radius: 30px;

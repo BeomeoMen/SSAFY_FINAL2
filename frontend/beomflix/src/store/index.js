@@ -3,7 +3,7 @@ import router from '@/router'
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
-import userModule from '@/store/user'
+// import userModule from '@/store/user'
 
 const API_URL = 'http://127.0.0.1:8000'
 Vue.use(Vuex)
@@ -29,7 +29,7 @@ export default new Vuex.Store({
     movieLikeCount: 0,
     movie_is_liked:false,
     movieLikes: Object,
-    likeMovie : [],
+    // likeMovie : [],
 
     movieList: Object,
     nowMovieList: [],
@@ -58,6 +58,8 @@ export default new Vuex.Store({
     warMovieList: [],
     westernMovieList: [],
 
+    recommendGenre:[],
+    popularMovie:[],
     token: Object, 
     movieDetail: Object,
     searchResults: [],
@@ -81,13 +83,12 @@ export default new Vuex.Store({
       state.reviewLikes[reviewId] = { is_liked, count };
     },
     UPDATE_MOVIE_LIKE(state, { movieId, userId, is_liked, count }) {
-      console.log(movieId, userId, is_liked, count)
       state.movieLikes[movieId] = { userId, is_liked, count };
-      console.log(state.movieLikes[movieId]);
+      console.log(state.movieLikes[movieId])
     },    
-    GET_MOVIELIKE(state, movie){
-      state.likeMovie = movie
-    },
+    // GET_MOVIELIKE(state, movie){
+    //   state.likeMovie = movie
+    // },
 
     GET_MOVIELIST(state, movie){
       state.movieList = movie
@@ -187,6 +188,13 @@ export default new Vuex.Store({
       state.westernMovieList = movie
     },
     
+    GET_RECOMMENDGENRE(state, movie){
+      state.recommendGenre = movie
+    },
+    GET_POPULARMOVIE(state, movie){
+      state.popularMovie = movie
+    }
+
   },
   actions: {
     getMovieList(context) {
@@ -198,7 +206,6 @@ export default new Vuex.Store({
         },
       })
         .then((res) => {
-          console.log(res.data)
           context.commit('GET_MOVIELIST', res.data)
         })
         .catch((err) => {
@@ -557,7 +564,6 @@ export default new Vuex.Store({
         },
       })
       .then(() => {
-        console.log('리뷰 작성 완료')
         context.dispatch('getReviews', movieId); 
       })
       .catch(err =>{
@@ -574,7 +580,6 @@ export default new Vuex.Store({
         },
       })
       .then(()=>{
-        console.log('리뷰 삭제 완료')
         context.dispatch('getReviews', movieId); 
       })
       .catch((err)=>{
@@ -594,7 +599,6 @@ export default new Vuex.Store({
         }
       })
       .then(()=>{
-        console.log('리뷰 수정 완료')
         context.dispatch('getReviews', movieId); 
       })
       .catch((err)=>{
@@ -610,8 +614,6 @@ export default new Vuex.Store({
         }
       })
       .then((res)=>{
-        console.log("영화 좋아용 >.<")
-        console.log(res)
         const is_liked = res.data.is_liked
         const count = res.data.count
         const userId = res.data.user_id
@@ -622,24 +624,6 @@ export default new Vuex.Store({
         console.log(err)
       })
     },
-
-    // getLikeMovie(context){
-    //   axios({
-    //     method: 'get',
-    //     url: `${API_URL}/movies/liked_movies/`,
-    //     headers: {
-    //       Authorization: `Token ${context.state.token.key}`
-    //     }
-    //   })
-    //   .then((res)=>{
-    //     console.log(res.data)
-    //     context.commit('GET_MOVIELIKE', res.data)
-        
-    //   })
-    //   .catch((err)=>{
-    //     console.log(err)
-    //   })
-    // },
 
     likeReview(context, reviewId){
       axios({
@@ -652,7 +636,6 @@ export default new Vuex.Store({
       .then((res)=>{
         const is_liked = res.data.is_liked
         const count = res.data.count
-        console.log(is_liked, count)
         context.commit('UPDATE_LIKE', { reviewId, is_liked, count });
       })
       .catch((err)=>{
@@ -669,7 +652,7 @@ export default new Vuex.Store({
         },
       })
         .then((res) => {
-          const filteredMovies = res.data.filter(movie => movie.title.includes(title));
+          const filteredMovies = res.data.movies.filter(movie => movie.title.includes(title));
           if(filteredMovies.length === 0){
             alert('일치하는 영화가 없습니다.')
           }else{
@@ -694,7 +677,6 @@ export default new Vuex.Store({
         }
       })
       .then(
-        console.log('회원가입 완료')
       )
       .catch((err) => {
         console.log(err)
@@ -718,7 +700,6 @@ export default new Vuex.Store({
           context.commit('setShowIntro', true)
           router.push({name: "introVideo"}) 
           context.dispatch('getUserId');
-          console.log(res.data)
       })
       .catch(err => {
         alert('로그인 정보가 유효하지 않습니다.')
@@ -738,7 +719,6 @@ export default new Vuex.Store({
           },
         })
         .then(res =>{
-          console.log(res)
           context.commit('GET_USERID', res.data.pk)
           context.commit('GET_USER_NAME', res.data.username)
         })
@@ -764,6 +744,23 @@ export default new Vuex.Store({
       })
     },
 
+    ModifyUser(context){
+      axios({
+        method:'put',
+        url: `${API_URL}/accounts/profile/`,
+        headers: {
+          Authorization: `Token ${context.state.token.key}`
+        },
+      })
+      .then(res =>{
+        context.commit('GET_USER_ID', res.data.pk)
+
+      })
+      .catch(err =>{
+        console.log(err)
+      })
+    },
+
     getUserProfile(context, userId){
       axios({
         method:'get',
@@ -773,7 +770,6 @@ export default new Vuex.Store({
         },
       })
       .then(res =>{
-        console.log(res)
         context.commit('GET_USER_ID', res.data.id)
         context.commit('GET_USER_NAME', res.data.username)
         router.push(`/proFile/${res.data.id}/`) 
@@ -797,7 +793,6 @@ export default new Vuex.Store({
         },
       })
       .then(() => {
-        console.log('방명록 작성 완료')
       })
       .catch(err =>{
         console.log(err)
@@ -815,7 +810,6 @@ export default new Vuex.Store({
       })
       .then((res) => {
         context.commit('GET_GUESTBOOKLIST', res.data)
-        console.log('방명록 조회 완료')
       })
       .catch(err =>{
         console.log(err)
@@ -830,7 +824,6 @@ export default new Vuex.Store({
         },
       })
       .then(()=>{
-        console.log('방명록 삭제 완료')
       })
       .catch((err)=>{
         console.log(err)
@@ -844,47 +837,8 @@ export default new Vuex.Store({
           Authorization: `Token ${context.state.token.key}`
         },
       })
-      .then((res) => {
-        console.log(res.data)
-        // context.dispatch('getFollow')
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-    },
-    // getFollower(context, userId){
-    //   axios({
-    //     method:'get',
-    //     url:`${API_URL}/accounts/profile/${userId}/follower/`,
-    //     headers: {
-    //       Authorization: `Token ${context.state.token.key}`
-    //     },
-    //   })
-    //   .then((res) => {
-    //     console.log(res.data)
-    //     console.log("팔로워 조회 완료")
-    //   })
-    //   .catch((err) => {
-    //     console.log(err)
-    //   })
-    // },
-    getFollowings(context, userId){
-      axios({
-        method:'get',
-        url:`${API_URL}/accounts/profile/${userId}/following/`,
-        headers: {
-          Authorization: `Token ${context.state.token.key}`
-        },
-      })
-      .then((res) => {
-        console.log(res.data)
-        const target_followers_count = res.data.target_followers_count
-        const target_followings_count = res.data.target_followings_count 
-        const now_followers_count = res.data.now_followers_count
-        const now_followings_count = res.data.now_followings_count
-        const is_followed = res.data.is_followed
-        console.log("팔로잉 조회 완료")
-        context.commit('GET_FOLLOW', {now_followers_count, now_followings_count,target_followers_count, target_followings_count, is_followed})
+      .then(() => {
+        
       })
       .catch((err) => {
         console.log(err)
@@ -903,7 +857,6 @@ export default new Vuex.Store({
         },
       })
       .then(() => {
-        console.log('자기소개 작성 완료')
       })
       .catch(err =>{
         console.log(err)
@@ -922,17 +875,46 @@ export default new Vuex.Store({
         },
       })
       .then(() => {
-        console.log('자기소개 작성 완료')
       })
       .catch(err =>{
         console.log(err)
       })
     },
     
+    getRecommendGenre(context){
+      axios({
+        method:'get',
+        url : `${API_URL}/movies/recommend_genre/`,
+        headers: {
+          Authorization: `Token ${context.state.token.key}`
+        },
+      })
+        .then((res) => {
+          context.commit('GET_RECOMMENDGENRE', res.data.movies)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+    getPopluarMovie(context){
+      axios({
+        method:'get',
+        url : `${API_URL}/movies/popular/`,
+        headers: {
+          Authorization: `Token ${context.state.token.key}`
+        },
+      })
+        .then((res) => {
+          context.commit('GET_POPULARMOVIE', res.data.movies)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+    
 
   },    
   modules: {
-    user:userModule
   }
 })
 

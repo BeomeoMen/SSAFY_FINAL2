@@ -4,6 +4,7 @@ from rest_framework.decorators import permission_classes
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 
 import json
+import random
 
 from django.shortcuts import get_list_or_404, get_object_or_404
 from movies.serializers import MovieListSerializer, MovieSerializer, NowMovieListSerializer, ReviewListSerializer, ReviewCreateSerializer, ReviewSerializer
@@ -15,11 +16,55 @@ from rest_framework import status
 # 영화 전체 조회
 @api_view(['GET',])
 @permission_classes([IsAuthenticatedOrReadOnly])
+def movie_popular_list(request):
+    if request.method == 'GET':
+        movies = get_list_or_404(Movie.objects.order_by('-vote_average'))
+
+        movies = movies[:20]
+
+        movie_list = []
+        for movie in movies:
+            movie_dict = {
+                'id': movie.id,
+                'title': movie.title,
+                'release_date': movie.release_date,
+                'popularity': movie.popularity,
+                'vote_count': movie.vote_count,
+                'vote_average': movie.vote_average,
+                'overview': movie.overview,
+                'poster_path': movie.poster_path,
+                'youtube_key': movie.youtube_key,
+                'user_click': movie.user_click
+            }
+            movie_list.append(movie_dict)
+
+    return Response({'movies': movie_list})
+
+
+# 영화 전체 조회
+@api_view(['GET',])
+@permission_classes([IsAuthenticatedOrReadOnly])
 def movie_list(request):
     if request.method == 'GET':
         movies = get_list_or_404(Movie.objects.order_by())
-        serializer = MovieListSerializer(movies, many=True)
-        return Response(serializer.data)
+
+        movie_list = []
+        for movie in movies:
+            movie_dict = {
+                'id': movie.id,
+                'title': movie.title,
+                'release_date': movie.release_date,
+                'popularity': movie.popularity,
+                'vote_count': movie.vote_count,
+                'vote_average': movie.vote_average,
+                'overview': movie.overview,
+                'poster_path': movie.poster_path,
+                'youtube_key': movie.youtube_key,
+                'user_click': movie.user_click
+            }
+            movie_list.append(movie_dict)
+
+    return Response({'movies': movie_list})
     
 # 최근 영화 전체 조회
 # 영화 전체 조회
@@ -179,8 +224,8 @@ def like_movie(request, movie_id):
     else:
         movie.like_users.add(user)
         is_liked = True
-        like = Like(user=user, movie=movie)
-        like.save()
+        # like = Like(user=user, movie=movie)
+        # like.save()
 
     context = {
         'is_liked': is_liked, 
@@ -218,11 +263,14 @@ def recommend_genre(request):
 
     # 가져온 genre를 사용하여 해당 genre에 속하는 영화를 검색합니다.
     movies = genre.movie_set.all()
-
+    if len(movies) >= 20:
+        movies = random.sample(list(movies), k=20)
+    
     # 검색된 영화 정보를 JSON 형식으로 반환합니다.
     movie_list = []
     for movie in movies:
         movie_dict = {
+            'id' : movie.id,
             'title': movie.title,
             'release_date': movie.release_date,
             'popularity': movie.popularity,
@@ -237,11 +285,18 @@ def recommend_genre(request):
 
     return Response({'movies': movie_list})
 
+
 @api_view(['GET',])
 @permission_classes([IsAuthenticatedOrReadOnly])
 def liked_movies(request, user_id):
-    user = User.objects.get(id=user_id)
-    liked_movies = Like.objects.filter(user=user).values_list('movie_id', flat=True)
-    movies = Movie.objects.filter(pk__in=liked_movies)
+    # user = User.objects.get(id=user_id)
+    # liked_movies = Like.objects.filter(user=user).values_list('movie_id', flat=True)
+    # movies = Movie.objects.filter(pk__in=liked_movies)
 
-    return Response(liked_movies)
+    # return Response(liked_movies)
+
+    user = User.objects.get(id=user_id)
+    liked_movies = Movie.objects.filter(like_users=user)
+
+    serializer = MovieSerializer(liked_movies, many=True)
+    return Response(serializer.data)

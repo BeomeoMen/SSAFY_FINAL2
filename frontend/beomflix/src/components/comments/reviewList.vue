@@ -71,7 +71,7 @@ export default {
 }
 .rating label {
   font-size: 1.5em;
-  color: #ffd700;
+  color: #ffd900dc;
   cursor: pointer;
   margin-right: 20px;
 }

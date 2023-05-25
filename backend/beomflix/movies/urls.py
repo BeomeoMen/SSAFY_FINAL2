@@ -4,9 +4,11 @@ from movies import views_tmdb, views
 # movies/ => enculde
 urlpatterns = [
     # API 데이터 DB 저장
-    path('tmdb/', views_tmdb.tmdb_data),
+    # path('tmdb/', views_tmdb.tmdb_data),
     # 전체 영화 조회(GET)
     path('', views.movie_list),
+    # popular 영화 조회(GET)
+    path('popular/', views.movie_popular_list),
     # movie_Detail 조회(GET)
     path('<int:movie_pk>/', views.movie_detail),
     # 장르로 영화 목록 조회
