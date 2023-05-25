@@ -1,6 +1,6 @@
 <template>
   <div class="Item">
-    <h4>작성자 : {{ guestBook.username }}</h4>
+    <h4 @click="getUserProfile">작성자 : {{ guestBook.username }}</h4>
     <h4>내용 : {{ guestBook.content }}</h4>
     <button class="btn btn-primary" v-if="isGuestBookOwner" @click="deleteGuestBook">삭제</button>
   </div>
@@ -15,7 +15,8 @@ export default {
   },
   computed:{
     ...mapState([
-      'userId'
+      'userId',
+      'USERID'
     ]),
     isGuestBookOwner(){
       return this.guestBook.user === this.userId
@@ -25,9 +26,11 @@ export default {
     deleteGuestBook(){
       const profileId = this.guestBook.profile
       const guestBookId = this.guestBook.id      
-      console.log(profileId, guestBookId)
       this.$store.dispatch('deleteGuestBook', {profileId, guestBookId})
       location.reload()
+    },
+    getUserProfile() {
+      this.$store.dispatch("getUserProfile", this.guestBook.user);
     }
   }
 }

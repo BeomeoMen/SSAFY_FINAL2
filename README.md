@@ -184,6 +184,24 @@
 ![recommend](readme.assets/recommend.png)
 
 # 5. 서비스 대표 기능 및 페이지 설명
+### 1. 첫 페이지
+![](readme.assets/first%ED%8E%98%EC%9D%B4%EC%A7%80.png)
+### 2. 인트로 영상
+![](readme.assets/%EC%9D%B8%ED%8A%B8%EB%A1%9C%20%EC%98%81%EC%83%81.png)
+### 3. 메인 페이지
+![](readme.assets/%EB%A9%94%EC%9D%B8%20%ED%8E%98%EC%9D%B4%EC%A7%80.png)
+### 4. 최근 상영작
+![](readme.assets/%EC%B5%9C%EA%B7%BC%20%EC%83%81%EC%98%81%EC%9E%91.png)
+### 5. 인기작
+![](readme.assets/%EC%9D%B8%EA%B8%B0%EC%9E%91.png)
+### 6. 영화 검색
+![](readme.assets/%EC%98%81%ED%99%94%20%EA%B2%80%EC%83%89.png)
+### 7. 영화 상세 페이지
+![](readme.assets/%EC%98%81%ED%99%94%20%EB%94%94%ED%85%8C%EC%9D%BC.png)
+### 8. 프로필 페이지
+![](readme.assets/%ED%94%84%EB%A1%9C%ED%95%84.png)
+
+
 
 # 6. 소감
 ## 진재환

@@ -15,14 +15,17 @@
 
           <h3 v-if="this.followerCheck" @click="isFollowers">팔로워 : {{ getFollowers.length }}</h3>
           <span v-else-if="getFollowers.length != 0 ">
-            <h3 v-for="follower in getFollowers" :key="follower.id" @click="isFollowers"> 팔로워 : {{ follower.username }} </h3>
+            <h3 @click="isFollowers">팔로워 : </h3>
+            <h3 v-for="follower in getFollowers" :key="follower.id" @click="isFollowers">{{ follower.username }} </h3>
           </span>
           <span v-else-if="getFollowers.length == 0">
             <h3 @click="isFollowers">팔로워가 없습니다</h3>
           </span>
+
           <h3 v-if="this.followingsCheck" @click="isFollowings"> 팔로잉 : {{ getFollowings.length }} </h3>
           <span v-else-if="getFollowings.length != 0  && !isNotProFileOwner">
-            <h3 v-for="follower in getFollowings" :key="follower.id" @click="isFollowings"> 팔로잉 : {{ follower.username }} </h3>
+            <h3 @click="isFollowings">팔로잉 : </h3>
+            <h3 v-for="follower in getFollowings" :key="follower.id" @click="isFollowings">  {{ follower.username }} </h3>
           </span>
           <span v-else-if="getFollowings.length == 0  && !isNotProFileOwner">
             <h3 @click="isFollowings">팔로잉한 유저가 없습니다.</h3>
