@@ -1140,36 +1140,6 @@
     },
     {
         "model": "movies.movie",
-        "pk": 32516,
-        "fields": {
-            "title": "금병매2",
-            "release_date": "2009-03-04",
-            "popularity": 544.09,
-            "vote_count": 80,
-            "vote_average": 6.2,
-            "overview": "어린 시절 서문경은 호색한이자 엄청난 정력의 소유자인 아버지와 미모의 어머니 사이에서 부유한 집안의 자식으로 자란다. 어머니가 돌아가시던 날부터 당대 최고의 성(性)연구가인 아버지에게 ‘대물철권’, ‘풍차돌리기’, ‘벽타기’ 등의 최고의 성교의 기술과 강철 같은 성기를 단련하며 자란 문경은 자신의 남근을 붓(?)대용으로 사용할 정도로 장성하게 되고, 나날이 늘어만 가는 자신의 성욕을 주체하지 못하여 힘든 나날을 보내는데……  중국의 4대 기서인 소설 ‘금병매’가 원작으로, 전문기 감독 특유의 유머와 해학을 곁들여 블록버스터 에로틱 환타지 영화가 탄생되었다. 원작에 충실하면서도 현대인의 기호에 맞는 유머와 교훈(?)까지 심어주는 영화 ‘금병매’는 보는 이에게 잊지 못할 '쾌락으로의 여행'을 선사한다.",
-            "poster_path": "/rUv3JCETD0FsZepmcRuXXhHmqpC.jpg",
-            "youtube_key": "nothing",
-            "user_click": 0,
-            "genres": [
-                18,
-                35,
-                10749
-            ],
-            "like_users": [],
-            "actors": [
-                25254,
-                134855,
-                237233,
-                237234,
-                237235,
-                237236,
-                237237
-            ]
-        }
-    },
-    {
-        "model": "movies.movie",
         "pk": 38757,
         "fields": {
             "title": "라푼젤",
@@ -1199,35 +1169,6 @@
     },
     {
         "model": "movies.movie",
-        "pk": 44281,
-        "fields": {
-            "title": "عصفور السطح",
-            "release_date": "1990-09-14",
-            "popularity": 273.707,
-            "vote_count": 33,
-            "vote_average": 6.8,
-            "overview": "",
-            "poster_path": "/uI7hb9flZetd0KZoN2BGHLq4uvZ.jpg",
-            "youtube_key": "nothing",
-            "user_click": 0,
-            "genres": [
-                18,
-                35
-            ],
-            "like_users": [],
-            "actors": [
-                1311650,
-                1311671,
-                1428133,
-                1428134,
-                1428135,
-                1436422,
-                3661395
-            ]
-        }
-    },
-    {
-        "model": "movies.movie",
         "pk": 45288,
         "fields": {
             "title": "더 파이팅 - 마시바 vs 키무라 사형집행",
@@ -1252,37 +1193,6 @@
                 112278,
                 237076,
                 571458
-            ]
-        }
-    },
-    {
-        "model": "movies.movie",
-        "pk": 45491,
-        "fields": {
-            "title": "옥보단",
-            "release_date": "1991-11-30",
-            "popularity": 60.921,
-            "vote_count": 54,
-            "vote_average": 5.8,
-            "overview": "호색가 미앙생은 순진한 옥향 낭자와 결혼 후 정원에서 아찔한 관계를 맺다 장인에게 걸려 꾸지람을 듣고 수행을 핑계로 집을 나온다. 집을 나와 방랑하던 그는 쾌락을 위해 뭇여자를 희롱하며 호색행각에 나서 정력을 소모한다. 한편, 미앙생으로 인해 성에 눈을 뜬 옥향은 외로운 밤을 견디지 못하고 결국 본능에 몸을 맡기는데...",
-            "poster_path": "/dq2Fv2go3btQogP9Bqy90EMwebT.jpg",
-            "youtube_key": "3fwcSB7RI-I",
-            "user_click": 0,
-            "genres": [
-                12,
-                18,
-                35,
-                10749
-            ],
-            "like_users": [],
-            "actors": [
-                65966,
-                83631,
-                109301,
-                122818,
-                231909,
-                235184,
-                1416997
             ]
         }
     },
@@ -1400,38 +1310,6 @@
                 124484,
                 144102,
                 226637
-            ]
-        }
-    },
-    {
-        "model": "movies.movie",
-        "pk": 67308,
-        "fields": {
-            "title": "옥보단 3D",
-            "release_date": "2011-04-14",
-            "popularity": 321.868,
-            "vote_count": 92,
-            "vote_average": 4.9,
-            "overview": "뛰어난 재주와 매력적인 외모, 호방한 성격의 미앙생은 에로 지상주의를 꿈꾸지만, 사실은 제대로 기 한번 못 펴본 고개 숙인 남자. 지고지순한 옥향의 매력에 첫눈에 반해 결혼을 하지만, 부족한 물건 탓에 굴욕적인 첫날 밤을 보내고 점점 무기력해진다. 그러던 어느 날, 술과 여자로 가득한 지상최대의 낙원에 가게 된 미앙생은 음기충만 절세미인들을 만나 매일 밤 황홀경에 빠져든다. 하지만 화려한 몸놀림과 현란한 테크닉의 그녀들을 상대하기에는 자신의 물건이 턱없이 작다는 걸 깨닫고 자책에 빠진 미앙생. 이윽고 음양통달의 고수를 찾아가 특단의 비책을 마련하기로 결심한다. 바로 자신의 물건을 더욱 강력하게 업그레이드 시키는 것. 마침내 누구도 무시할 수 없는 막강한 파워의 거물이 되어 나타난 미앙생은 날이 갈수록 쾌락의 절정에 빠져들고, 그의 부인 옥향은 점점 잊혀져만 가는데… 과연, 미앙생은 이대로 황홀한 밤을 지배하는 천하제일 고수가 될 수 있을까?",
-            "poster_path": "/44qdUtA6f3y7daHwo4z3RPRYoKk.jpg",
-            "youtube_key": "0OSMZPJbm_g",
-            "user_click": 0,
-            "genres": [
-                12,
-                18,
-                28,
-                36,
-                10749
-            ],
-            "like_users": [],
-            "actors": [
-                122158,
-                138489,
-                548485,
-                548487,
-                1039927,
-                1163353,
-                1613813
             ]
         }
     },
@@ -1583,63 +1461,6 @@
     },
     {
         "model": "movies.movie",
-        "pk": 86331,
-        "fields": {
-            "title": "Q - 섹스힐링",
-            "release_date": "2011-10-06",
-            "popularity": 83.679,
-            "vote_count": 710,
-            "vote_average": 6.1,
-            "overview": "자유분방하게 살아온 세실(데보라 레비)은 아버지를 떠나 보낸 상실감에 스스로를 학대하듯 처음 보는 남자 매트(고완 디디)를 유혹하며 도발적인 성적 유희에 빠져든다. 마치 활화산 같은 욕망의 분출이 자신의 해방구인 것처럼.  치명적인 유혹을 즐기듯 거침없이 몸을 던지는 세실은 연인 찬스(조니 아마로)와도 온몸을 사르는 불 같은 사랑에 빠져보지만 굶주린 욕망은 좀처럼 채워지지 않는다. 마찬가지로 출구 없는 삶에서 뜨거운 열정을 숨기듯 안고 사는 앨리스(헬렌 짐머)는 자신의 욕망을 대리 분출시키려는 세실로 인해 아슬아슬해서 더욱 위험한 욕망에 사로잡힌다. 결국 세실과 앨리스는 대담하게도 섹스리스 커플을 치료하는 ‘섹스힐링’에 나서고, 급기야는 친구들과 함께 집단 매춘에 뛰어들어 끝간 데를 모를 욕망의 화신들로 변해가는데…",
-            "poster_path": "/yBTElYnRkwySYzMunE6urPT9LvT.jpg",
-            "youtube_key": "dUkCaPW8xCM",
-            "user_click": 0,
-            "genres": [
-                18,
-                10749
-            ],
-            "like_users": [],
-            "actors": [
-                49863,
-                96928,
-                587147,
-                933178,
-                933179,
-                1016071,
-                1016075
-            ]
-        }
-    },
-    {
-        "model": "movies.movie",
-        "pk": 87584,
-        "fields": {
-            "title": "셀러브리티 섹스 테이프",
-            "release_date": "2012-02-02",
-            "popularity": 77.922,
-            "vote_count": 58,
-            "vote_average": 4.5,
-            "overview": "찌질한 녀석들의 포르노 제작 도전기!\r 떼돈 벌고, 총각딱지 떼고! 이보다 황홀할 수는 없다!  여자친구 ‘킴’과 4년째 키스 이상의 진도를 나가지 못하는 숫총각 ‘로스’, 잘나가는 녀석들의 숙제셔틀 ‘앤디’, 영어를 못하는 동양인 ‘관호’, 두꺼운 안경에 자폐증 증세가 있는 ‘마커스’, 그리고 포르노사이트 관리 아르바이트를 하는 ‘덕’! 교내 게임 동호회 회원들이자 룸메이트인 이들은 한 파티에서 우연히 한 물간 여배우 ‘멜로니 아담스’와 ‘앤디’의 섹스장면을 촬영해 인터넷에 올리게 된다. 하지만 재미로 올렸던 동영상이 엄청난 조회수를 기록하며 ‘멜로니 아담스’를 스타덤에 올려놓자, 왕년의 여배우들로부터 홍보용 포르노를 촬영하자는 요청이 빗발치는데…",
-            "poster_path": "/3FWSUD1yIvGPmLIXgyOS72MrTrC.jpg",
-            "youtube_key": "hohJfm5LHJQ",
-            "user_click": 0,
-            "genres": [
-                35
-            ],
-            "like_users": [],
-            "actors": [
-                138859,
-                935261,
-                935263,
-                935264,
-                1072142,
-                1573604,
-                1573615
-            ]
-        }
-    },
-    {
-        "model": "movies.movie",
         "pk": 91314,
         "fields": {
             "title": "트랜스포머: 사라진 시대",
@@ -1730,35 +1551,6 @@
     },
     {
         "model": "movies.movie",
-        "pk": 105905,
-        "fields": {
-            "title": "昭和おんなみち　裸性門",
-            "release_date": "1973-07-04",
-            "popularity": 111.495,
-            "vote_count": 3,
-            "vote_average": 6.7,
-            "overview": "",
-            "poster_path": "/5Sd84BzmxUuIDzAVGsv9ZoOsXX8.jpg",
-            "youtube_key": "nothing",
-            "user_click": 0,
-            "genres": [
-                18,
-                10749
-            ],
-            "like_users": [],
-            "actors": [
-                133710,
-                133714,
-                146649,
-                1010159,
-                1269376,
-                1491081,
-                1708225
-            ]
-        }
-    },
-    {
-        "model": "movies.movie",
         "pk": 106646,
         "fields": {
             "title": "더 울프 오브 월 스트리트",
@@ -1784,34 +1576,6 @@
                 21007,
                 56024,
                 234352
-            ]
-        }
-    },
-    {
-        "model": "movies.movie",
-        "pk": 107406,
-        "fields": {
-            "title": "Quando l'amore è oscenità",
-            "release_date": "1980-02-14",
-            "popularity": 60.992,
-            "vote_count": 20,
-            "vote_average": 7.0,
-            "overview": "",
-            "poster_path": "/gIEqumdBvEBGZXPvAAuPHu8Z8r2.jpg",
-            "youtube_key": "nothing",
-            "user_click": 0,
-            "genres": [
-                18
-            ],
-            "like_users": [],
-            "actors": [
-                41119,
-                43884,
-                934901,
-                1354267,
-                1637245,
-                1637246,
-                1637247
             ]
         }
     },
@@ -1998,32 +1762,6 @@
     },
     {
         "model": "movies.movie",
-        "pk": 143310,
-        "fields": {
-            "title": "꽃과 뱀 4: 백의 밧줄노예",
-            "release_date": "1986-12-06",
-            "popularity": 102.447,
-            "vote_count": 14,
-            "vote_average": 5.4,
-            "overview": "",
-            "poster_path": "/tIsSeK3NqCceMXnGPyeweQrJiuS.jpg",
-            "youtube_key": "nothing",
-            "user_click": 0,
-            "genres": [
-                18,
-                53
-            ],
-            "like_users": [],
-            "actors": [
-                225578,
-                554020,
-                590435,
-                1118802
-            ]
-        }
-    },
-    {
-        "model": "movies.movie",
         "pk": 150540,
         "fields": {
             "title": "인사이드 아웃",
@@ -2148,35 +1886,6 @@
     },
     {
         "model": "movies.movie",
-        "pk": 198380,
-        "fields": {
-            "title": "La minorenne",
-            "release_date": "1974-09-25",
-            "popularity": 123.037,
-            "vote_count": 16,
-            "vote_average": 5.1,
-            "overview": "",
-            "poster_path": "/iTLHdNXVGoWNluALiBlBkgRHwIo.jpg",
-            "youtube_key": "nothing",
-            "user_click": 0,
-            "genres": [
-                35,
-                10749
-            ],
-            "like_users": [],
-            "actors": [
-                22479,
-                31897,
-                123910,
-                133209,
-                227317,
-                1052768,
-                1178856
-            ]
-        }
-    },
-    {
-        "model": "movies.movie",
         "pk": 198663,
         "fields": {
             "title": "메이즈 러너",
@@ -2238,35 +1947,6 @@
     },
     {
         "model": "movies.movie",
-        "pk": 218746,
-        "fields": {
-            "title": "젊은 엄마",
-            "release_date": "2013-07-31",
-            "popularity": 122.163,
-            "vote_count": 12,
-            "vote_average": 5.0,
-            "overview": "열아홉 불타오르는 질풍욕정의 시절, 재수생 진구는 미모의 영어 과외 선생님을 떠올리며 혼자만의 에로틱한 상상을 즐긴다. 그러던 어느 날, 그녀에게 적나라한 순간을 들키며 어색한 분위기가 되는 두 사람. 하지만 위기는 곧 기회라고 했던가. 그녀는 진구에게 영어가 아닌 섹스를 가르치기 시작하고 두 청춘의 통제 불능 로맨스가 시작된다. 하지만 결혼을 핑계로 그녀가 과외를 그만두게 되고 이 사랑도 끝이 난다.  어느덧 시간이 흘러 성인이 된 진구. 이젠 애정 없는 섹스에 익숙하다. 하지만 육체적 사랑뿐이던 애인이 임신을 하며 일대 파란이 인다. 달갑지 않은 결혼과 장모와의 첫 만남. 그런데…너무나 아름답고 섹시하다. 진구는 데릴사위가 되어 장모와 한 집에 살게 되지만 철 없는 아내의 불륜과 도망으로 결혼 생활은 결국 파탄 나고 만다. 자신의 딸이 저지른 배신으로 미안해 어쩔 줄 모르는 장모. 진구는 장모의 제안으로 아이, 장모와 함께 기묘하고도 위험한 동거를 시작한다.",
-            "poster_path": "/x73C5Hi8FuxCWdmY67evoV9V7xi.jpg",
-            "youtube_key": "nothing",
-            "user_click": 0,
-            "genres": [
-                35,
-                10749
-            ],
-            "like_users": [],
-            "actors": [
-                1194465,
-                1203492,
-                1203493,
-                1647345,
-                2632669,
-                2675570,
-                2675571
-            ]
-        }
-    },
-    {
-        "model": "movies.movie",
         "pk": 228150,
         "fields": {
             "title": "퓨리",
@@ -2314,34 +1994,6 @@
             ],
             "like_users": [],
             "actors": []
-        }
-    },
-    {
-        "model": "movies.movie",
-        "pk": 235331,
-        "fields": {
-            "title": "残酷・女高生(性)私刑",
-            "release_date": "1975-07-23",
-            "popularity": 104.069,
-            "vote_count": 2,
-            "vote_average": 3.0,
-            "overview": "",
-            "poster_path": "/owcqxnEq9UixRbl4lXc6zid0piQ.jpg",
-            "youtube_key": "nothing",
-            "user_click": 0,
-            "genres": [
-                80
-            ],
-            "like_users": [],
-            "actors": [
-                142535,
-                225579,
-                233674,
-                1113305,
-                1119119,
-                1270570,
-                1270655
-            ]
         }
     },
     {
@@ -2952,35 +2604,6 @@
     },
     {
         "model": "movies.movie",
-        "pk": 337167,
-        "fields": {
-            "title": "50가지 그림자: 해방",
-            "release_date": "2018-01-17",
-            "popularity": 98.144,
-            "vote_count": 7356,
-            "vote_average": 6.7,
-            "overview": "모든 과거를 잊고 서로에게 더 깊게 빠져든 ‘크리스찬 그레이’와 ‘아나스타샤’.  그레이의 독특한 취향으로 시작된 이 비밀스러운 관계는  더 큰 자극을 원하는 아나스타샤로 인해 역전되고,  마침내 그녀의 본능이 지배하는 마지막 절정의 순간을 맞이하게 되는데…",
-            "poster_path": "/kdN58uXDV5D0RWdMjdO9jtdFjxg.jpg",
-            "youtube_key": "Aj6I54yrsF0",
-            "user_click": 0,
-            "genres": [
-                18,
-                10749
-            ],
-            "like_users": [],
-            "actors": [
-                33337,
-                56680,
-                59251,
-                118545,
-                222130,
-                1089873,
-                1254583
-            ]
-        }
-    },
-    {
-        "model": "movies.movie",
         "pk": 337339,
         "fields": {
             "title": "분노의 질주: 더 익스트림",
@@ -3068,36 +2691,7 @@
             ]
         }
     },
-    {
-        "model": "movies.movie",
-        "pk": 338958,
-        "fields": {
-            "title": "마법에 걸린 사랑 2",
-            "release_date": "2022-11-18",
-            "popularity": 100.809,
-            "vote_count": 826,
-            "vote_average": 6.9,
-            "overview": "동화 같은 삶을 위해 뉴욕을 떠나 먼로빌이라는 조용한 교외로 이사한 지젤. 그러나 그녀가 꿈꾸던 영원한 행복을 찾을 수 없자 안달라시아의 마법을 사용하게 되고, 이로 인해 마을 전체가 동화 속 세계로 변해 버린다. 이제 자신과 가족의 진정한 행복을 위해 시계가 자정을 가리키기 전까지 이 모든 것을 되돌려놓아야 하는데. 지젤은 그녀가 그토록 원하던 영원한 행복을 찾을 수 있을까?",
-            "poster_path": "/jKdLlnizhVaaFHfoBapbr98QZfZ.jpg",
-            "youtube_key": "2mgRqHOuA9g",
-            "user_click": 0,
-            "genres": [
-                14,
-                35,
-                10751
-            ],
-            "like_users": [],
-            "actors": [
-                9273,
-                11006,
-                18352,
-                19394,
-                52792,
-                111513,
-                2063192
-            ]
-        }
-    },
+    
     {
         "model": "movies.movie",
         "pk": 345940,
@@ -3396,62 +2990,6 @@
                 55256,
                 213001,
                 1172108
-            ]
-        }
-    },
-    {
-        "model": "movies.movie",
-        "pk": 404250,
-        "fields": {
-            "title": "金色のガッシュベル!! 101番目の魔物",
-            "release_date": "2004-07-09",
-            "popularity": 108.754,
-            "vote_count": 44,
-            "vote_average": 7.2,
-            "overview": "",
-            "poster_path": "/eW250uuZW49GTJ5ZH0e3kNesWSd.jpg",
-            "youtube_key": "nothing",
-            "user_click": 0,
-            "genres": [
-                12,
-                16,
-                28,
-                35
-            ],
-            "like_users": [],
-            "actors": [
-                9705,
-                9706,
-                31082,
-                73044,
-                90499
-            ]
-        }
-    },
-    {
-        "model": "movies.movie",
-        "pk": 405871,
-        "fields": {
-            "title": "젊은 아가씨 고기 노예",
-            "release_date": "1985-08-24",
-            "popularity": 76.543,
-            "vote_count": 8,
-            "vote_average": 5.0,
-            "overview": "",
-            "poster_path": "/nrUDsisIxwAB9s5caM5SE0HJEHe.jpg",
-            "youtube_key": "nothing",
-            "user_click": 0,
-            "genres": [
-                18
-            ],
-            "like_users": [],
-            "actors": [
-                224454,
-                1118810,
-                1248271,
-                1306631,
-                1894657,
-                2540163
             ]
         }
     },
@@ -4115,31 +3653,7 @@
             ]
         }
     },
-    {
-        "model": "movies.movie",
-        "pk": 502242,
-        "fields": {
-            "title": "미용실 특별한 서비스 2",
-            "release_date": "2018-02-13",
-            "popularity": 67.757,
-            "vote_count": 4,
-            "vote_average": 7.0,
-            "overview": "\"손님, 저한테 다 맡겨주세요.\"  머리부터 발끝까지 만족시키는 특별한 미용실이 온다!  퇴폐업소로 유명한 미용실에서 일하게 된 혜진. 처음에는 몸으로 서비스한다는 사실이 꺼림칙했지만, 어느 순간부터 적극적으로 손님을 탐하게 된다. 여사장의 스페셜 노하우까지 전수 받으며 승승장구하는 혜진. 그런데 새로 뽑은 섹스머신 주희가 지치지 않는 체력으로 모든 손님을 독차지하기 시작하는데…",
-            "poster_path": "/5qFTCvx1h1CsHqbAuqo68J8GSub.jpg",
-            "youtube_key": "nothing",
-            "user_click": 0,
-            "genres": [
-                10749
-            ],
-            "like_users": [],
-            "actors": [
-                1721615,
-                1995527,
-                2112856,
-                2616611
-            ]
-        }
-    },
+    
     {
         "model": "movies.movie",
         "pk": 502356,
@@ -4293,37 +3807,7 @@
             ]
         }
     },
-    {
-        "model": "movies.movie",
-        "pk": 508947,
-        "fields": {
-            "title": "메이의 새빨간 비밀",
-            "release_date": "2022-03-10",
-            "popularity": 136.58,
-            "vote_count": 4173,
-            "vote_average": 7.5,
-            "overview": "엄마의 착한 딸, 아니면 미운 13살? 성적도 우수하고 친구들과 사이도 좋은 데다 부모와도 친밀한 관계를 유지하고 있는, 똑 부러지면서도 엉뚱한 매력의 소유자 메이는 요즘 질풍노도의 시기를 겪느라 고민이 많다. 이 나이에 엄마의 과잉보호를 받자니 스트레스가 이만저만이 아닌 데다, 관심사, 인간관계, 신체 등 그녀의 모든 것이 변하고 있기 때문. 그런데 이 와중에 흥분하면 거대한 레서판다로 변신하는 비밀까지 떠안게 되다니! 아침도 먹어야 하고 학교도 가야 하는데, 이 엄청난 비밀을 어떻게 숨겨야 할까?",
-            "poster_path": "/hsOhOcX7qDy7bPwbrt1OoITngrf.jpg",
-            "youtube_key": "0cmLEJGhZGM",
-            "user_click": 0,
-            "genres": [
-                14,
-                16,
-                35,
-                10751
-            ],
-            "like_users": [],
-            "actors": [
-                25540,
-                1269910,
-                1333452,
-                1373681,
-                2602879,
-                2974629,
-                3156344
-            ]
-        }
-    },
+    
     {
         "model": "movies.movie",
         "pk": 518896,
@@ -4414,34 +3898,7 @@
             ]
         }
     },
-    {
-        "model": "movies.movie",
-        "pk": 526811,
-        "fields": {
-            "title": "단순한 열정",
-            "release_date": "2021-01-14",
-            "popularity": 83.582,
-            "vote_count": 37,
-            "vote_average": 4.9,
-            "overview": "영혼마저 잠식한 열병 같은 사랑에 빠져버린 엘렌, 통제되지 않는 자신의 욕망 그리고 육체적 탐닉을 마주할수록 점점 혼란에 빠지고, 일상이 조금씩 흔들리기 시작한다.  2022년 노벨문학상 수상! 아니 에르노의 베스트셀러 원작! 그의 뜨거운 고백을 스크린에서 만나다!",
-            "poster_path": "/6b4CzIO7NDMD0967O19EBOHsbJ1.jpg",
-            "youtube_key": "2AupMRBsF4k",
-            "user_click": 0,
-            "genres": [
-                18,
-                10749
-            ],
-            "like_users": [],
-            "actors": [
-                7691,
-                136170,
-                577645,
-                1100011,
-                1164460,
-                2269559
-            ]
-        }
-    },
+    
     {
         "model": "movies.movie",
         "pk": 526896,
@@ -4504,34 +3961,7 @@
             ]
         }
     },
-    {
-        "model": "movies.movie",
-        "pk": 534171,
-        "fields": {
-            "title": "동창회의 목적 2",
-            "release_date": "2017-08-31",
-            "popularity": 70.759,
-            "vote_count": 4,
-            "vote_average": 5.3,
-            "overview": "",
-            "poster_path": "/iLzUj5gGtJbAIfbPaS3v0ITZhmD.jpg",
-            "youtube_key": "LmW0FtZHaf4",
-            "user_click": 0,
-            "genres": [
-                18,
-                10749
-            ],
-            "like_users": [],
-            "actors": [
-                1468940,
-                1549899,
-                1670243,
-                1753962,
-                1823455,
-                2565241
-            ]
-        }
-    },
+    
     {
         "model": "movies.movie",
         "pk": 536554,
@@ -4562,35 +3992,7 @@
             ]
         }
     },
-    {
-        "model": "movies.movie",
-        "pk": 537915,
-        "fields": {
-            "title": "애프터",
-            "release_date": "2019-04-11",
-            "popularity": 80.301,
-            "vote_count": 7595,
-            "vote_average": 7.1,
-            "overview": "대학 입학 후 첫 파티에 초대 받게 된 신입생 ‘테사’는 진실게임을 하던 중 키스 벌칙에 걸리고 만다. 상대는 학교에서 유명한 반항아 ‘하딘’. 키스를 앞둔 0.1초 전, 모두가 주목하는 그 순간 ‘테사’는 ‘하딘’의 입술을 거절하고 만다. 강렬했던 첫 만남 이후, 마치 새로운 세상을 발견한 듯 한번도 경험한 적 없던 감정에 눈을 뜨게 된 두 사람. ‘하딘’은 자신의 비밀 장소로 ‘테사’를 초대하고 이제 두 사람은 서로를 모르기 전으로 절대 되돌아 갈 수 없음을 알게 되는데…",
-            "poster_path": "/zTZ7Q9mAwBQoYaR8HgGbmBNp6AC.jpg",
-            "youtube_key": "2ZAdcWHuCmY",
-            "user_click": 0,
-            "genres": [
-                18,
-                10749
-            ],
-            "like_users": [],
-            "actors": [
-                1039523,
-                1114487,
-                1224112,
-                1684130,
-                1685330,
-                1753914,
-                2161745
-            ]
-        }
-    },
+    
     {
         "model": "movies.movie",
         "pk": 539681,
@@ -4682,36 +4084,7 @@
             ]
         }
     },
-    {
-        "model": "movies.movie",
-        "pk": 545611,
-        "fields": {
-            "title": "에브리씽 에브리웨어 올 앳 원스",
-            "release_date": "2022-03-24",
-            "popularity": 73.779,
-            "vote_count": 4635,
-            "vote_average": 7.8,
-            "overview": "남편과 세탁소를 운영하며 근근히 살아가고 있는 이민자 이블린 왕. 20대 시절 남편과 순수한 사랑을 불태우며 모든 것을 뒤로 하고 미국으로 이민을 떠났지만, 50대가 된 지금은 세탁소 운영 등 온갖 일로 허덕이며 단란했던 가족과도 삐그덕거리는 등 고달프게 살고 있다. 세무조사를 받던 중 자신이 멀티버스의 여러 다른 자신들과 연결되어 있음을 알게 되고, 강력한 악의 기운으로부터 모든 우주와 가족을 구해내기 위한 모험에 나서게 되는데...",
-            "poster_path": "/aCW0sC55bFnOaUBP2eUGryvAJXf.jpg",
-            "youtube_key": "ebjjjpNkY4E",
-            "user_click": 0,
-            "genres": [
-                12,
-                28,
-                878
-            ],
-            "like_users": [],
-            "actors": [
-                690,
-                1620,
-                8944,
-                20904,
-                213001,
-                1071151,
-                1381186
-            ]
-        }
-    },
+    
     {
         "model": "movies.movie",
         "pk": 549294,
@@ -5072,34 +4445,7 @@
             ]
         }
     },
-    {
-        "model": "movies.movie",
-        "pk": 580116,
-        "fields": {
-            "title": "ザ・レイプ",
-            "release_date": "1982-05-15",
-            "popularity": 107.457,
-            "vote_count": 5,
-            "vote_average": 3.5,
-            "overview": "",
-            "poster_path": "/kY6gWfEJMjJ0JSvDkBuOCB3U6v0.jpg",
-            "youtube_key": "nothing",
-            "user_click": 0,
-            "genres": [
-                18
-            ],
-            "like_users": [],
-            "actors": [
-                20331,
-                66589,
-                229504,
-                551776,
-                2041314,
-                2201511,
-                2322403
-            ]
-        }
-    },
+    
     {
         "model": "movies.movie",
         "pk": 580489,
@@ -6033,31 +5379,7 @@
             ]
         }
     },
-    {
-        "model": "movies.movie",
-        "pk": 652574,
-        "fields": {
-            "title": "친구부부",
-            "release_date": "2019-11-10",
-            "popularity": 87.594,
-            "vote_count": 6,
-            "vote_average": 5.8,
-            "overview": "",
-            "poster_path": "/vk1vD1F4V8bN0Tz8Z4iVy0OtgoL.jpg",
-            "youtube_key": "nothing",
-            "user_click": 0,
-            "genres": [
-                10749
-            ],
-            "like_users": [],
-            "actors": [
-                2243993,
-                2496892,
-                2618388,
-                2630046
-            ]
-        }
-    },
+    
     {
         "model": "movies.movie",
         "pk": 653851,
@@ -6088,56 +5410,8 @@
             ]
         }
     },
-    {
-        "model": "movies.movie",
-        "pk": 654374,
-        "fields": {
-            "title": "막내 처제",
-            "release_date": "2019-12-08",
-            "popularity": 540.759,
-            "vote_count": 0,
-            "vote_average": 0.0,
-            "overview": "하나는 세 자매의 첫째이다. 어느 날 , 제사를 위해 모인 자리에서 가족들이 막내인 서리만 남자친구가 없다며 걱정한다. 형부인 호석은 평소 자신을 잘 챙겨준 회사직원 민수를 처제인 서리와 소개팅을 주선한다. 그러나 민수와 이야기를 할수록 서리는 자신이 호석에게 호감이 있음을 깨닫게 된다. 그 후 서리는 형부인 호석과 자주 만나게 되는데..​",
-            "poster_path": "/hC9yqXygRNVDz2B9NfZocqmhczM.jpg",
-            "youtube_key": "nothing",
-            "user_click": 0,
-            "genres": [
-                10749
-            ],
-            "like_users": [],
-            "actors": [
-                1907997,
-                1908003,
-                2358048,
-                2374721
-            ]
-        }
-    },
-    {
-        "model": "movies.movie",
-        "pk": 660653,
-        "fields": {
-            "title": "젊은 친구엄마",
-            "release_date": "2019-10-23",
-            "popularity": 88.065,
-            "vote_count": 2,
-            "vote_average": 3.0,
-            "overview": "아들 친구를 유혹하는 유부녀의 이야기를 다룬 성애 영화",
-            "poster_path": "/9KumU7gLIDhbNBKOcGbDbXEAwh9.jpg",
-            "youtube_key": "WAeYIRaq8pg",
-            "user_click": 0,
-            "genres": [
-                10749
-            ],
-            "like_users": [],
-            "actors": [
-                1907997,
-                1907998,
-                2358048,
-                2492259
-            ]
-        }
-    },
+    
+    
     {
         "model": "movies.movie",
         "pk": 661374,
@@ -6439,31 +5713,7 @@
             ]
         }
     },
-    {
-        "model": "movies.movie",
-        "pk": 677118,
-        "fields": {
-            "title": "오르가즘 특강 2",
-            "release_date": "2020-02-20",
-            "popularity": 94.641,
-            "vote_count": 1,
-            "vote_average": 10.0,
-            "overview": "평생 섹스를 통해 오르가즘이 무엇인지 모르고 살았던 여자들. 그녀들이 오르가즘 과외선생을 만나 쾌락이 무엇인지 배워가기 시작한다. 남친과 관계 후 고민하는 세진. 섹스가 아프기만 하고 즐겁지 않다. 세진의 고민을 들어주던 미주. 세진에게 섹스 선생님 윤수를 소개 한다. 세진은 애인에게 한 달 간 출장을 간다 하고 섹스 개인 교습을 받는다. 점점 몸이 깨어나고 능숙해진 세진. 한 달 후 다시 애인을 만나 즐거운 섹스를 할 수 있게 된다.​",
-            "poster_path": "/gYSJi5avO0RmzrX9ZbKwM7ZMkng.jpg",
-            "youtube_key": "nothing",
-            "user_click": 0,
-            "genres": [
-                18
-            ],
-            "like_users": [],
-            "actors": [
-                1333252,
-                1744377,
-                1907997,
-                2527941
-            ]
-        }
-    },
+
     {
         "model": "movies.movie",
         "pk": 677179,
@@ -6580,31 +5830,7 @@
             ]
         }
     },
-    {
-        "model": "movies.movie",
-        "pk": 701952,
-        "fields": {
-            "title": "여친 엄마2",
-            "release_date": "2018-08-30",
-            "popularity": 215.424,
-            "vote_count": 5,
-            "vote_average": 2.2,
-            "overview": "젊은 것(?)에 푹 빠진 여친 엄마! 그녀의 육탄공세가 시작된다!!!\r 젊고 어린 세희는 중년의 민구와 결혼을 했지만, 나이 때문인지 말을 잘 듣지 않는 남편의 물건 때문에 욕구만 쌓여간다. 기분전환 차 남편과 며칠 여행을 간 사이, 민구의 딸 유진은 부모가 없는 집에 남자친구 지훈을 불러 불타는 사랑을 나눈다. 한편, 여행을 간 세희는 남편이 회사 업무로 인해 예정보다 빨리 집에 오게 되고, 마침 일을 마치고 쉬고 있는 지훈의 알몸과 마주하게 되는데...",
-            "poster_path": "/5OMeVCF5jZpCrrvJNEMMP0vOoIH.jpg",
-            "youtube_key": "nothing",
-            "user_click": 0,
-            "genres": [
-                10749
-            ],
-            "like_users": [],
-            "actors": [
-                1622390,
-                2094678,
-                2631126,
-                2631128
-            ]
-        }
-    },
+
     {
         "model": "movies.movie",
         "pk": 705996,
@@ -7085,89 +6311,7 @@
             ]
         }
     },
-    {
-        "model": "movies.movie",
-        "pk": 744275,
-        "fields": {
-            "title": "애프터: 관계의 함정",
-            "release_date": "2021-09-01",
-            "popularity": 71.835,
-            "vote_count": 2173,
-            "vote_average": 7.1,
-            "overview": "영국 런던에서 미국 시애틀까지, 핫스팟에서 시작된 사랑의 클라이맥스! 첫사랑, 첫키스, 첫경험, 설렘 가득했던 처음을 뒤로 하고 꿈을 위해 잠시 서로를 떠나게 된 하딘과 테사. 각자 영국 런던과 미국 시애틀에서 롱디 연애를 앞둔 두 사람은 시간과 장소를 가리지 않고 달콤한 사랑을 속삭인다. 하지만 연애와 꿈의 갈림길에 선 둘은 서로에게 감춘 '누군가'의 존재와 예상치 못한 비밀까지 알게 되면서 사랑의 클라이맥스에 치닫게 되는데…",
-            "poster_path": "/o0PgoBD6jLYId3LYpu9yUY06SLT.jpg",
-            "youtube_key": "NYdNN6C9hfI",
-            "user_click": 0,
-            "genres": [
-                18,
-                10749
-            ],
-            "like_users": [],
-            "actors": [
-                20373,
-                20805,
-                20960,
-                32203,
-                1114487,
-                1753914,
-                2035329
-            ]
-        }
-    },
-    {
-        "model": "movies.movie",
-        "pk": 744276,
-        "fields": {
-            "title": "애프터: 에버 해피",
-            "release_date": "2022-08-24",
-            "popularity": 112.193,
-            "vote_count": 845,
-            "vote_average": 6.8,
-            "overview": "뉴욕으로 떠난 테사와 소설가로 데뷔한 하딘,  런던에서 삶을 송두리째 뒤흔들 엄청난 과거를 알게 된 하딘은 자신의 불행 속에 테사를 끌어들이기 싫어서 애써 밀어낸다.  계속 제자리만 맴도는 관계에 지친 테사는 새로운 삶을 꿈꾸며 뉴욕으로 향하고, 떨어진 동안 그의 소중함을 깨달은 하딘은 뉴욕에서 테사와 재회하여 서로의 숨결과 살결을 탐한다.  다시 미래를 꿈꾸던 테사는 하딘이 집필한 소설 ‘애프터’에 자신의 첫 키스부터 첫 경험뿐만 아니라 감추고 싶던 아픈 기억까지 모두 담겨 있다는 것을 알고 충격을 받는데…",
-            "poster_path": "/fZqvzsekRXxRrtEKIWoAWP5eqe7.jpg",
-            "youtube_key": "7rVxq0WB09Q",
-            "user_click": 0,
-            "genres": [
-                18,
-                10749
-            ],
-            "like_users": [],
-            "actors": [
-                20373,
-                20805,
-                20960,
-                32203,
-                1114487,
-                1753914,
-                2035329
-            ]
-        }
-    },
-    {
-        "model": "movies.movie",
-        "pk": 747355,
-        "fields": {
-            "title": "스와핑: 두 부부의 이혼여행",
-            "release_date": "2020-08-28",
-            "popularity": 324.276,
-            "vote_count": 2,
-            "vote_average": 8.5,
-            "overview": "",
-            "poster_path": "/wESfP4ZeBbwjjFw2tql4Bqx101Q.jpg",
-            "youtube_key": "nothing",
-            "user_click": 0,
-            "genres": [
-                18
-            ],
-            "like_users": [],
-            "actors": [
-                1622390,
-                1814297,
-                1994504,
-                2300516
-            ]
-        }
-    },
+
     {
         "model": "movies.movie",
         "pk": 751741,
@@ -7318,36 +6462,7 @@
             ]
         }
     },
-    {
-        "model": "movies.movie",
-        "pk": 760104,
-        "fields": {
-            "title": "X",
-            "release_date": "2022-03-17",
-            "popularity": 89.005,
-            "vote_count": 1939,
-            "vote_average": 6.8,
-            "overview": "1979년, 젊은 영화 제작자 그룹이 텍사스 시골에서 성인 영화를 만들기 시작한다. 나이 든 호스트를 마주하게 되고 배우들은 삶을 위한 필사적인 싸움에 직면하게 된다.",
-            "poster_path": "/woTQx9Q4b8aO13jR9dsj8C9JESy.jpg",
-            "youtube_key": "wFEnZk10Vh4",
-            "user_click": 0,
-            "genres": [
-                27,
-                53,
-                9648
-            ],
-            "like_users": [],
-            "actors": [
-                26291,
-                29221,
-                132220,
-                484359,
-                974169,
-                1137824,
-                1440014
-            ]
-        }
-    },
+    
     {
         "model": "movies.movie",
         "pk": 760161,
@@ -7762,34 +6877,7 @@
             ]
         }
     },
-    {
-        "model": "movies.movie",
-        "pk": 790496,
-        "fields": {
-            "title": "배드 럭 뱅잉",
-            "release_date": "2021-04-29",
-            "popularity": 149.059,
-            "vote_count": 157,
-            "vote_average": 6.6,
-            "overview": "남편과 합의 하에 찍은 섹스 비디오가 포르노 사이트에 유출된 사실을 뒤늦게 발견한 교사 에미. 학생들 사이에서 비디오가 금세 퍼졌고, 이를 알게 된 동료 교사들과 학부모들이 에미를 해임하기 위해 긴급 회의를 소집한다. 심판대에 서서 온갖 조롱과 모욕을 당하던 에미는 결국 분노를 대폭발시키는데...",
-            "poster_path": "/xZaPemWDqYirw5VtsfHqzxfwLym.jpg",
-            "youtube_key": "lAzUsyk6nas",
-            "user_click": 0,
-            "genres": [
-                35
-            ],
-            "like_users": [],
-            "actors": [
-                39960,
-                85230,
-                592234,
-                1547403,
-                1871780,
-                2080404,
-                3044670
-            ]
-        }
-    },
+
     {
         "model": "movies.movie",
         "pk": 791155,
@@ -7938,36 +7026,6 @@
                 2215526,
                 2992685,
                 2992691
-            ]
-        }
-    },
-    {
-        "model": "movies.movie",
-        "pk": 801335,
-        "fields": {
-            "title": "걸 인 더 베이스먼트",
-            "release_date": "2021-02-27",
-            "popularity": 68.362,
-            "vote_count": 502,
-            "vote_average": 7.9,
-            "overview": "2008년 사건 발생 국가인 오스트리아는 물론 전세계를 경악시킨 근친 납치, 감금 및 강간 사건으로,  24년의 감금 요제프 프리츨 사건을 모티브로 한  스토리",
-            "poster_path": "/qmddUxRwbsxHa7oEXm4PWh1KZe8.jpg",
-            "youtube_key": "a7VGn_0Vsx8",
-            "user_click": 0,
-            "genres": [
-                53,
-                80,
-                10770
-            ],
-            "like_users": [],
-            "actors": [
-                4758,
-                21624,
-                106490,
-                1457425,
-                2004111,
-                2604515,
-                2993645
             ]
         }
     },
@@ -11186,26 +10244,6 @@
     },
     {
         "model": "movies.movie",
-        "pk": 1040603,
-        "fields": {
-            "title": "오르가즘 주식회사: 쾌락을 판 어느 회사의 진실",
-            "release_date": "2022-11-05",
-            "popularity": 89.854,
-            "vote_count": 57,
-            "vote_average": 6.4,
-            "overview": "섹슈얼 웰니스를 표방한 신생 회사. 이들이 내세운 ‘오르가즘 명상’ 방법이 유명해지면서 추종자들이 늘어간다. 하지만 곧 멤버들로부터 충격적인 고발이 쏟아지기 시작한다.",
-            "poster_path": "/yqI3XQ1nmvxFpBus1BescRrRBAj.jpg",
-            "youtube_key": "11DiQzSLfmo",
-            "user_click": 0,
-            "genres": [
-                99
-            ],
-            "like_users": [],
-            "actors": []
-        }
-    },
-    {
-        "model": "movies.movie",
         "pk": 1041513,
         "fields": {
             "title": "엔칸토 할리우드 볼",
@@ -11698,34 +10736,6 @@
                 1435955,
                 1712147,
                 2605256
-            ]
-        }
-    },
-    {
-        "model": "movies.movie",
-        "pk": 1087040,
-        "fields": {
-            "title": "머니 샷: 폰허브를 말하다",
-            "release_date": "2023-03-15",
-            "popularity": 149.324,
-            "vote_count": 199,
-            "vote_average": 5.8,
-            "overview": "폰허브의 성공과 추문에 대해 깊숙이 파헤친다. 배우, 운동가 그리고 전직 직원들의 인터뷰로 이루어진 다큐멘터리.",
-            "poster_path": "/kpTqWqLYcf1uErnx5VXLah4EWJZ.jpg",
-            "youtube_key": "WTAay-4QUuY",
-            "user_click": 0,
-            "genres": [
-                99
-            ],
-            "like_users": [],
-            "actors": [
-                222346,
-                232008,
-                1041370,
-                1100768,
-                3970030,
-                3970033,
-                3970043
             ]
         }
     },
