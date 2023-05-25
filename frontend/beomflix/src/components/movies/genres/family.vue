@@ -2,7 +2,7 @@
   <div>
     <navbar/>
     <div class="container">
-      <h1>가족</h1>
+      <h1 style="color: white; margin: 20px;" >가족</h1>
       <div class="row row-cols-md-4">
         <familyItem v-for="movie in familyMovieList.movies" :key="movie.id" :movie="movie"/>
       </div>

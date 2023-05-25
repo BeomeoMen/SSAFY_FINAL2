@@ -38,7 +38,6 @@
             <textarea v-model="content" v-if="!isNotProFileOwner" cols="100" rows="5"></textarea>
             <button class="btn btn-primary" v-if="!isNotProFileOwner" @click="createIntroduce">작성</button>
           </div>
-          <!-- <h4 >{{ getContnet }}</h4> -->
           <h4 v-html="formattedContent"></h4>
         </div>
       </div>
@@ -111,8 +110,8 @@ export default {
     return null;
     },
     isFollowedByCurrentUser() {
-    return this.getFollowers.some(follower => follower.id === this.userId);
-  }
+      return this.getFollowers.some(follower => follower.id === this.userId);
+    }
   },
   methods: {
     checkFollowingStatus() {
@@ -239,20 +238,22 @@ export default {
 
 <style>
 .profile {
-  padding: 20px;
+  padding: 30px;
   color: white;
   width: 100%;
   max-width: 1500px;
   justify-content: center;
+  margin: auto;
 }
 .userInfo{
   display: flex;
-  margin-right: 100px;
   color: white;
+  padding: 20px;
+  background-color: rgba(128, 128, 128, 0.09);
+  border-radius: 20px;
 }
 .introduction-container {
   display: flex;
-  /* align-items: center; */
   justify-content: space-between;
 }
 
@@ -263,16 +264,15 @@ export default {
 .userInfoJ h3{
   padding-bottom: 10px;
 }
-.self {
-  color: white;
-  background-color: purple;
-}
+
 .likeMovies {
   color: white;
-  background-color: blue;
+  padding: 20px;
+  background-color: rgba(128, 128, 128, 0.09);
 }
 .guestBook {
   color: white;
-  background-color: green;
+  padding: 20px;
+  background-color: rgba(128, 128, 128, 0.09);
 }
 </style>

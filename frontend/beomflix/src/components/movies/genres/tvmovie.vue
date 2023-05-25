@@ -2,7 +2,7 @@
   <div>
     <navbar/>
     <div class="container">
-      <h1>TV 영화</h1>
+      <h1 style="color: white; margin: 20px;" >TV 영화</h1>
       <div class="row row-cols-md-4">
         <tvmovieItem v-for="movie in tvmovieMovieList.movies" :key="movie.id" :movie="movie"/>
       </div>

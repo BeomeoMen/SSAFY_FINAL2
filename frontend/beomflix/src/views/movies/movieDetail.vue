@@ -11,9 +11,8 @@
           <div class="details-row">
             <h2>{{ movieDetail.title }}</h2>
             <div class="like-buttons">
-              <i class="fa-solid fa-thumbs-up fa-2xl" @click="likeMovie" style="color: rgb(0, 123, 255)" ></i>
-              <span style="width: 15px;"></span>
-              <i class="fa-regular fa-thumbs-up fa-2xl" @click="likeMovie" style="color: rgb(0, 123, 255)"></i>
+              <i class="bi bi-heart fa-xl" style="color: rgb(0, 123, 255)" v-if="!isLiked" @click="likeMovie"></i>
+              <i class="bi bi-heart-fill fa-xl" style="color: rgb(0, 123, 255)" v-if="isLiked" @click="likeMovie"></i>
             </div>
           </div>
           <p> 장르 : <span v-for="genre in movieDetail.genres" :key="genre.id" >{{ genre.name }} |</span> </p>
@@ -50,18 +49,9 @@ export default {
       user: "user/userId",
       movieLikes: "movieLikes",
     }),
-    // likeCheck() {
-    //   const movieId = this.movieDetail.id;
-    //   return this.movieLikes[movieId]?.is_liked || false;
-    // }
-
-    // this.movieLikes[this.movieDetail.id].is_liked = !this.movieLikes[this.movieDetail.id].is_liked
-    // poster: function () {
-    //   return 'https://image.tmdb.org/t/p/original';
-    // },
-    // trailerUrlPath: function () {
-    //   return 'https://www.youtube.com/embed/';
-    // },
+    isLiked() {
+      return this.movieLikes[this.movieDetail.id]
+    }
   },
   mounted() {
     this.getReview();
@@ -98,18 +88,20 @@ export default {
   display: flex;
   width: auto;
 }
-
+p{
+  font-size: 18px;
+}
 .image-container {
   margin-right: 20px;
   color: white;
 }
 .image-container img {
   width: 500px;
-  height: auto;
+  height: 850px;
 }
 .details-container {
   color: white;
-  /* border: solid 1px white; */
+  background-color: rgba(128, 128, 128, 0.09);
   padding: 20px;
   height: auto;
 }
@@ -134,8 +126,9 @@ export default {
     display: flex;
     width: 100%;
     color: white;
-    background-color: rgba(128, 128, 128, 0.145);
+    background-color: rgba(128, 128, 128, 0.09);
     border-radius: 10px;
     justify-content: center;
+    margin-top: 20px;
   }
 </style>

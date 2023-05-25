@@ -13,9 +13,9 @@
             <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
           </svg>
         </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">장르</a>
-          <ul class="dropdown-menu">
+        <li class="nav-item dropdown" >
+          <a class="nav-link dropdown-toggle"  data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">장르</a>
+          <ul class="dropdown-menu" >
             <li><router-link class="dropdown-item" to="/actionPage">액션</router-link></li>
             <li><router-link class="dropdown-item" to="/animationPage">만화</router-link></li>
             <li><router-link class="dropdown-item" to="/comedyPage">개그</router-link></li>
@@ -37,10 +37,9 @@
           </ul>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><i class="fa-light fa-users"></i>
-          </a>
+          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><i class="fa-regular fa-user"></i></a>
           <ul class="dropdown-menu">
-            <li class="dropdown-item" style="color: black;" @click="getUserProfile">내 프로필 보기</li>
+            <li><a class="dropdown-item" @click="getUserProfile">내 프로필 보기</a></li>
             <li><a class="dropdown-item" href="#modifyUserModal" data-bs-toggle="modal" data-target="#modifyUserModal" >비밀번호 변경</a></li>
             <li><a class="dropdown-item" @click="logout">로그아웃</a></li>
           </ul>
@@ -133,6 +132,16 @@ input::placeholder {
 input:focus {
   border-color: #00aaff;
   box-shadow: 0 0 5px rgba(0, 170, 255, 0.5);
+}
+.dropdown-menu{
+  background-color: black;
+}
+
+.dropdown-item{
+  color: white;
+}
+.dropdown-item:hover {
+  background-color: rgb(0, 123, 255);
 }
 </style>
 

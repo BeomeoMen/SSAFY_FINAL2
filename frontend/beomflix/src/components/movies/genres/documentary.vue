@@ -2,7 +2,7 @@
   <div>
     <navbar/>
     <div class="container">
-      <h1>다큐멘터리</h1>
+      <h1 style="color: white; margin: 20px;" >다큐멘터리</h1>
       <div class="row row-cols-md-4">
         <documentaryItem v-for="movie in documentaryMovieList.movies" :key="movie.id" :movie="movie"/>
       </div>

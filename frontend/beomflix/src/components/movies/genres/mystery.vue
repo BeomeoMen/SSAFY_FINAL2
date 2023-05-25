@@ -2,7 +2,7 @@
   <div>
     <navbar/>
     <div class="container">
-      <h1>미스테리</h1>
+      <h1 style="color: white; margin: 20px;" >미스테리</h1>
       <div class="row row-cols-md-4">
         <mysteryItem v-for="movie in mysteryMovieList.movies" :key="movie.id" :movie="movie"/>
       </div>

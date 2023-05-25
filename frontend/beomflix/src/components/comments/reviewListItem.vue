@@ -1,6 +1,6 @@
 <template>
   <div class="reviews">
-    <span @click="getUserProfile"><h3>{{ review.user.username }}</h3></span>
+    <span @click="getUserProfile"><h5>작성자 :{{ review.user.username }}</h5></span>
     <span v-if="!isEditing"> <h4>내용: {{ review.content }}</h4></span>
     <input v-else v-model="editedContent" type="text" placeholder="리뷰를 입력해주세요">
     <span v-if="!isEditing">평점:
@@ -92,6 +92,7 @@ export default {
   border: solid 0.5px white;
   width: 1000px;
   border-radius: 10px;
+  background-color: rgba(128, 128, 128, 0.319);
   justify-content: center;
 
 }
