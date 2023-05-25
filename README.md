@@ -1,5 +1,20 @@
 # 제목
 
+# 0. 프로젝트 설정
+- Backend
+  - backend/beomflix/movies/fixtures 안에 있는 json 파일을 loaddata 합니다.
+    - 필수!! 
+    - actors.json, genre.json, movies.json, now_movies.json 순으로 합니다.
+    > python manage.py loaddata actors.json genre.json movies.json now_movies.json 
+
+- Frontend
+  - frontend/beomflix 안에서 설정을 설치합니다.
+  > npm install
+
+  - 만약 설치가 제대로 되지 않는다면 아래의 명령어를 터미널에 입력해주세요.
+
+  > npm install --force
+
 # 1. **프로젝트 개요 및 팀원 업무 분담 내역**
 
 ## 1) 개발 기간
